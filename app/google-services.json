@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "606609583904",
+    "project_id": "curity-b3658",
+    "storage_bucket": "curity-b3658.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606609583904:android:a9724e352b03d91018b145",
+        "android_client_info": {
+          "package_name": "com.example.curity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606609583904-ahudepgbirmalgv764ern8qvuhedumnn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0SonNqTWQ5-qLL-_6VX5lCMR03TsMc3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "606609583904-ahudepgbirmalgv764ern8qvuhedumnn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
