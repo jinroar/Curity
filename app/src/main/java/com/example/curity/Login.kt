@@ -4,9 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.curity.R
+import com.example.curity.SignUp.SignUpP1
 import com.example.curity.databinding.ActivityLoginBinding
-import com.example.curity.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class Login : AppCompatActivity() {
@@ -24,7 +23,7 @@ class Login : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         binding.textView.setOnClickListener{
-            val intent = Intent(this, SignUp::class.java)
+            val intent = Intent(this, SignUpP1::class.java)
             startActivity(intent)
         }
 
@@ -37,7 +36,7 @@ class Login : AppCompatActivity() {
             if (email.isNotEmpty() && pass.isNotEmpty()) {
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        val intent = Intent(this, Login::class.java)
+                        val intent = Intent(this, HomePage::class.java)
                         startActivity(intent)
                     } else {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
