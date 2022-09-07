@@ -43,7 +43,7 @@ class SignUpP1 : AppCompatActivity() {
                 if (pass == confirmPass){
                     firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener{
                         if (it.isSuccessful){
-                            val intent = Intent(this, Login::class.java)
+                            val intent = Intent(this, SignUpP2::class.java)
 
                             val user = FirebaseAuth.getInstance().currentUser
                             val fullName = fName.plus(" ").plus(lName)
