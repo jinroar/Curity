@@ -74,7 +74,7 @@
         app:layout_constraintVertical_bias="0.337" />
 
     <TextView
-        android:id="@+id/WelcomeView"
+        android:id="@+id/WelcomeView1"
         android:layout_width="147dp"
         android:layout_height="54dp"
         android:layout_marginTop="40dp"
@@ -91,7 +91,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/WelcomeView"
+        android:id="@+id/WelcomeView2"
         android:layout_width="336dp"
         android:layout_height="35dp"
         android:layout_marginTop="40dp"
@@ -107,7 +107,7 @@
         app:layout_constraintVertical_bias="0.2" />
 
     <TextView
-        android:id="@+id/WelcomeView"
+        android:id="@+id/EmailView"
         android:layout_width="91dp"
         android:layout_height="31dp"
         android:layout_marginTop="40dp"
@@ -150,7 +150,7 @@
         app:layout_constraintVertical_bias="0.841" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/SignUpView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
@@ -164,7 +164,7 @@
         app:layout_constraintVertical_bias="0.841" />
 
     <TextView
-        android:id="@+id/WelcomeView"
+        android:id="@+id/PasswordView"
         android:layout_width="130dp"
         android:layout_height="27dp"
         android:text="PASSWORD"
