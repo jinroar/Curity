@@ -44,6 +44,7 @@
             android:layout_marginTop="10dp"
             app:boxStrokeColor="@color/red"
             app:hintTextColor="@color/red"
+
             app:layout_constraintBottom_toTopOf="@+id/AdressnameLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -66,7 +67,7 @@
             android:layout_marginHorizontal="16dp"
             app:boxStrokeColor="@color/red"
             app:hintTextColor="@color/red"
-            app:layout_constraintBottom_toBottomOf="@+id/LnameLayout">
+            app:layout_constraintTop_toBottomOf="@+id/LnameLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/addressEt"
@@ -75,6 +76,27 @@
                 android:layout_height="wrap_content"
                 android:hint="Address"
                 android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phoneLayout"
+                style="@style/LoginTextInputOuterFieldStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                app:boxStrokeColor="@color/red"
+                app:hintTextColor="@color/red"
+
+                app:layout_constraintTop_toBottomOf="@+id/AdressnameLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneEt"
+                    style="@style/LoginTextInputInnerFieldStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cellphone Number"
+                    android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -90,7 +112,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/AdressnameLayout">
+            app:layout_constraintTop_toBottomOf="@+id/phoneLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailEt"
