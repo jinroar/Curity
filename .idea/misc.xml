@@ -3,14 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/drawable/ic_email.xml" value="0.188" />
-        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/drawable/ic_lock.xml" value="0.188" />
-        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/drawable/red_wave.xml" value="0.155" />
-        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/activity_home_page.xml" value="0.1796875" />
-        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/activity_sign_up_p1.xml" value="0.1796875" />
-        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/activity_sign_up_p2.xml" value="0.1796875" />
-        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/fragment_first.xml" value="0.1796875" />
+        <entry key="..\:/College/Thesis/Curity/app/src/main/res/layout/activity_maps.xml" value="0.3625" />
+        <entry key="..\:/College/Thesis/Curity/app/src/main/res/layout/fragment_first.xml" value="0.1" />
+        <entry key="..\:/College/Thesis/Curity/app/src/main/res/layout/fragment_first_new.xml" value="0.20742753623188406" />
+        <entry key="..\:/College/Thesis/Curity/app/src/main/res/layout/fragment_second.xml" value="0.3625" />
         <entry key="..\:/Users/Admin/Documents/GitHub/Curity/app/src/main/res/layout/activity_sign_up.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Admin/Documents/GitHub/Curity/app/src/main/res/layout/activity_sign_up_p2.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Admin/Documents/GitHub/IBO-Thesis/app/src/main/res/layout/activity_home_page.xml" value="0.17889492753623187" />
@@ -20,7 +16,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11.0.5" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
