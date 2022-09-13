@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "606609583904",
-    "project_id": "curity-b3658",
-    "storage_bucket": "curity-b3658.appspot.com"
+    "project_number": "460771845596",
+    "firebase_url": "https://curity-2247d-default-rtdb.firebaseio.com",
+    "project_id": "curity-2247d",
+    "storage_bucket": "curity-2247d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:606609583904:android:a9724e352b03d91018b145",
+        "mobilesdk_app_id": "1:460771845596:android:9611ac47b9477fccfc9b19",
         "android_client_info": {
           "package_name": "com.example.curity"
         }
       },
       "oauth_client": [
         {
-          "client_id": "606609583904-ahudepgbirmalgv764ern8qvuhedumnn.apps.googleusercontent.com",
+          "client_id": "460771845596-95tvrq50lcvv25abr4ed7dg0i77sdhv8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB0SonNqTWQ5-qLL-_6VX5lCMR03TsMc3c"
+          "current_key": "AIzaSyBfn8PPYE17oOqSD2UdHZWJLPhX3tUuMrQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "606609583904-ahudepgbirmalgv764ern8qvuhedumnn.apps.googleusercontent.com",
+              "client_id": "460771845596-95tvrq50lcvv25abr4ed7dg0i77sdhv8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
