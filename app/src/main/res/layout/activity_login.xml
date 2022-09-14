@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/red_wave"
-    tools:context=".login.Login">
+    tools:context=".Login">
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneLayout"
+        android:id="@+id/emailLayout"
         style="@style/LoginTextInputOuterFieldStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,14 +22,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/phoneEt"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailEt"
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_email"
-            android:hint=" Phone Number"
-            android:inputType="text" />
+            android:hint=" Enter email"
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -44,10 +44,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phoneLayout"
+        app:layout_constraintTop_toBottomOf="@id/emailLayout"
         app:passwordToggleEnabled="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passET"
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
@@ -83,7 +83,7 @@
         android:textColor="@color/white"
         android:textSize="40dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/phoneLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/emailLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +99,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="@color/white"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/phoneLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/emailLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,16 +107,16 @@
         app:layout_constraintVertical_bias="0.2" />
 
     <TextView
-        android:id="@+id/phoneView"
+        android:id="@+id/EmailView"
         android:layout_width="91dp"
         android:layout_height="31dp"
         android:layout_marginTop="40dp"
-        android:text="PHONE"
+        android:text="EMAIL"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="#bb0a1e"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/phoneLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/emailLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
