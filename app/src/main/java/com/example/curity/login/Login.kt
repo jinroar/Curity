@@ -28,6 +28,11 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.forgetTextView.setOnClickListener{
+            val intent = Intent(this, forgetPassword::class.java)
+            startActivity(intent)
+        }
+
         binding.button.setOnClickListener {
             val email = binding.emailEt.text.toString()
             val pass = binding.passET.text.toString()
