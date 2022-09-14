@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/red_wave"
-    tools:context=".Login">
+    tools:context=".login.Login">
 
 
     <com.google.android.material.textfield.TextInputLayout

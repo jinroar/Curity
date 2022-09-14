@@ -1,4 +1,4 @@
-package com.example.curity
+package com.example.curity.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +23,7 @@ class Login : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        binding.textView.setOnClickListener{
+        binding.SignUpView.setOnClickListener{
             val intent = Intent(this, SignUpP1::class.java)
             startActivity(intent)
         }

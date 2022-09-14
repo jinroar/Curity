@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Curity"
         tools:targetApi="31">
         <activity
+            android:name=".SignUp.SignUpP1"
+            android:exported="false" />
+        <activity
             android:name=".SignUp.SignUpP2"
             android:exported="false" />
         <activity
@@ -25,7 +28,7 @@
             android:name=".SignUp.SignUpP1"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".login.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
