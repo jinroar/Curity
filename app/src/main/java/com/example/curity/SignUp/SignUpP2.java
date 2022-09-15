@@ -39,14 +39,13 @@ public class SignUpP2 extends AppCompatActivity {
     }
 
     public void getContacts() {
-
         // create cursor and query the data
         cursor = getContentResolver().query(
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                 null,
                 null,
                 null,
-                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC"
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + "ASC"
         );
 
         startManagingCursor(cursor);
@@ -72,6 +71,7 @@ public class SignUpP2 extends AppCompatActivity {
         // Calling setAdaptor() method to set created adapter
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        cursor.close();
     }
 
     
