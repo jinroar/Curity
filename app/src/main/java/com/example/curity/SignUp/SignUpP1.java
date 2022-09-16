@@ -22,7 +22,7 @@ public class SignUpP1 extends AppCompatActivity {
 
     private EditText firstEditText, lastEditText, addressEditText, phoneEditText;
     private EditText emailEditText, passwordEditText, confirmPassEditText;
-    private Button register;
+    private Button nxtBtn;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -38,9 +38,9 @@ public class SignUpP1 extends AppCompatActivity {
         confirmPassEditText = findViewById(R.id.confirmPassEt);
         phoneEditText = findViewById(R.id.phoneEt);
 
-        register = findViewById(R.id.button1);
+        nxtBtn = findViewById(R.id.button1);
 
-        register.setOnClickListener(new View.OnClickListener() {
+        nxtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String firstTxt = firstEditText.getText().toString();
@@ -51,9 +51,8 @@ public class SignUpP1 extends AppCompatActivity {
                 final String passwordTxt = passwordEditText.getText().toString();
                 final String confirmPassTxt = confirmPassEditText.getText().toString();
 
-                //check if the user fill up all of the field(s)
                 if (firstTxt.isEmpty() || lastTxt.isEmpty() || addressTxt.isEmpty() || phoneTxt.isEmpty() ||
-                emailTxt.isEmpty() || passwordTxt.isEmpty() || confirmPassTxt.isEmpty()){
+                        emailTxt.isEmpty() || passwordTxt.isEmpty() || confirmPassTxt.isEmpty()){
                     Toast.makeText(SignUpP1.this, "Please fill Up the empty field(s)", Toast.LENGTH_SHORT).show();
                 }
 
@@ -63,33 +62,15 @@ public class SignUpP1 extends AppCompatActivity {
                 }
 
                 else {
-                    firebaseAuth = FirebaseAuth.getInstance();
-                    firebaseAuth.createUserWithEmailAndPassword(emailTxt,passwordTxt)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
+                    Intent intent = new Intent(getApplicationContext(), SignUpP3.class);
+                    intent.putExtra("f_name", firstTxt);
+                    intent.putExtra("l_name", lastTxt);
+                    intent.putExtra("address", addressTxt);
+                    intent.putExtra("phone", phoneTxt);
+                    intent.putExtra("email", emailTxt);
+                    intent.putExtra("pass", passwordTxt);
 
-                                User users = new User(firstTxt, lastTxt, addressTxt, phoneTxt, emailTxt);
-
-                                FirebaseDatabase.getInstance().getReference("users")
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()){
-                                                    Toast.makeText(SignUpP1.this, "User has been register successfully", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    Toast.makeText(SignUpP1.this, "Failed to register", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
-
-                                Intent intent = new Intent(SignUpP1.this, Login.class);
-                                startActivity(intent);
-                            }
-                        }
-                    });
+                    startActivity(intent);
                 }
             }
         });
