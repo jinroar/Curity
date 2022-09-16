@@ -167,12 +167,17 @@
         android:id="@+id/PasswordView"
         android:layout_width="130dp"
         android:layout_height="27dp"
+        android:layout_marginTop="8dp"
         android:text="PASSWORD"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="#bb0a1e"
         android:textSize="20dp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="363dp" />
+        app:layout_constraintBottom_toTopOf="@+id/passwordLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
