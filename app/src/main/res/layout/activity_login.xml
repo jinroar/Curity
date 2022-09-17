@@ -8,6 +8,14 @@
     tools:context=".login.Login">
 
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/curity_logo"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailLayout"
         style="@style/LoginTextInputOuterFieldStyle"
@@ -92,8 +100,8 @@
 
     <TextView
         android:id="@+id/WelcomeView2"
-        android:layout_width="336dp"
-        android:layout_height="35dp"
+        android:layout_width="226dp"
+        android:layout_height="29dp"
         android:layout_marginTop="40dp"
         android:text="Sign in to continue"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
@@ -101,10 +109,10 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/emailLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.196" />
 
     <TextView
         android:id="@+id/EmailView"
