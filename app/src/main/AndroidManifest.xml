@@ -16,6 +16,12 @@
         android:theme="@style/Theme.Curity"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity.profile"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity.settings"
+            android:exported="false" />
+        <activity
             android:name=".SignUp.SignUpP3"
             android:exported="false" />
         <activity
