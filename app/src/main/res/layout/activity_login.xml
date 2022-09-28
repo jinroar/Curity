@@ -4,20 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/red_wave"
+    android:background="@color/white"
     tools:context=".login.Login">
-
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="137dp"
+        android:layout_height="169dp"
+        app:layout_constraintBottom_toTopOf="@+id/LogoView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1"
         app:srcCompat="@drawable/curity_logo" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -40,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_email"
-            android:hint=" Enter email"
+            android:hint=" Email"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,42 +84,42 @@
 
     <TextView
         android:id="@+id/WelcomeView1"
-        android:layout_width="147dp"
-        android:layout_height="54dp"
+        android:layout_width="106dp"
+        android:layout_height="51dp"
         android:layout_marginTop="40dp"
         android:text="Login"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/emailLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.355" />
 
     <TextView
         android:id="@+id/WelcomeView2"
-        android:layout_width="226dp"
-        android:layout_height="29dp"
+        android:layout_width="175dp"
+        android:layout_height="24dp"
         android:layout_marginTop="40dp"
         android:text="Sign in to continue"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/emailLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.196" />
+        app:layout_constraintVertical_bias="0.507" />
 
     <TextView
         android:id="@+id/EmailView"
         android:layout_width="91dp"
         android:layout_height="31dp"
         android:layout_marginTop="40dp"
+        android:fontFamily="sans-serif"
         android:text="EMAIL"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="#bb0a1e"
@@ -130,10 +127,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/emailLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.758" />
+        app:layout_constraintVertical_bias="0.765" />
 
     <TextView
         android:id="@+id/forgetTextView"
@@ -153,27 +150,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Don't have an account?"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintHorizontal_bias="0.397"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.841" />
+        app:layout_constraintVertical_bias="0.807" />
 
     <TextView
         android:id="@+id/SignUpView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.831" />
+        app:layout_constraintVertical_bias="0.807" />
 
     <TextView
         android:id="@+id/PasswordView"
