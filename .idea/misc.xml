@@ -6,11 +6,17 @@
         <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/drawable/ic_email.xml" value="0.188" />
         <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/drawable/ic_lock.xml" value="0.188" />
         <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/drawable/red_wave.xml" value="0.155" />
+        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/drawable/top_background.xml" value="0.1615" />
+        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/activity_forget_password.xml" value="0.22" />
         <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/activity_home_page.xml" value="0.1796875" />
         <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/activity_profile.xml" value="0.22" />
         <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/activity_sign_up_p1.xml" value="0.1796875" />
         <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/activity_sign_up_p2.xml" value="0.1796875" />
+        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/activity_sign_up_p3.xml" value="0.13269927536231885" />
         <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/fragment_first.xml" value="0.1796875" />
+        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/fragment_second.xml" value="0.13269927536231885" />
+        <entry key="..\:/Documents/GitHub/Curity/app/src/main/res/layout/fragment_third.xml" value="0.13269927536231885" />
         <entry key="..\:/Users/Admin/Documents/GitHub/Curity/app/src/main/res/layout/activity_sign_up.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Admin/Documents/GitHub/Curity/app/src/main/res/layout/activity_sign_up_p2.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Admin/Documents/GitHub/IBO-Thesis/app/src/main/res/layout/activity_home_page.xml" value="0.17889492753623187" />

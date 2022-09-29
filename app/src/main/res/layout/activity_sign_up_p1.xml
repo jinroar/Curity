@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.919"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/curity_logo" />
+        app:srcCompat="@drawable/_png__curity_logo" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/FnameLayout"
