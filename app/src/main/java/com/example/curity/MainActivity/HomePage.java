@@ -2,6 +2,7 @@ package com.example.curity.MainActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -18,9 +19,11 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.curity.R;
 import com.example.curity.databinding.ActivityHomePageBinding;
 import com.example.curity.firstFragment;
+import com.example.curity.login.Login;
 import com.example.curity.secondFragment;
 import com.example.curity.thirdFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,16 +43,20 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         setContentView(binding.getRoot());
         replaceFragment(new firstFragment());
 
+        // bottom navigation (Home, Map, and Chats)
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.firstFragment:
                     replaceFragment(new firstFragment());
+                    navigationView.setCheckedItem(R.id.nav_home);
                     break;
                 case R.id.secondFragment:
                     replaceFragment(new secondFragment());
+                    navigationView.setCheckedItem(R.id.nav_maps);
                     break;
                 case R.id.thirdFragment:
                     replaceFragment(new thirdFragment());
+                    navigationView.setCheckedItem(R.id.nav_chat);
                     break;
             }
 
@@ -72,7 +79,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
-//        navigationView.setCheckedItem(R.id.nav_home);
+        navigationView.setCheckedItem(R.id.nav_home);
     }
 
 
@@ -99,12 +106,24 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
             /*----------------Fragments----------------*/
             case R.id.nav_home:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
+                        new firstFragment()).commit();
+
+                binding.bottomNavigationView.setSelectedItemId(R.id.firstFragment);
                 break;
 
             case R.id.nav_maps:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
+                    new secondFragment()).commit();
+
+                binding.bottomNavigationView.setSelectedItemId(R.id.secondFragment);
                 break;
 
             case R.id.nav_chat:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
+                        new thirdFragment()).commit();
+
+                binding.bottomNavigationView.setSelectedItemId(R.id.thirdFragment);
                 break;
 
             /*----------------Activities----------------*/
@@ -116,6 +135,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(new Intent(HomePage.this, settings.class));
                 break;
 
+            case R.id.nav_logout:
+//                FirebaseAuth.getInstance().signOut();
+//                startActivity(new Intent(HomePage.this, Login.class));
+                break;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

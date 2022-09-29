@@ -1,6 +1,5 @@
 package com.example.curity.SignUp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -14,8 +13,6 @@ import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -39,13 +36,14 @@ public class SignUpP2 extends AppCompatActivity {
     }
 
     public void getContacts() {
+
         // create cursor and query the data
         cursor = getContentResolver().query(
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                 null,
                 null,
                 null,
-                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + "ASC"
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC"
         );
 
         startManagingCursor(cursor);
@@ -71,10 +69,8 @@ public class SignUpP2 extends AppCompatActivity {
         // Calling setAdaptor() method to set created adapter
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        cursor.close();
     }
 
-    
     // Prompt Permissions
     public void requestContactPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
