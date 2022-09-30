@@ -1,10 +1,13 @@
 package com.example.curity.login
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.curity.MainActivity.HomePage
+import com.example.curity.R
 import com.example.curity.SignUp.SignUpP1
 import com.example.curity.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -59,6 +62,26 @@ class Login : AppCompatActivity() {
         if (firebaseAuth.currentUser !=null){
             val intent = Intent(this, HomePage::class.java)
             startActivity(intent)
+            finish();
         }
+    }
+
+    override fun onBackPressed() {
+        //Dialog box
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setTitle("Exit")
+        builder.setMessage("Are you sure you want to exit?")
+        builder.setIcon(R.drawable.ic_baseline_warning_24)
+
+        builder.setPositiveButton("Ok", DialogInterface.OnClickListener{ dialog, which ->
+            finishAffinity()
+        })
+
+        builder.setNegativeButton("Cancel", DialogInterface.OnClickListener{ dialog, which ->
+            dialog.dismiss()
+        })
+
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.show()
     }
 }

@@ -2,7 +2,6 @@ package com.example.curity.MainActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -48,15 +47,12 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             switch (item.getItemId()) {
                 case R.id.firstFragment:
                     replaceFragment(new firstFragment());
-                    navigationView.setCheckedItem(R.id.nav_home);
                     break;
                 case R.id.secondFragment:
                     replaceFragment(new secondFragment());
-                    navigationView.setCheckedItem(R.id.nav_maps);
                     break;
                 case R.id.thirdFragment:
                     replaceFragment(new thirdFragment());
-                    navigationView.setCheckedItem(R.id.nav_chat);
                     break;
             }
 
@@ -136,8 +132,12 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 break;
 
             case R.id.nav_logout:
-//                FirebaseAuth.getInstance().signOut();
-//                startActivity(new Intent(HomePage.this, Login.class));
+                //logout to the firebase
+                FirebaseAuth.getInstance().signOut();
+
+                //going back to the login Page
+                startActivity(new Intent(HomePage.this, Login.class));
+                finish();
                 break;
         }
 
