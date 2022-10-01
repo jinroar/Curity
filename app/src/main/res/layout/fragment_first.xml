@@ -13,9 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:rb_color="#FF1616"
-        app:rb_duration="3000"
-        app:rb_radius="50dp"
-        app:rb_rippleAmount="3"
+        app:rb_duration="700"
+        app:rb_radius="60dp"
+        app:rb_rippleAmount="4"
         app:rb_scale="3">
 
         <TextView
@@ -24,7 +24,7 @@
             android:layout_above="@+id/button2"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_marginBottom="90dp"
+            android:layout_marginBottom="80dp"
             android:text="Tap the button to send SOS"
             android:textAlignment="center"
             android:textSize="25dp"
@@ -32,8 +32,8 @@
 
         <ImageView
             android:id="@+id/button2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
             android:layout_centerInParent="true"
             android:background="@drawable/roundedbutton" />
 
