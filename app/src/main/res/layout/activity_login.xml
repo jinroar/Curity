@@ -11,7 +11,6 @@
         android:id="@+id/imageView"
         android:layout_width="137dp"
         android:layout_height="169dp"
-        app:layout_constraintBottom_toTopOf="@+id/LogoView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,7 +18,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailLayout"
-        style="@style/LoginTextInputOuterFieldStyle"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -29,21 +28,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_email"
+        app:startIconTint="@color/red">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailEt"
-            style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_email"
-            android:hint=" Email"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordLayout"
-        style="@style/LoginTextInputOuterFieldStyle"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -54,15 +52,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailLayout"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:startIconDrawable="@drawable/ic_lock"
+        app:startIconTint="@color/red">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passET"
-            style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_lock"
-            android:hint=" Password"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -102,7 +99,7 @@
     <TextView
         android:id="@+id/WelcomeView2"
         android:layout_width="175dp"
-        android:layout_height="24dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Sign in to continue"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"

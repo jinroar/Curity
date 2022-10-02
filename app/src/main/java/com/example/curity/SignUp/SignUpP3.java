@@ -1,83 +1,123 @@
 package com.example.curity.SignUp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
-import android.content.Intent;
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.provider.ContactsContract;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.curity.R;
-import com.example.curity.login.Login;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpP3 extends AppCompatActivity {
 
-    private String firstEditText, lastEditText, addressEditText, phoneEditText;
-    private String emailEditText, passwordEditText, confirmPassEditText;
-    private Button nxtBtn;
-    private FirebaseAuth firebaseAuth;
+    public static final int PERMISSIONS_REQUEST_READ_CONTACTS = 1;
+    Cursor cursor;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_p3);
 
-        nxtBtn = findViewById(R.id.button1);
+        // declaring listView using findViewById()
+        listView = findViewById(R.id.ListView);
 
+        requestContactPermission();
+    }
 
-        //get the variables from SignUpP
-        Intent iin= getIntent();
-        Bundle b = iin.getExtras();
+    public void getContacts() {
 
-        final String firstTxt = (String) b.get("f_name");
-        final String lastTxt = (String) b.get("l_name");
-        final String addressTxt = (String) b.get("address");
-        final String phoneTxt = (String) b.get("phone");
-        final String emailTxt = (String) b.get("email");
-        final String passwordTxt = (String) b.get("pass");
+        // create cursor and query the data
+        cursor = getContentResolver().query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                null,
+                null,
+                null,
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC"
+        );
 
+        startManagingCursor(cursor);
 
+        // data is a array of String type which is
+        // used to store Number and Names.
+        String[] data = {
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                ContactsContract.CommonDataKinds.Phone.NUMBER
+        };
 
-        nxtBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                firebaseAuth = FirebaseAuth.getInstance();
-                firebaseAuth.createUserWithEmailAndPassword(emailTxt,passwordTxt)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()){
+        int[] to = {android.R.id.text1, android.R.id.text2};
 
-                                    User users = new User(firstTxt, lastTxt, addressTxt, phoneTxt, emailTxt);
+        // creation of adapter using SimpleCursorAdapter class
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                this,
+                android.R.layout.simple_list_item_multiple_choice,
+                cursor,
+                data,
+                to
+        );
 
-                                    FirebaseDatabase.getInstance().getReference("users")
-                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()){
-                                                        Toast.makeText(SignUpP3.this, "User has been register successfully", Toast.LENGTH_SHORT).show();
-                                                    } else {
-                                                        Toast.makeText(SignUpP3.this, "Failed to register", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                }
-                                            });
+        // Calling setAdaptor() method to set created adapter
+        listView.setAdapter(adapter);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+    }
 
-                                    Intent intent = new Intent(SignUpP3.this, Login.class);
-                                    startActivity(intent);
-                                }
-                            }
-                        });
+    // Prompt Permissions
+    public void requestContactPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        android.Manifest.permission.READ_CONTACTS)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Read contacts access needed");
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    builder.setMessage("Please enable access to contacts.");
+                    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @TargetApi(Build.VERSION_CODES.M)
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            requestPermissions(
+                                    new String[]
+                                            {android.Manifest.permission.READ_CONTACTS}
+                                    , PERMISSIONS_REQUEST_READ_CONTACTS);
+                        }
+                    });
+                    builder.show();
+                } else {
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{android.Manifest.permission.READ_CONTACTS},
+                            PERMISSIONS_REQUEST_READ_CONTACTS);
+                }
+            } else {
+                getContacts();
             }
-        });
+        } else {
+            getContacts();
+        }
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_READ_CONTACTS: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getContacts();
+                } else {
+                    Toast.makeText(this, "You have disabled a contacts permission", Toast.LENGTH_LONG).show();
+                    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                }
+            }
+        }
     }
 }
