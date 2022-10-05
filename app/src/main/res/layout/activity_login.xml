@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="260dp"
         app:boxStrokeColor="@color/red"
         app:hintTextColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +36,7 @@
             android:id="@+id/emailEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Email"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="15dp"
         app:boxStrokeColor="@color/red"
         app:hintTextColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +61,7 @@
             android:id="@+id/passET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Password"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -112,24 +114,6 @@
         app:layout_constraintVertical_bias="0.507" />
 
     <TextView
-        android:id="@+id/EmailView"
-        android:layout_width="91dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="sans-serif"
-        android:text="EMAIL"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="@color/red"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/emailLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.765" />
-
-    <TextView
         android:id="@+id/forgetTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -168,22 +152,5 @@
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:layout_constraintVertical_bias="0.807" />
-
-    <TextView
-        android:id="@+id/PasswordView"
-        android:layout_width="130dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="8dp"
-        android:text="PASSWORD"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="@color/red"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/passwordLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailLayout"
-        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
