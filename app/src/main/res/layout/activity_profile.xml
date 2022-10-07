@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,56 +8,81 @@
     tools:context=".MainActivity.profile">
 
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/imageView5"
         android:layout_width="138dp"
         android:layout_height="144dp"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="-300dp"
-        android:layout_marginBottom="1150dp"
+        android:layout_marginBottom="1145dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        app:srcCompat="@drawable/profile" />
+        app:srcCompat="@drawable/profile" />-->
 
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center"
         android:padding="25dp"
-        tools:layout_editor_absoluteY="10dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edittext_name"
+            android:id="@+id/edittext_fnamelay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
-            android:hint="Full Name"
+            android:hint="First Name"
             android:textSize="30dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edittext_fname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="140dp"
                 android:drawableStart="@drawable/ic_baseline_person_24"
                 android:drawablePadding="10dp"
-                android:text="Sophia Quizon"
+                android:text="Sophia"
                 android:textSize="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edittext_address"
+            android:id="@+id/edittext_lnamelay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
+            android:hint="Last Name"
+            android:textSize="30dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edittext_lname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_person_24"
+                android:drawablePadding="10dp"
+                android:text="Quizon"
+                android:textSize="20dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext_addresslay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
             android:hint="Address"
             android:textSize="30dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edittext_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_home_24"
@@ -68,14 +93,16 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edittext_email"
+            android:id="@+id/edittext_emaillay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
             android:hint="Email Address"
             android:textSize="30dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edittext_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_email"
@@ -86,37 +113,21 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edittext_pass"
+            android:id="@+id/edittext_phonelay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="Password"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
+            android:hint="Phone Number"
             android:textSize="30dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edittext_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_baseline_home_24"
+                android:drawableStart="@drawable/ic_baseline_phone_android_24"
                 android:drawablePadding="10dp"
-                android:text="******"
-                android:textSize="20dp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edittext_contacts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="Selected Contacts"
-            android:textSize="30dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_baseline_home_24"
-                android:drawablePadding="10dp"
-                android:text="List of Contacts"
+                android:text="09178994704"
                 android:textSize="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -139,4 +150,4 @@
 
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
