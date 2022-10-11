@@ -52,7 +52,7 @@ class Login : AppCompatActivity() {
                     }
                 }
             }else{
-                Toast.makeText(this, "Please fill Up the empty field(s)", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please fill up the empty field(s)", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Curity"
         tools:targetApi="31">
         <activity
+            android:name=".CreateProfile"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity.profile"
             android:exported="false" />
         <activity

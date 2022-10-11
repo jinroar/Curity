@@ -78,7 +78,7 @@ public class SignUpP2 extends AppCompatActivity {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         if (task.isSuccessful()){
-                                                            Toast.makeText(SignUpP2.this, "User has been register successfully", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(SignUpP2.this, "User has been registered successfully!", Toast.LENGTH_SHORT).show();
 
                                                             // go to login Page
                                                             Intent intent = new Intent(getApplicationContext(), Login.class);
@@ -86,7 +86,7 @@ public class SignUpP2 extends AppCompatActivity {
                                                             finish();
 
                                                         } else {
-                                                            Toast.makeText(SignUpP2.this, "Failed to register", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(SignUpP2.this, "Failed to register! Please Try Again", Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
                                                 });
