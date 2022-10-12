@@ -61,7 +61,7 @@
             android:hint="Last Name"
             android:textSize="30dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/edittext_lname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
             android:hint="Address"
             android:textSize="30dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/edittext_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
             android:hint="Email Address"
             android:textSize="30dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/edittext_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
             android:hint="Phone Number"
             android:textSize="30dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/edittext_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -7,11 +7,14 @@ import androidx.appcompat.widget.SwitchCompat;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.curity.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class settings extends AppCompatActivity {
 
@@ -27,6 +30,12 @@ public class settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        //check display name in firebase
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            Log.d("ACTIVITY Settings", "\nUser details : " + user.getDisplayName() + "\n"
+                    + user.getUid() + "\n" + user.getProviderId());
+        }
 
         // for the Notifications
         preferences = getSharedPreferences("PREFS", 0);

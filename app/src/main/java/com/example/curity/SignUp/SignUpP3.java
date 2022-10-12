@@ -32,7 +32,8 @@ public class SignUpP3 extends AppCompatActivity {
         // declaring listView using findViewById()
         listView = findViewById(R.id.ListView);
 
-        requestContactPermission();
+
+//        requestContactPermission();
     }
 
     public void getContacts() {

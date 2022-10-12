@@ -3,6 +3,7 @@ package com.example.curity.MainActivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,126 +12,82 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.curity.R;
+import com.example.curity.databinding.ActivityHomePageBinding;
+import com.example.curity.databinding.ActivityProfileBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Transaction;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 public class profile extends AppCompatActivity {
-
-    EditText fname, lname, homeaddress, emailadd, phonenum;
-    Button btn_update, btn_logout;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference reference;
-    DocumentReference documentReference;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String currentuid = user.getUid();
-
+    ActivityProfileBinding binding;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        fname = findViewById(R.id.edittext_fname);
-        lname = findViewById(R.id.edittext_lname);
-        homeaddress = findViewById(R.id.edittext_address);
-        emailadd = findViewById(R.id.edittext_email);
-        phonenum = findViewById(R.id.edittext_phone);
-        btn_update = findViewById(R.id.btn_update);
-        btn_logout = findViewById(R.id.btn_logout);
+        binding = ActivityProfileBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        btn_update.setOnClickListener(new View.OnClickListener(){
+        binding.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                updateProfile();
+            public void onClick(View v) {
+
+                String fName = binding.edittextFname.getText().toString();
+                String lName = binding.edittextLname.getText().toString();
+                String address = binding.edittextAddress.getText().toString();
+                String email = binding.edittextEmail.getText().toString();
+                String phone = binding.edittextPhone.getText().toString();
+
+                updatedata(fName, lName, address, email, phone);
+
             }
+
         });
 
     }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        /*String currentuid = user.getUid();*/
+    private void updatedata(String fName, String lName, String address, String email, String phone) {
 
-        documentReference.collection("users").document(currentuid);
-        documentReference.get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                        if (task.getResult().exists()){
-
-                            String fnameResult = task.getResult().getString("firstName");
-                            String lnameResult = task.getResult().getString("lastName");
-                            String addressResult = task.getResult().getString("address");
-                            String emailResult = task.getResult().getString("email");
-                            String phoneResult = task.getResult().getString("phone");
-
-                            fname.setText(fnameResult);
-                            lname.setText(lnameResult);
-                            homeaddress.setText(addressResult);
-                            emailadd.setText(emailResult);
-                            phonenum.setText(phoneResult);
-
-                        }else {
-                            Toast.makeText(profile.this, "No profile", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    private void updateProfile() {
-
-        String firstName = fname.getText().toString();
-        String lastName = lname.getText().toString();
-        String address = homeaddress.getText().toString();
-        String email = emailadd.getText().toString();
-        String phone = phonenum.getText().toString();
+        HashMap User = new HashMap();
+        User.put("firstName",fName);
+        User.put("lastName",lName);
+        User.put("address",address);
+        User.put("email",email);
+        User.put("phone",phone);
 
 
-        final DocumentReference sDoc = db.collection("users").document(currentuid);
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(User)
+                .addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
 
-        db.runTransaction(new Transaction.Function<Void>() {
-                    @Override
-                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                        //DocumentSnapshot snapshot = transaction.get(sfDocRef);
+                if (task.isSuccessful()){
 
-                        transaction.update(sDoc, "firstName", fname);
-                        transaction.update(sDoc, "lastName", lname);
-                        transaction.update(sDoc, "address", homeaddress);
-                        transaction.update(sDoc, "email", emailadd);
-                        transaction.update(sDoc, "phone", phonenum);
+                    binding.edittextFname.setText("");
+                    binding.edittextLname.setText("");
+                    binding.edittextAddress.setText("");
+                    binding.edittextEmail.setText("");
+                    binding.edittextPhone.setText("");
 
-                        // Success
-                        return null;
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(profile.this, "updated", Toast.LENGTH_SHORT).show();
 
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(profile.this, "failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    Toast.makeText(profile.this,"Successfully Updated",Toast.LENGTH_SHORT).show();
+
+                }else {
+
+                    Toast.makeText(profile.this,"Failed to Update",Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
 
     }
 }

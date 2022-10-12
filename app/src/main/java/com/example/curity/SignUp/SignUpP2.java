@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.curity.R;
@@ -16,10 +18,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpP2 extends AppCompatActivity {
 
+    private String fullName;
     private EditText emailEditText, passwordEditText, confirmPassEditText;
     private Button nxtBtn;
     private FirebaseAuth firebaseAuth;
@@ -80,11 +85,29 @@ public class SignUpP2 extends AppCompatActivity {
                                                         if (task.isSuccessful()){
                                                             Toast.makeText(SignUpP2.this, "User has been registered successfully!", Toast.LENGTH_SHORT).show();
 
-                                                            // go to login Page
-                                                            Intent intent = new Intent(getApplicationContext(), Login.class);
-                                                            startActivity(intent);
-                                                            finish();
+                                                            //for display name (full name)
+                                                            fullName = firstTxt + " " + lastTxt;
+                                                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+                                                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                                    .setDisplayName(fullName).build();
+
+                                                            //check if it was updated in the firebase authentication
+                                                            user.updateProfile(profileUpdates)
+                                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                            if (task.isSuccessful()) {
+                                                                                Log.d("ACTIVITY SIGNUP P2", "User profile updated.");
+
+                                                                                // go to login Page
+                                                                                Intent intent = new Intent(getApplicationContext(), Login.class);
+                                                                                startActivity(intent);
+                                                                                finish();
+
+                                                                            }
+                                                                        }
+                                                                    });
                                                         } else {
                                                             Toast.makeText(SignUpP2.this, "Failed to register! Please Try Again", Toast.LENGTH_SHORT).show();
                                                         }
