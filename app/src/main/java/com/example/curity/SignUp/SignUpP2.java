@@ -81,8 +81,9 @@ public class SignUpP2 extends AppCompatActivity {
                                                             Toast.makeText(SignUpP2.this, "User has been register successfully", Toast.LENGTH_SHORT).show();
 
                                                             // go to login Page
-                                                            Intent intent = new Intent(getApplicationContext(), Login.class);
-                                                            startActivity(intent);
+//                                                            Intent intent = new Intent(getApplicationContext(), SignUpP3.class);
+//                                                            intent.putExtra("Source", "from SignUp 2");
+//                                                            startActivity(intent);
                                                             finish();
 
                                                         } else {
