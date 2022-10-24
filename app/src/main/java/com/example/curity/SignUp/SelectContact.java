@@ -142,17 +142,18 @@ public class SelectContact extends AppCompatActivity {
                         if (task.isSuccessful()){
                             if (task.getResult().exists()){
                                 DataSnapshot dataSnapshot = task.getResult();
-                                String cName1 = String.valueOf(dataSnapshot.child("contactName1").getValue());
-                                String cName2 = String.valueOf(dataSnapshot.child("contactName2").getValue());
-                                String cName3 = String.valueOf(dataSnapshot.child("contactName3").getValue());
+                                String cNam1 = String.valueOf(dataSnapshot.child("contactName1").getValue());
+                                String cNam2 = String.valueOf(dataSnapshot.child("contactName2").getValue());
+                                String cNam3 = String.valueOf(dataSnapshot.child("contactName3").getValue());
 
                                 String cNum1 = String.valueOf(dataSnapshot.child("contactNumber1").getValue());
                                 String cNum2 = String.valueOf(dataSnapshot.child("contactNumber2").getValue());
                                 String cNum3 = String.valueOf(dataSnapshot.child("contactNumber3").getValue());
 
-                                conNameTV1.setText(cName1);
-                                conNameTV2.setText(cName2);
-                                conNameTV3.setText(cName3);
+                                // UI purposes
+                                conNameTV1.setText(cNam1);
+                                conNameTV2.setText(cNam2);
+                                conNameTV3.setText(cNam3);
 
                                 conNumTV1.setText(cNum1);
                                 conNumTV2.setText(cNum2);
@@ -161,6 +162,16 @@ public class SelectContact extends AppCompatActivity {
                                 add1.setVisibility(View.INVISIBLE);
                                 add2.setVisibility(View.INVISIBLE);
                                 add3.setVisibility(View.INVISIBLE);
+
+
+                                // saved the retrieve data in the variable
+                                cName1 = cNam1;
+                                cName2 = cNam2;
+                                cName3 = cNam3;
+
+                                cNumber1 = cNum1;
+                                cNumber2 = cNum2;
+                                cNumber3 = cNum3;
                             }
                         }
                     }
