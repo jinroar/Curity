@@ -24,6 +24,7 @@ import com.example.curity.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SelectContact extends AppCompatActivity {
@@ -63,6 +64,9 @@ public class SelectContact extends AppCompatActivity {
         contactCL1 = findViewById(R.id.contact1);
         contactCL2 = findViewById(R.id.contact2);
         contactCL3 = findViewById(R.id.contact3);
+
+        //retrieve the saved data
+        retrieveSavedContacts();
 
         enterButton = findViewById(R.id.select_contact);
 
@@ -127,6 +131,40 @@ public class SelectContact extends AppCompatActivity {
             });
 //        }
 
+    }
+
+    private void retrieveSavedContacts() {
+        FirebaseDatabase.getInstance().getReference("contacts")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()){
+                            if (task.getResult().exists()){
+                                DataSnapshot dataSnapshot = task.getResult();
+                                String cName1 = String.valueOf(dataSnapshot.child("contactName1").getValue());
+                                String cName2 = String.valueOf(dataSnapshot.child("contactName2").getValue());
+                                String cName3 = String.valueOf(dataSnapshot.child("contactName3").getValue());
+
+                                String cNum1 = String.valueOf(dataSnapshot.child("contactNumber1").getValue());
+                                String cNum2 = String.valueOf(dataSnapshot.child("contactNumber2").getValue());
+                                String cNum3 = String.valueOf(dataSnapshot.child("contactNumber3").getValue());
+
+                                conNameTV1.setText(cName1);
+                                conNameTV2.setText(cName2);
+                                conNameTV3.setText(cName3);
+
+                                conNumTV1.setText(cNum1);
+                                conNumTV2.setText(cNum2);
+                                conNumTV3.setText(cNum3);
+
+                                add1.setVisibility(View.INVISIBLE);
+                                add2.setVisibility(View.INVISIBLE);
+                                add3.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    }
+                });
     }
 
     //check where this activity was created
