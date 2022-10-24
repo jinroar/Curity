@@ -47,7 +47,7 @@ public class profile extends AppCompatActivity {
                                 DataSnapshot dataSnapshot = task.getResult();
                                 String fName = String.valueOf(dataSnapshot.child("firstName").getValue());
                                 String lName = String.valueOf(dataSnapshot.child("lastName").getValue());
-                                String address = String.valueOf(dataSnapshot.child("addresse").getValue());
+                                String address = String.valueOf(dataSnapshot.child("address").getValue());
                                 String email = String.valueOf(dataSnapshot.child("email").getValue());
                                 String phone = String.valueOf(dataSnapshot.child("phone").getValue());
 
