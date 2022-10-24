@@ -32,6 +32,12 @@
                     android:title="Profile" />
 
                 <item
+                    android:id="@+id/select_contact"
+                    android:checkable="false"
+                    android:icon="@drawable/ic_baseline_contacts_24"
+                    android:title="Contacts" />
+
+                <item
                     android:id="@+id/nav_setting"
                     android:checkable="false"
                     android:icon="@drawable/ic_baseline_settings_24"

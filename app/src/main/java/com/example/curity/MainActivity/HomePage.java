@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.curity.R;
+import com.example.curity.SignUp.SelectContact;
 import com.example.curity.databinding.ActivityHomePageBinding;
 import com.example.curity.firstFragment;
 import com.example.curity.login.Login;
@@ -125,6 +126,13 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             /*----------------Activities----------------*/
             case R.id.nav_profile:
                 startActivity(new Intent(HomePage.this, profile.class));
+                break;
+
+            case R.id.select_contact:
+//                startActivity(new Intent(HomePage.this, SelectContact.class));
+                Intent intent = new Intent(HomePage.this, SelectContact.class);
+                intent.putExtra("Source", "from Homepage");
+                startActivity(intent);
                 break;
 
             case R.id.nav_setting:

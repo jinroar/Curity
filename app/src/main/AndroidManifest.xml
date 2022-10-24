@@ -25,6 +25,9 @@
             android:name=".MainActivity.settings"
             android:exported="false" />
         <activity
+            android:name=".SignUp.SelectContact"
+            android:exported="false" />
+        <activity
             android:name=".SignUp.SignUpP3"
             android:exported="false" />
         <activity
