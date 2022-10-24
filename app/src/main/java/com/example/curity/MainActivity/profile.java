@@ -17,6 +17,7 @@ import com.example.curity.databinding.ActivityProfileBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,6 +36,33 @@ public class profile extends AppCompatActivity {
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //Retrieve the data first
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()){
+                            if (task.getResult().exists()) {
+                                DataSnapshot dataSnapshot = task.getResult();
+                                String fName = String.valueOf(dataSnapshot.child("firstName").getValue());
+                                String lName = String.valueOf(dataSnapshot.child("lastName").getValue());
+                                String address = String.valueOf(dataSnapshot.child("addresse").getValue());
+                                String email = String.valueOf(dataSnapshot.child("email").getValue());
+                                String phone = String.valueOf(dataSnapshot.child("phone").getValue());
+
+                                binding.edittextFname.setText(fName);
+                                binding.edittextLname.setText(lName);
+                                binding.edittextAddress.setText(address);
+                                binding.edittextEmail.setText(email);
+                                binding.edittextPhone.setText(phone);
+
+                            }
+                        }
+                    }
+                });
+
+        // Updating the User profile
         binding.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +76,6 @@ public class profile extends AppCompatActivity {
                 updatedata(fName, lName, address, email, phone);
 
             }
-
         });
 
     }
@@ -70,20 +97,10 @@ public class profile extends AppCompatActivity {
             public void onComplete(@NonNull Task task) {
 
                 if (task.isSuccessful()){
-
-                    binding.edittextFname.setText("");
-                    binding.edittextLname.setText("");
-                    binding.edittextAddress.setText("");
-                    binding.edittextEmail.setText("");
-                    binding.edittextPhone.setText("");
-
-
                     Toast.makeText(profile.this,"Successfully Updated",Toast.LENGTH_SHORT).show();
 
                 }else {
-
                     Toast.makeText(profile.this,"Failed to Update",Toast.LENGTH_SHORT).show();
-
                 }
 
             }

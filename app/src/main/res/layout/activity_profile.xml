@@ -47,7 +47,6 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_person_24"
                 android:drawablePadding="10dp"
-                android:text="Sophia"
                 android:textSize="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -67,7 +66,6 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_person_24"
                 android:drawablePadding="10dp"
-                android:text="Quizon"
                 android:textSize="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -87,7 +85,6 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_home_24"
                 android:drawablePadding="10dp"
-                android:text="Baclaran Parañaque City"
                 android:textSize="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -107,7 +104,6 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="10dp"
-                android:text="*****@gmail.com"
                 android:textSize="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -127,7 +123,6 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_phone_android_24"
                 android:drawablePadding="10dp"
-                android:text="09178994704"
                 android:textSize="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
