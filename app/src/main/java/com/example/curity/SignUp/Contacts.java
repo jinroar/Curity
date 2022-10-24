@@ -28,6 +28,55 @@ public class Contacts {
 
     }
 
+    public String getContactName1() {
+        return contactName1;
+    }
+
+    public void setContactName1(String contactName1) {
+        this.contactName1 = contactName1;
+    }
+
+    public String getContactNumber1() {
+        return contactNumber1;
+    }
+
+    public void setContactNumber1(String contactNumber1) {
+        this.contactNumber1 = contactNumber1;
+    }
+
+    //contact person second
+    public String getContactName2() {
+        return contactName2;
+    }
+
+    public void setContactName2(String contactName2) {
+        this.contactName2 = contactName2;
+    }
+
+    public String getContactNumber2() {
+        return contactNumber2;
+    }
+
+    public void setContactNumber2(String contactNumber2) {
+        this.contactNumber2 = contactNumber2;
+    }
+
+    //contact person third
+    public String getContactName3() {
+        return contactName3;
+    }
+
+    public void setContactName3(String contactName3) {
+        this.contactName3 = contactName3;
+    }
+
+    public String getContactNumber3() {
+        return contactNumber3;
+    }
+
+    public void setContactNumber3(String contactNumber3) {
+        this.contactNumber3 = contactNumber3;
+    }
 }
 
 

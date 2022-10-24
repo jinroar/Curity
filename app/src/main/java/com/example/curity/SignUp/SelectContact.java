@@ -24,12 +24,7 @@ import com.example.curity.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.ktx.Firebase;
 
 public class SelectContact extends AppCompatActivity {
 
@@ -40,11 +35,8 @@ public class SelectContact extends AppCompatActivity {
     Button enterButton;
 
     int box;
-    String contactName1,contactName2,contactName3;
-    String contactNumber1,contactNumber2,contactNumber3;
-//
-    public FirebaseDatabase firebaseDatabase;
-    public DatabaseReference databaseReference;
+    String cName1,cName2,cName3;
+    String cNumber1,cNumber2,cNumber3;
 
     private String source;
 
@@ -114,44 +106,23 @@ public class SelectContact extends AppCompatActivity {
             //Enter button listener
             //here yung firebase
             enterButton.setOnClickListener(new View.OnClickListener() {
-                Contacts contacts = new Contacts(contactName1,contactName2,contactName3,contactNumber1,contactNumber2,contactNumber3);
-
                 @Override
                 public void onClick(View v) {
-                    firebaseDatabase = FirebaseDatabase.getInstance();
-                    databaseReference = firebaseDatabase.getReference("contacts")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    Contacts contact = new Contacts(cName1,cName2,cName3,cNumber1,cNumber2,cNumber3);
 
-                    databaseReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            databaseReference.setValue(contacts);
-                            Toast.makeText(SelectContact.this, "Contacts input successful", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-
-//                    FirebaseDatabase.getInstance()
-//                            .getReference("contacts")
-//                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                            .setValue(contacts).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    if (task.isSuccessful()){
-//                                        Toast.makeText(SelectContact.this, "Contacts input successful", Toast.LENGTH_SHORT).show();
-//                                        finish();
-//
-//                                    } else {
-//                                        Toast.makeText(SelectContact.this, "Contacts input unsuccessful", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                            });
+                    // insert contacts to the firebase realtime database
+                    FirebaseDatabase.getInstance().getReference("contacts")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(contact).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        Toast.makeText(SelectContact.this, "Contacts Input successful!", Toast.LENGTH_SHORT).show();
+                                    } else  {
+                                        Toast.makeText(SelectContact.this, "Contacts Input Failed! Please Try Again", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                 }
             });
 //        }
@@ -246,24 +217,24 @@ public class SelectContact extends AppCompatActivity {
                                 conNameTV1.setText(name);
                                 conNumTV1.setText(num);
                                 add1.setVisibility(View.INVISIBLE);
-                                contactName1 = name;
-                                contactNumber1 = num;
+                                cName1 = name;
+                                cNumber1 = num;
                                 break;
-                            case 2:
 
+                            case 2:
                                 conNameTV2.setText(name);
                                 conNumTV2.setText(num);
                                 add2.setVisibility(View.INVISIBLE);
-                                contactName2 = name;
-                                contactNumber2 = num;
+                                cName2 = name;
+                                cNumber2 = num;
                                 break;
-                            case 3:
 
+                            case 3:
                                 conNameTV3.setText(name);
                                 conNumTV3.setText(num);
                                 add3.setVisibility(View.INVISIBLE);
-                                contactName3 = name;
-                                contactNumber3 = num;
+                                cName3 = name;
+                                cNumber3 = num;
                                 break;
 
                         }
