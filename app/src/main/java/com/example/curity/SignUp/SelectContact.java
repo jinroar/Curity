@@ -74,10 +74,12 @@ public class SelectContact extends AppCompatActivity {
 
         enterButton = findViewById(R.id.select_contact);
 
+        //intent for the contacts
         Intent pickContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
 
         source = getIntent().getStringExtra("Source");
 
+        //Constraints Listener
         contactCL1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,9 +107,12 @@ public class SelectContact extends AppCompatActivity {
             }
         });
 
+        //permissions
         requestContactsPermission();
 
 //        if(checkSource() == 1){
+            //Enter button listener
+            //here yung firebase
             enterButton.setOnClickListener(new View.OnClickListener() {
                 Contacts contacts = new Contacts(contactName1,contactName2,contactName3,contactNumber1,contactNumber2,contactNumber3);
 
@@ -153,6 +158,7 @@ public class SelectContact extends AppCompatActivity {
 
     }
 
+    //check where this activity was created
     public int checkSource() {
         int sourceInt;
         switch (source){
@@ -168,7 +174,7 @@ public class SelectContact extends AppCompatActivity {
         return sourceInt;
     }
 
-
+    // permissions
     private void requestContactsPermission() {
         if (!hasContactsPermission())
         {
@@ -182,7 +188,7 @@ public class SelectContact extends AppCompatActivity {
                 PackageManager.PERMISSION_GRANTED;
     }
 
-
+    //getting data from phone contacts
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -233,6 +239,8 @@ public class SelectContact extends AppCompatActivity {
                     while(cursor2.moveToNext()){
                         String num = cursor2.getString(cursor2.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
+                        //pass values
+                        //print values in box
                         switch(box){
                             case 1:
                                 conNameTV1.setText(name);
