@@ -85,29 +85,10 @@ public class SignUpP2 extends AppCompatActivity {
                                                         if (task.isSuccessful()){
                                                             Toast.makeText(SignUpP2.this, "User has been registered successfully!", Toast.LENGTH_SHORT).show();
 
-                                                            //for display name (full name)
-                                                            fullName = firstTxt + " " + lastTxt;
-                                                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                                                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                                                    .setDisplayName(fullName).build();
-
-                                                            //check if it was updated in the firebase authentication
-                                                            user.updateProfile(profileUpdates)
-                                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                        @Override
-                                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                                            if (task.isSuccessful()) {
-                                                                                Log.d("ACTIVITY SIGNUP P2", "User profile updated.");
-
-                                                                                // go to login Page
-                                                                                Intent intent = new Intent(getApplicationContext(), Login.class);
-                                                                                startActivity(intent);
-                                                                                finish();
-
-                                                                            }
-                                                                        }
-                                                                    });
+                                                            // go to login Page
+                                                            Intent intent = new Intent(getApplicationContext(), Login.class);
+                                                            startActivity(intent);
+                                                            finish();
                                                         } else {
                                                             Toast.makeText(SignUpP2.this, "Failed to register! Please Try Again", Toast.LENGTH_SHORT).show();
                                                         }

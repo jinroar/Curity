@@ -29,8 +29,6 @@ public class forgetPassword extends AppCompatActivity {
 
 
         emailEditText = findViewById(R.id.emailEt);
-        passwordEditText = findViewById(R.id.passET);
-        confirmPassEditText = findViewById(R.id.confirmPassEt);
         resetPassBtn = findViewById(R.id.resetPassBtn);
 
         firebaseAuth = FirebaseAuth.getInstance();
