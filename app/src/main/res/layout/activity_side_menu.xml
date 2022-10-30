@@ -8,22 +8,23 @@
     android:padding="20dp">
 
     <ImageView
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="5dp"
         android:src="@drawable/user" />
 
     <TextView
+        android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Traveling"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"/>
 
     <TextView
+        android:id="@+id/userNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ww.taimoorsikander.com"
         android:textColor="@color/white"
         android:textSize="14sp" />
 

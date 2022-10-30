@@ -3,6 +3,8 @@ package com.example.curity.MainActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -22,8 +24,12 @@ import com.example.curity.firstFragment;
 import com.example.curity.login.Login;
 import com.example.curity.secondFragment;
 import com.example.curity.thirdFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -42,6 +48,33 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         binding = ActivityHomePageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         replaceFragment(new firstFragment());
+
+        // inserting name at the sidebar
+        // Retrieve the data first using firebase realtime
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()){
+                            if (task.getResult().exists()) {
+                                DataSnapshot dataSnapshot = task.getResult();
+                                String fName = String.valueOf(dataSnapshot.child("firstName").getValue());
+                                String lName = String.valueOf(dataSnapshot.child("lastName").getValue());
+                                String phone = String.valueOf(dataSnapshot.child("phone").getValue());
+
+
+                                // getting the header of the side bar
+                                View headView = navigationView.getHeaderView(0);
+                                TextView setName = headView.findViewById(R.id.userName);
+                                TextView setPhoneNum = headView.findViewById(R.id.userNumber);
+
+                                setName.setText(fName +" "+ lName);
+                                setPhoneNum.setText(phone);
+                            }
+                        }
+                    }
+                });
 
         // bottom navigation (Home, Map, and Chats)
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
