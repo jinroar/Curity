@@ -5,21 +5,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.os.Handler;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.example.curity.databinding.FragmentFirstBinding;
+import androidx.fragment.app.Fragment;
+
 import com.skyfishjy.library.RippleBackground;
 
 /**
@@ -34,6 +28,8 @@ public class firstFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    RippleBackground rippleBackground;
+    ImageView button;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -78,20 +74,21 @@ public class firstFragment extends Fragment implements View.OnClickListener {
 //        Button button = view.findViewById(R.id.button2);
 //        button.setOnClickListener(this);
 
-        final RippleBackground rippleBackground = view.findViewById(R.id.content);
-        final ImageView button = view.findViewById(R.id.button2);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!rippleBackground.isRippleAnimationRunning()) {
-                    button.setColorFilter(Color.argb(255, 255, 255, 255)); //change the logo color while staring animation
-                    rippleBackground.startRippleAnimation(); //starting the animation
-                } else {
-                    button.setColorFilter(null); //get back to previous logo color while stopping animation
-                    rippleBackground.stopRippleAnimation(); //stopping the animation
-                }
-            }
-        });
+        rippleBackground = view.findViewById(R.id.content);
+        button = view.findViewById(R.id.button2);
+        button.setOnClickListener(this);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (!rippleBackground.isRippleAnimationRunning()) {
+//                    button.setColorFilter(Color.argb(255, 255, 255, 255)); //change the logo color while staring animation
+//                    rippleBackground.startRippleAnimation(); //starting the animation
+//                } else {
+//                    button.setColorFilter(null); //get back to previous logo color while stopping animation
+//                    rippleBackground.stopRippleAnimation(); //stopping the animation
+//                }
+//            }
+//        });
 
         return view;
     }
@@ -99,6 +96,15 @@ public class firstFragment extends Fragment implements View.OnClickListener {
     //Ask Question for 5 Seconds
     @Override
     public void onClick(View v) {
+
+        if (!rippleBackground.isRippleAnimationRunning()) {
+                    button.setColorFilter(Color.argb(255, 255, 255, 255)); //change the logo color while staring animation
+                    rippleBackground.startRippleAnimation(); //starting the animation
+        } else {
+                    button.setColorFilter(null); //get back to previous logo color while stopping animation
+                    rippleBackground.stopRippleAnimation(); //stopping the animation
+        }
+
         AlertDialog dialog = new AlertDialog.Builder(firstFragment.this.getContext())
                 .setTitle("Alert")
                 .setMessage("Are you OK?")
@@ -106,8 +112,8 @@ public class firstFragment extends Fragment implements View.OnClickListener {
                 .setNegativeButton("no", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        Intent intent = new Intent(firstFragment.this.requireContext(), userMapsActivity.class);
-//                        startActivity(intent);
+                        Intent intent = new Intent(firstFragment.this.requireContext(), userMapsActivity.class);
+                        startActivity(intent);
 
                     }
                 })

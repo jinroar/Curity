@@ -2,7 +2,7 @@
     <string name="app_name">Curity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="api_key">AIzaSyCa2Mgu3Uwd22nEa72tDMRqZjhqQUtP5hY</string>
     <!-- for the hamburger -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
