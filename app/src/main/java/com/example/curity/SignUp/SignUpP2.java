@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.curity.R;
@@ -18,9 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class SignUpP2 extends AppCompatActivity {
 
@@ -28,6 +26,7 @@ public class SignUpP2 extends AppCompatActivity {
     private EditText emailEditText, passwordEditText, confirmPassEditText;
     private Button nxtBtn;
     private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore fStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +67,18 @@ public class SignUpP2 extends AppCompatActivity {
 
                 else {
                     firebaseAuth = FirebaseAuth.getInstance();
+                    fStore = FirebaseFirestore.getInstance();
+
                     firebaseAuth.createUserWithEmailAndPassword(emailTxt,passwordTxt)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()){
+                                        // Identify the Access level
+                                        // 1 - Brgy
+                                        // 2 - User
 
-                                        User users = new User(firstTxt, lastTxt, addressTxt, phoneTxt, emailTxt);
-
+                                        User users = new User(firstTxt, lastTxt, addressTxt, phoneTxt, emailTxt, "2");
                                         //going to put the data inside the Firebase Realtime and Firebase Authentication
                                         FirebaseDatabase.getInstance().getReference("users")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

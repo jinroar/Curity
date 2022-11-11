@@ -2,15 +2,17 @@ package com.example.curity.login
 
 import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.example.curity.AdminPage.HomePageBrgy
 import com.example.curity.MainActivity.HomePage
 import com.example.curity.R
 import com.example.curity.SignUp.SignUpP1
 import com.example.curity.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class Login : AppCompatActivity() {
 
@@ -26,18 +28,13 @@ class Login : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        binding.SignUpView.setOnClickListener{
+        binding.SignUpView.setOnClickListener {
             val intent = Intent(this, SignUpP1::class.java)
             startActivity(intent)
         }
 
-        binding.forgetTextView.setOnClickListener{
+        binding.forgetTextView.setOnClickListener {
             val intent = Intent(this, forgetPassword::class.java)
-            startActivity(intent)
-        }
-
-        binding.brgyLogin.setOnClickListener {
-            val intent = Intent(this,LoginBrgy::class.java)
             startActivity(intent)
         }
 
@@ -45,29 +42,38 @@ class Login : AppCompatActivity() {
             val email = binding.emailEt.text.toString()
             val pass = binding.passET.text.toString()
 
-
-
             if (email.isNotEmpty() && pass.isNotEmpty()) {
-                firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        val intent = Intent(this, HomePage::class.java)
-                        startActivity(intent)
-                    } else {
-                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }else{
+                firebaseAuth.signInWithEmailAndPassword(email, pass)
+                        .addOnSuccessListener { authResult -> checkUserAccessLevel(authResult.user!!.uid) }
+                        .addOnFailureListener {}
+            } else {
                 Toast.makeText(this, "Please fill up the empty field(s)", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+    private fun checkUserAccessLevel(uid: String) {
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(uid).get()
+                .addOnSuccessListener { dataSnapshot ->
+                    // Identify the Access level
+                    // 1 - Brgy
+                    // 2 - User
+
+                    if (dataSnapshot.child("isAdmin").value.toString() == "1") {
+                        startActivity(Intent(this, HomePageBrgy::class.java))
+                        finish()
+                    } else if (dataSnapshot.child("isAdmin").value.toString() == "2") {
+                        startActivity(Intent(this, HomePage::class.java))
+                        finish()
+                    } }
+    }
+
     override fun onStart() {
         super.onStart()
-        if (firebaseAuth.currentUser !=null){
-            val intent = Intent(this, HomePage::class.java)
-            startActivity(intent)
-            finish();
+        if (firebaseAuth.currentUser != null) {
+            checkUserAccessLevel(firebaseAuth.currentUser!!.uid)
+            finish()
         }
     }
 

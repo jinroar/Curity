@@ -82,21 +82,6 @@
         app:layout_constraintVertical_bias="0.337" />
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/brgyLogin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:background="@color/red"
-        android:text="Barangay Login"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.18" />
-
     <TextView
         android:id="@+id/WelcomeView1"
         android:layout_width="106dp"
