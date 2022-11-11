@@ -41,6 +41,9 @@
             android:name=".login.forgetPassword"
             android:exported="false" />
         <activity
+            android:name=".login.LoginBrgy"
+            android:exported="false" />
+        <activity
             android:name=".SignUp.SignUpP1"
             android:exported="false" />
         <activity

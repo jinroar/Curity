@@ -36,6 +36,11 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.brgyLogin.setOnClickListener {
+            val intent = Intent(this,LoginBrgy::class.java)
+            startActivity(intent)
+        }
+
         binding.button.setOnClickListener {
             val email = binding.emailEt.text.toString()
             val pass = binding.passET.text.toString()
