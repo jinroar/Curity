@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,17 +20,18 @@
     <TextView
         android:id="@+id/WelcomeView"
         android:layout_width="267dp"
-        android:layout_height="72dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="30dp"
-        android:text="Welcome, \nSign up to continue"
+        android:text="Welcome,\nSign up to continue"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/FnameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageView3"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.166" />
 
@@ -47,14 +47,16 @@
 
         app:layout_constraintBottom_toTopOf="@+id/LnameLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:startIconTint="@color/red">
 
         <EditText
             android:id="@+id/f_nameEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_baseline_person_24"
-            android:hint="  First Name"
+            android:hint="First Name"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,14 +71,16 @@
         app:boxStrokeColor="@color/red"
         app:hintTextColor="@color/red"
 
-        app:layout_constraintTop_toBottomOf="@+id/FnameLayout">
+        app:layout_constraintTop_toBottomOf="@+id/FnameLayout"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+
+        app:startIconTint="@color/red">
 
         <EditText
             android:id="@+id/l_nameEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="  Last Name"
-            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:hint="Last Name"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,14 +93,17 @@
         android:layout_marginTop="15dp"
         app:boxStrokeColor="@color/red"
         app:hintTextColor="@color/red"
-        app:layout_constraintTop_toBottomOf="@+id/LnameLayout">
+
+        app:layout_constraintTop_toBottomOf="@+id/LnameLayout"
+        app:startIconDrawable="@drawable/ic_baseline_home_24"
+
+        app:startIconTint="@color/red">
 
         <EditText
             android:id="@+id/addressEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_baseline_home_24"
-            android:hint="  Address"
+            android:hint="Address"
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -111,14 +118,15 @@
         android:layout_marginTop="15dp"
         app:boxStrokeColor="@color/red"
         app:hintTextColor="@color/red"
-        app:layout_constraintTop_toBottomOf="@+id/AdressnameLayout">
+        app:layout_constraintTop_toBottomOf="@+id/AdressnameLayout"
+        app:startIconDrawable="@drawable/ic_baseline_phone_android_24"
+        app:startIconTint="@color/red">
 
         <EditText
             android:id="@+id/phoneEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_baseline_phone_android_24"
-            android:hint="  Cellphone Number"
+            android:hint="Cellphone Number"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,8 +139,8 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/round_btn"
         android:text="Next"
-        android:textSize="20dp"
         android:textColor="@color/white"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

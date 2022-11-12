@@ -17,6 +17,7 @@ public class SignUpP1 extends AppCompatActivity {
     private EditText firstEditText, lastEditText, addressEditText, phoneEditText;
     private Button nxtBtn;
     private FirebaseAuth firebaseAuth;
+    private Boolean check = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +39,32 @@ public class SignUpP1 extends AppCompatActivity {
                 final String addressTxt = addressEditText.getText().toString();
                 final String phoneTxt = phoneEditText.getText().toString();
 
-                if (firstTxt.isEmpty() || lastTxt.isEmpty() || addressTxt.isEmpty() || phoneTxt.isEmpty()){
-                    Toast.makeText(SignUpP1.this, "Please fill Up the empty field(s)", Toast.LENGTH_SHORT).show();
+                if (firstTxt.isEmpty()){
+                    firstEditText.setError("First name is required");
+                    firstEditText.requestFocus();
                 }
 
-                else {
+                if (lastTxt.isEmpty()){
+                    lastEditText.setError("last name is required");
+                    lastEditText.requestFocus();
+                }
+
+                if (addressTxt.isEmpty()){
+                    addressEditText.setError("Address is required");
+                    addressEditText.requestFocus();
+                }
+
+                if (phoneTxt.isEmpty()){
+                    phoneEditText.setError("Cellphone number is required");
+                    phoneEditText.requestFocus();
+                }
+
+                if (phoneTxt.length() != 11){
+                    phoneEditText.setError("Enter the 11 digits of your cellphone number.");
+                    phoneEditText.requestFocus();
+                }
+
+                if (!(firstTxt.isEmpty() || lastTxt.isEmpty() || addressTxt.isEmpty() || phoneTxt.isEmpty()) && phoneTxt.length() == 11) {
                     //pass the data to the next page
                     Intent intent = new Intent(getApplicationContext(), SignUpP2.class);
                     intent.putExtra("f_name", firstTxt);

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,24 +57,46 @@ public class SignUpP2 extends AppCompatActivity {
                 final String passwordTxt = passwordEditText.getText().toString();
                 final String confirmPassTxt = confirmPassEditText.getText().toString();
 
-                if (emailTxt.isEmpty() || passwordTxt.isEmpty() || confirmPassTxt.isEmpty()){
-                    Toast.makeText(SignUpP2.this, "Please fill Up the empty field(s)", Toast.LENGTH_SHORT).show();
+                if (emailTxt.isEmpty()){
+                    emailEditText.setError("Email is required");
+                    emailEditText.requestFocus();
+                }
+
+                // check if the password box is empty
+                if (passwordTxt.isEmpty() && confirmPassTxt.isEmpty()){
+                    passwordEditText.setError("password is required");
+                    passwordEditText.requestFocus();
+
+                    confirmPassEditText.setError("password is required");
+                    confirmPassEditText.requestFocus();
+                }
+
+                // check email valid
+                if (!Patterns.EMAIL_ADDRESS.matcher(emailTxt).matches()){
+                    emailEditText.setError("Please provide valid email");
+                    emailEditText.requestFocus();
+                }
+
+                // check if the length of the password more than 6
+                if (passwordTxt.length() < 6){
+                    passwordEditText.setError("Minimum password length should be 6 characters.");
+                    passwordEditText.requestFocus();
                 }
 
                 // check if the password is not match
-                else if (!passwordTxt.equals(confirmPassTxt)){
+                if (!passwordTxt.equals(confirmPassTxt)){
                     Toast.makeText(SignUpP2.this, "Password is not matched", Toast.LENGTH_SHORT).show();
                 }
 
-                else {
+                if (!(emailTxt.isEmpty() || passwordTxt.isEmpty() || confirmPassTxt.isEmpty()) && passwordTxt.equals(confirmPassTxt) ) {
                     firebaseAuth = FirebaseAuth.getInstance();
                     fStore = FirebaseFirestore.getInstance();
 
-                    firebaseAuth.createUserWithEmailAndPassword(emailTxt,passwordTxt)
+                    firebaseAuth.createUserWithEmailAndPassword(emailTxt, passwordTxt)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         // Identify the Access level
                                         // 1 - Brgy
                                         // 2 - User
@@ -85,7 +108,7 @@ public class SignUpP2 extends AppCompatActivity {
                                                 .setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()){
+                                                        if (task.isSuccessful()) {
                                                             Toast.makeText(SignUpP2.this, "User has been registered successfully!", Toast.LENGTH_SHORT).show();
 
                                                             // go to login Page
