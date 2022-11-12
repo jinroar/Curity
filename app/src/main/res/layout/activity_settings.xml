@@ -13,14 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Settings"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         android:textAlignment="center"
         android:textSize="36dp" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_1"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:text="Notification"
+        android:textStyle="bold"
         android:textSize="20dp" />
 
     <RelativeLayout
@@ -36,7 +39,8 @@
             android:gravity="center_vertical"
             android:text="Shake Disable Method"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/shakeDisableMethod_txt"
@@ -71,7 +75,8 @@
             android:gravity="center_vertical"
             android:text="Shake Alarm Sound"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/shakeAlarmSound_txt"
@@ -99,7 +104,8 @@
         android:gravity="center_vertical"
         android:text="Shake Sensitivity"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:textStyle="bold"/>
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/shakeSensitivity"
