@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,49 +22,49 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
         app:srcCompat="@drawable/profile" />-->
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="79dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/_png__curity_logo" />
+
+    <TextView
+        android:id="@+id/welcomeView2"
+        android:layout_width="266dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="48dp"
+        android:text="Edit Profile"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.806"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height=""
+        android:layout_marginTop="108dp"
         android:gravity="center"
-        android:padding="25dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-
-        <!--<ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="90dp"
-            android:layout_height="124dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.049"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/_png__curity_logo" />-->
-
-        <TextView
-            android:id="@+id/WelcomeView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Profile"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-            android:textColor="#bb0a1e"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/FnameLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.736"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.17" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edittext_fnamelay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:hint="First Name"
             android:textSize="30dp">
@@ -161,6 +162,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/round_btn"
             android:text="UPDATE"
+            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -174,4 +176,4 @@
 
 
     </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
