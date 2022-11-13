@@ -7,15 +7,22 @@ import android.net.NetworkInfo;
 public class Common {
     public static boolean isConnectedToInternet(Context context) {
 
+        boolean wifiConnected;
+        boolean mobileConnected;
+
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
 
+        NetworkInfo activeInfo = connectivityManager.getActiveNetworkInfo();
+
         if (connectivityManager != null) {
             NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
-            if (info != null) {
-                for (int i = 1; i < info.length; i++) {
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED)
-                        return true;
+            if (activeInfo != null && activeInfo.isConnected()) {
+                wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
+                mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
+
+                if(wifiConnected || mobileConnected){
+                    return true;
                 }
             }
         }

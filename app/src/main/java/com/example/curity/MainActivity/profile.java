@@ -70,23 +70,21 @@ public class profile extends AppCompatActivity {
                 String fName = binding.edittextFname.getText().toString();
                 String lName = binding.edittextLname.getText().toString();
                 String address = binding.edittextAddress.getText().toString();
-                String email = binding.edittextEmail.getText().toString();
                 String phone = binding.edittextPhone.getText().toString();
 
-                updatedata(fName, lName, address, email, phone);
+                updatedata(fName, lName, address, phone);
 
             }
         });
 
     }
 
-    private void updatedata(String fName, String lName, String address, String email, String phone) {
+    private void updatedata(String fName, String lName, String address, String phone) {
 
         HashMap User = new HashMap();
         User.put("firstName",fName);
         User.put("lastName",lName);
         User.put("address",address);
-        User.put("email",email);
         User.put("phone",phone);
 
 
