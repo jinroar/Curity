@@ -14,11 +14,10 @@ import com.example.curity.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class forgetPassword extends AppCompatActivity {
 
-    private EditText emailEditText, passwordEditText, confirmPassEditText;
+    private EditText emailEditText;
     private Button resetPassBtn;
     private FirebaseAuth firebaseAuth;
 

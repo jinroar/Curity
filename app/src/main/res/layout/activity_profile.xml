@@ -131,7 +131,8 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="10dp"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:enabled="false"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
