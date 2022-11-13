@@ -2,6 +2,8 @@ package com.example.curity.login
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -10,6 +12,7 @@ import com.example.curity.AdminPage.HomePageBrgy
 import com.example.curity.MainActivity.HomePage
 import com.example.curity.R
 import com.example.curity.SignUp.SignUpP1
+import com.example.curity.Utility.NetworkChangeListener
 import com.example.curity.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -18,6 +21,7 @@ class Login : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    var networkChangeListener = NetworkChangeListener()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,10 +75,18 @@ class Login : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(networkChangeListener, filter)
+
         if (firebaseAuth.currentUser != null) {
             checkUserAccessLevel(firebaseAuth.currentUser!!.uid)
             finish()
         }
+    }
+
+    override fun onStop() {
+        unregisterReceiver(networkChangeListener)
+        super.onStop()
     }
 
     override fun onBackPressed() {

@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.example.curity.BrgyNotificationsFragment;
 import com.example.curity.MainActivity.profile;
 import com.example.curity.MainActivity.settings;
 import com.example.curity.R;
+import com.example.curity.Utility.NetworkChangeListener;
 import com.example.curity.databinding.ActivityHomePageBrgyBinding;
 import com.example.curity.login.Login;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +35,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class HomePageBrgy extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     ActivityHomePageBrgyBinding binding;
 
@@ -175,5 +180,18 @@ public class HomePageBrgy extends AppCompatActivity implements NavigationView.On
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

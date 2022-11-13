@@ -1,6 +1,8 @@
 package com.example.curity.MainActivity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.curity.R;
 import com.example.curity.SignUp.SelectContact;
+import com.example.curity.Utility.NetworkChangeListener;
 import com.example.curity.databinding.ActivityHomePageBinding;
 import com.example.curity.firstFragment;
 import com.example.curity.login.Login;
@@ -32,6 +35,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     ActivityHomePageBinding binding;
 
@@ -184,5 +189,18 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }
