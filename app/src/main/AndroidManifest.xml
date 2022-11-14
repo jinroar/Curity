@@ -36,9 +36,6 @@
             android:name=".SignUp.SelectContact"
             android:exported="false" />
         <activity
-            android:name=".SignUp.SignUpP3"
-            android:exported="false" />
-        <activity
             android:name=".login.forgetPassword"
             android:exported="false" />
         <activity
