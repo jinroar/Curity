@@ -16,7 +16,6 @@ public class Common {
         NetworkInfo activeInfo = connectivityManager.getActiveNetworkInfo();
 
         if (connectivityManager != null) {
-            NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
             if (activeInfo != null && activeInfo.isConnected()) {
                 wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
                 mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
