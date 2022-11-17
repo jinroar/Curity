@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/brgyHome"
-        android:title="Home"
-        android:icon="@drawable/ic_baseline_home_24"/>
+        android:id="@+id/brgyAlert"
+        android:title="Alerts"
+        android:icon="@drawable/ic_baseline_crisis_alert_24"/>
     <item
-        android:id="@+id/brgyDashboard"
-        android:title="Dashboard"
-        android:icon="@drawable/ic_baseline_dashboard_24"/>
+        android:id="@+id/brgyMap"
+        android:title="Map"
+        android:icon="@drawable/ic_baseline_map_24"/>
     <item
-        android:id="@+id/brgyNotification"
-        android:title="Notification"
+        android:id="@+id/brgyChat"
+        android:title="Chat"
         android:icon="@drawable/ic_baseline_notifications_24"/>
 </menu>
