@@ -82,20 +82,20 @@ public class HomePageBrgy extends AppCompatActivity implements NavigationView.On
                 });
 
         // bottom navigation (Home, Dashboard, and Notification)
-//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-//            switch (item.getItemId()) {
-//                case R.id.brgyAlert:
-//                    replaceFragment(new BrgyHomeFragment());
-//                    break;
-//                case R.id.brgyMap:
-//                    replaceFragment(new BrgyMapFragment());
-//                    break;
-//                case R.id.brgyChat:
-//                    replaceFragment(new BrgyNotificationsFragment());
-//                    break;
-//            }
-//            return true;
-//        });
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.brgyAlert:
+                    replaceFragment(new BrgyHomeFragment());
+                    break;
+                case R.id.brgyMap:
+                    replaceFragment(new BrgyMapFragment());
+                    break;
+                case R.id.brgyChat:
+                    replaceFragment(new BrgyNotificationsFragment());
+                    break;
+            }
+            return true;
+        });
 
 
         /*------------------Hooks------------------*/
