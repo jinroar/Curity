@@ -22,11 +22,11 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.curity.R;
 import com.example.curity.SignUp.SelectContact;
 import com.example.curity.Utility.NetworkChangeListener;
+import com.example.curity.chatFragment;
 import com.example.curity.databinding.ActivityHomePageBinding;
 import com.example.curity.firstFragment;
 import com.example.curity.login.Login;
 import com.example.curity.secondFragment;
-import com.example.curity.thirdFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -81,23 +81,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                     }
                 });
 
-        // bottom navigation (Home, Map, and Chats)
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.firstFragment:
-                    replaceFragment(new firstFragment());
-                    break;
-                case R.id.secondFragment:
-                    replaceFragment(new secondFragment());
-                    break;
-                case R.id.thirdFragment:
-                    replaceFragment(new thirdFragment());
-                    break;
-            }
-
-            return true;
-        });
-
 
         /*------------------Hooks------------------*/
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -143,22 +126,16 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
                         new firstFragment()).commit();
-
-                binding.bottomNavigationView.setSelectedItemId(R.id.firstFragment);
                 break;
 
             case R.id.nav_maps:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
                     new secondFragment()).commit();
-
-                binding.bottomNavigationView.setSelectedItemId(R.id.secondFragment);
                 break;
 
             case R.id.nav_chat:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
-                        new thirdFragment()).commit();
-
-                binding.bottomNavigationView.setSelectedItemId(R.id.thirdFragment);
+                        new chatFragment()).commit();
                 break;
 
             /*----------------Activities----------------*/
