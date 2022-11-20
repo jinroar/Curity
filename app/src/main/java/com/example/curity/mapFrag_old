@@ -31,7 +31,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.curity.Objects.AcceptedAlerts;
 import com.example.curity.Services.ApiInterface;
 import com.example.curity.Services.Result;
 import com.example.curity.Services.Route;
@@ -160,7 +159,6 @@ public class BrgyMapFragment extends Fragment implements OnMapReadyCallback {
     private boolean userFound = false, requestType = false;
     private Circle centerCircle;
     private Circle carCircle;
-    private int rad;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -271,6 +269,7 @@ public class BrgyMapFragment extends Fragment implements OnMapReadyCallback {
         adminCurrentLongitude = lastLocation.getLongitude();
         currentLoc = new LatLng(adminCurrentLatitude, adminCurrentLongitude);
 
+        Log.d("Location:", " "+currentLoc);
 
         if (currentLoc == null){
             getStartLocation();
@@ -283,7 +282,7 @@ public class BrgyMapFragment extends Fragment implements OnMapReadyCallback {
     private void getEndLocation(){
         databaseReference = FirebaseDatabase.getInstance().getReference().child("User's Location");
         geoFire = new GeoFire(databaseReference);
-        geoQuery = geoFire.queryAtLocation(new GeoLocation(adminCurrentLatitude,adminCurrentLongitude),rad);
+        geoQuery = geoFire.queryAtLocation(new GeoLocation(adminCurrentLatitude,adminCurrentLongitude),10);
         geoQuery .removeAllListeners();
 
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
@@ -303,6 +302,10 @@ public class BrgyMapFragment extends Fragment implements OnMapReadyCallback {
                                             DataSnapshot dataSnapshot = task.getResult();
                                             userCurrentLatitude = Double.parseDouble(String.valueOf(dataSnapshot.child("0").getValue()));
                                             userCurrentLongitude = Double.parseDouble(String.valueOf(dataSnapshot.child("1").getValue()));
+
+                                            //remove from firebase
+                                            FirebaseDatabase.getInstance().getReference().child("User's Location").child(userID).removeValue();
+                                            firebaseUpdate();
 
                                         }
                                     }
@@ -324,7 +327,6 @@ public class BrgyMapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onGeoQueryReady() {
                 if(!userFound){
-                    rad+=1;
                     getEndLocation();
                 }
             }
@@ -333,12 +335,12 @@ public class BrgyMapFragment extends Fragment implements OnMapReadyCallback {
             public void onGeoQueryError(DatabaseError error) {
 
             }
+
+
         });
 
 
     }
-
-
 
     private void requestLocationPermisson(){
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_PERMISSION_CODE);
@@ -356,7 +358,14 @@ public class BrgyMapFragment extends Fragment implements OnMapReadyCallback {
         databaseReference = FirebaseDatabase.getInstance().getReference("Admin's Location");
         geoFire = new GeoFire(databaseReference);
 
-        geoFire.setLocation(FirebaseAuth.getInstance().getCurrentUser().getUid(),new GeoLocation(adminCurrentLatitude, adminCurrentLongitude));
+        geoFire.setLocation(userID,new GeoLocation(adminCurrentLatitude, adminCurrentLongitude));
+    }
+
+    private void firebaseUpdate(){
+        databaseReference = FirebaseDatabase.getInstance().getReference("Accepted Alerts");
+        geoFire = new GeoFire(databaseReference);
+
+        geoFire.setLocation(FirebaseAuth.getInstance().getCurrentUser().getUid(),new GeoLocation(userCurrentLatitude, userCurrentLongitude));
     }
 
     private void getDirections(String origin, String destination){
@@ -387,7 +396,7 @@ public class BrgyMapFragment extends Fragment implements OnMapReadyCallback {
                         }
 
                         polyLineOptions = new PolylineOptions();
-                        polyLineOptions.color(ContextCompat.getColor(getActivity().getApplicationContext(),R.color.red));
+                        polyLineOptions.color(ContextCompat.getColor(getActivity().getApplicationContext(),R.color.black));
                         polyLineOptions.width(8);
                         polyLineOptions.startCap(new ButtCap());
                         polyLineOptions.jointType(JointType.ROUND);
@@ -494,7 +503,5 @@ public class BrgyMapFragment extends Fragment implements OnMapReadyCallback {
         }.start();
     }
 
-    private void brgyAnimation(){
 
-    }
 }

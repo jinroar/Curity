@@ -17,17 +17,6 @@ public class Contacts {
 
     }
 
-    public void displayAll(){
-
-        Log.d("Contact", contactName1);
-        Log.d("Contact", contactName2);
-        Log.d("Contact", contactName2);
-        Log.d("Contact", contactNumber1);
-        Log.d("Contact", contactNumber2);
-        Log.d("Contact", contactNumber3);
-
-    }
-
     public String getContactName1() {
         return contactName1;
     }

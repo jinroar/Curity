@@ -82,20 +82,20 @@ public class HomePageBrgy extends AppCompatActivity implements NavigationView.On
                 });
 
         // bottom navigation (Home, Dashboard, and Notification)
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.brgyAlert:
-                    replaceFragment(new BrgyHomeFragment());
-                    break;
-                case R.id.brgyMap:
-                    replaceFragment(new BrgyMapFragment());
-                    break;
-                case R.id.brgyChat:
-                    replaceFragment(new BrgyNotificationsFragment());
-                    break;
-            }
-            return true;
-        });
+//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+//            switch (item.getItemId()) {
+//                case R.id.brgyAlert:
+//                    replaceFragment(new BrgyHomeFragment());
+//                    break;
+//                case R.id.brgyMap:
+//                    replaceFragment(new BrgyMapFragment());
+//                    break;
+//                case R.id.brgyChat:
+//                    replaceFragment(new BrgyNotificationsFragment());
+//                    break;
+//            }
+//            return true;
+//        });
 
 
         /*------------------Hooks------------------*/
@@ -140,23 +140,23 @@ public class HomePageBrgy extends AppCompatActivity implements NavigationView.On
             /*----------------Fragments----------------*/
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
-                        new BrgyMapFragment()).commit();
-
-                binding.bottomNavigationView.setSelectedItemId(R.id.firstFragment);
-                break;
-
-            case R.id.nav_dashboard:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
                         new BrgyHomeFragment()).commit();
 
-                binding.bottomNavigationView.setSelectedItemId(R.id.brgyMap);
+//                binding.bottomNavigationView.setSelectedItemId(R.id.firstFragment);
+                break;
+
+            case R.id.nav_map:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
+                        new BrgyMapFragment()).commit();
+
+//                binding.bottomNavigationView.setSelectedItemId(R.id.brgyMap);
                 break;
 
             case R.id.nav_notification:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
                         new BrgyNotificationsFragment()).commit();
 
-                binding.bottomNavigationView.setSelectedItemId(R.id.brgyChat);
+//                binding.bottomNavigationView.setSelectedItemId(R.id.brgyChat);
                 break;
 
             /*----------------Activities----------------*/
