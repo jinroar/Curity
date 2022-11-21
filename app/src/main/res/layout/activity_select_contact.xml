@@ -37,11 +37,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="10dp"
                     android:text="Emergency Contacts"
                     android:textColor="@color/white"
-                    android:textSize="35dp"
+                    android:textSize="24dp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView8"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -187,7 +188,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="40dp"
             android:background="@drawable/round_btn"
-            android:padding="15dp"
+            android:padding="10dp"
             android:text="Enter"
             android:textColor="@color/white"
             android:textSize="20dp"

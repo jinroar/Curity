@@ -11,38 +11,50 @@
             android:title="Alerts" />
 
         <item
-            android:id="@+id/nav_map"
+            android:id="@+id/nav_profile"
             android:checkable="false"
-            android:icon="@drawable/ic_baseline_map_24"
-            android:title="Map" />
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Profile" />
+
+<!--        <item-->
+<!--            android:id="@+id/nav_map"-->
+<!--            android:checkable="false"-->
+<!--            android:icon="@drawable/ic_baseline_map_24"-->
+<!--            android:title="Map" />-->
+<!--        <item-->
+<!--            android:id="@+id/nav_notification"-->
+<!--            android:checkable="false"-->
+<!--            android:icon="@drawable/ic_baseline_notifications_24"-->
+<!--            android:title="Notifications" />-->
+
         <item
-            android:id="@+id/nav_notification"
+            android:id="@+id/nav_logout"
             android:checkable="false"
-            android:icon="@drawable/ic_baseline_notifications_24"
-            android:title="Notifications" />
+            android:icon="@drawable/ic_baseline_reply_24"
+            android:title="Logout" />
     </group>
 
-    <item android:title="Profile">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_profile"
-                    android:checkable="false"
-                    android:icon="@drawable/ic_baseline_person_24"
-                    android:title="Profile" />
+<!--    <item android:title="Profile">-->
+<!--        <menu>-->
+<!--            <group android:checkableBehavior="single">-->
+<!--                <item-->
+<!--                    android:id="@+id/nav_profile"-->
+<!--                    android:checkable="false"-->
+<!--                    android:icon="@drawable/ic_baseline_person_24"-->
+<!--                    android:title="Profile" />-->
 
-                <item
-                    android:id="@+id/nav_setting"
-                    android:checkable="false"
-                    android:icon="@drawable/ic_baseline_settings_24"
-                    android:title="Setting" />
+<!--&lt;!&ndash;                <item&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:id="@+id/nav_setting"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:checkable="false"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:icon="@drawable/ic_baseline_settings_24"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:title="Setting" />&ndash;&gt;-->
 
-                <item
-                    android:id="@+id/nav_logout"
-                    android:checkable="false"
-                    android:icon="@drawable/ic_baseline_reply_24"
-                    android:title="Logout" />
-            </group>
-        </menu>
-    </item>
+<!--                <item-->
+<!--                    android:id="@+id/nav_logout"-->
+<!--                    android:checkable="false"-->
+<!--                    android:icon="@drawable/ic_baseline_reply_24"-->
+<!--                    android:title="Logout" />-->
+<!--            </group>-->
+<!--        </menu>-->
+<!--    </item>-->
 </menu>

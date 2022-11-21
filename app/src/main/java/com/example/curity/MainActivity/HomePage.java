@@ -81,22 +81,22 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                     }
                 });
 
-        // bottom navigation (Home, Map, and Chats)
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.firstFragment:
-                    replaceFragment(new firstFragment());
-                    break;
-                case R.id.secondFragment:
-                    replaceFragment(new secondFragment());
-                    break;
-                case R.id.thirdFragment:
-                    replaceFragment(new thirdFragment());
-                    break;
-            }
-
-            return true;
-        });
+//        // bottom navigation (Home, Map, and Chats)
+//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+//            switch (item.getItemId()) {
+//                case R.id.firstFragment:
+//                    replaceFragment(new firstFragment());
+//                    break;
+//                case R.id.secondFragment:
+//                    replaceFragment(new secondFragment());
+//                    break;
+//                case R.id.thirdFragment:
+//                    replaceFragment(new thirdFragment());
+//                    break;
+//            }
+//
+//            return true;
+//        });
 
 
         /*------------------Hooks------------------*/
@@ -144,22 +144,22 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
                         new firstFragment()).commit();
 
-                binding.bottomNavigationView.setSelectedItemId(R.id.firstFragment);
+//                binding.bottomNavigationView.setSelectedItemId(R.id.firstFragment);
                 break;
 
-            case R.id.nav_maps:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
-                    new secondFragment()).commit();
+//            case R.id.nav_maps:
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
+//                    new secondFragment()).commit();
+//
+////                binding.bottomNavigationView.setSelectedItemId(R.id.secondFragment);
+//                break;
 
-                binding.bottomNavigationView.setSelectedItemId(R.id.secondFragment);
-                break;
-
-            case R.id.nav_chat:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
-                        new thirdFragment()).commit();
-
-                binding.bottomNavigationView.setSelectedItemId(R.id.thirdFragment);
-                break;
+//            case R.id.nav_chat:
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
+//                        new thirdFragment()).commit();
+////
+////                binding.bottomNavigationView.setSelectedItemId(R.id.thirdFragment);
+//                break;
 
             /*----------------Activities----------------*/
             case R.id.nav_profile:
@@ -173,9 +173,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(intent);
                 break;
 
-            case R.id.nav_setting:
-                startActivity(new Intent(HomePage.this, settings.class));
-                break;
+//            case R.id.nav_setting:
+//                startActivity(new Intent(HomePage.this, settings.class));
+//                break;
 
             case R.id.nav_logout:
                 //logout to the firebase
