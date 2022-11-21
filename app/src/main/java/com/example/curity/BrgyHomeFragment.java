@@ -92,7 +92,7 @@ public class BrgyHomeFragment extends Fragment {
     private double adminCurrentLatitude;
     private double adminCurrentLongitude;
     private LatLng currentLoc;
-    private String userName;
+    private String fName;
     private int rad=1;
 
     @Override
@@ -160,7 +160,7 @@ public class BrgyHomeFragment extends Fragment {
                                     if (task.isSuccessful()) {
                                         if (task.getResult().exists()) {
                                             DataSnapshot dataSnapshot = task.getResult();
-                                            String fName = String.valueOf(dataSnapshot.child("firstName").getValue());
+                                            fName = String.valueOf(dataSnapshot.child("firstName").getValue());
                                         }
                                     }
                                 }
@@ -212,7 +212,7 @@ public class BrgyHomeFragment extends Fragment {
             ImageView exit = layout_dialog.findViewById(R.id.exit);
             TextView message = layout_dialog.findViewById(R.id.message);
 
-            message.setText(userName+" Needs Help!");
+            message.setText(fName +" Needs Help!");
             AlertDialog dialog = builder.create();
             dialog.show();
             dialog.setCancelable(false);

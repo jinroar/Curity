@@ -58,6 +58,7 @@ import com.google.android.gms.maps.model.JointType;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -173,7 +174,6 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
         //zoom in animation
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(adminCurrentLatitude,adminCurrentLongitude), 17));
-
         getDirections(doubToString(adminCurrentLatitude, adminCurrentLongitude) ,doubToString(userCurrentLatitude,userCurrentLongitude));
 
         //for current location
@@ -371,7 +371,9 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                         LatLngBounds.Builder builder = new LatLngBounds.Builder();
                         builder.include(ori);
                         builder.include(desti);
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(),100));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(adminCurrentLatitude,adminCurrentLongitude), 17));
+//                        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(),100));
+
                     }
 
                     @Override
@@ -459,6 +461,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                     getDirections(doubToString(adminCurrentLatitude, adminCurrentLongitude) ,doubToString(userCurrentLatitude,userCurrentLongitude));
                     ori = new LatLng(adminCurrentLatitude, adminCurrentLongitude);
                     desti = new LatLng(userCurrentLatitude,userCurrentLongitude);
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(userCurrentLatitude,userCurrentLongitude)));
 
                 }else {
 //                    Toast.makeText(userMapsActivity.this,"Location unchanged, lat: "+lastLocation.getLatitude()+",lng:"+lastLocation.getLongitude(),Toast.LENGTH_SHORT).show();
