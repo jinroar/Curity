@@ -48,6 +48,9 @@
             android:name=".userMapsActivity"
             android:exported="false" />
         <activity
+            android:name=".AdminMapsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity.HomePage"
             android:exported="false" />
         <activity
