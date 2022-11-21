@@ -169,11 +169,12 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
         setGeocoder();
         ori = new LatLng(adminCurrentLatitude, adminCurrentLongitude);
         desti = new LatLng(userCurrentLatitude,userCurrentLongitude);
-        getDirections(doubToString(adminCurrentLatitude, adminCurrentLongitude) ,doubToString(userCurrentLatitude,userCurrentLongitude));
 
 
         //zoom in animation
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(adminCurrentLatitude,adminCurrentLongitude), 17));
+
+        getDirections(doubToString(adminCurrentLatitude, adminCurrentLongitude) ,doubToString(userCurrentLatitude,userCurrentLongitude));
 
         //for current location
         if (isLocationPermissionGranted()) {

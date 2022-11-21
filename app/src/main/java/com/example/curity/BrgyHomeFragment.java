@@ -226,8 +226,6 @@ public class BrgyHomeFragment extends Fragment {
                     userFound = false;
                     Intent intent = new Intent(BrgyHomeFragment.this.requireContext(), AdminMapsActivity.class);
                     startActivity(intent);
-
-
                 }
             });
 
@@ -244,7 +242,7 @@ public class BrgyHomeFragment extends Fragment {
 
 
     private void locationChange(){
-        new CountDownTimer(10000, 1000) {
+        new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -266,7 +264,6 @@ public class BrgyHomeFragment extends Fragment {
                         msgNum = 1;
                         break;
                 }
-
                 getUserInfo();
                 locationChange();
             }

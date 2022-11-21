@@ -39,6 +39,7 @@ import com.google.android.gms.maps.model.ButtCap;
 import com.google.android.gms.maps.model.JointType;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -96,6 +97,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
     private PolylineOptions polyLineOptions;
     private Polyline polyline;
     private boolean adminFound = false;
+    private int counter = 0;
 
     @Override
 
@@ -163,7 +165,6 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
         setGeocoder();
         ori = new LatLng(userCurrentLatitude,userCurrentLongitude);
         desti = new LatLng(14.60650190264927,121.00234099730302);
-        getDirections(doubToString(userCurrentLatitude,userCurrentLongitude) ,doubToString(adminCurrentLatitude,adminCurrentLongitude));
 
 
         //zoom in animation
@@ -224,7 +225,6 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
         }
     }
 
-
     private void requestLocationPermisson(){
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_PERMISSION_CODE);
     }
@@ -254,11 +254,13 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
     private void setFirebase(){
         isAdminFound();
         if(!adminFound){
+            Log.d("Set Firebase Admin Found:", "True");
             databaseReference = FirebaseDatabase.getInstance().getReference("User's Location");
             geoFire = new GeoFire(databaseReference);
 
             geoFire.setLocation(FirebaseAuth.getInstance().getCurrentUser().getUid(),new GeoLocation(userCurrentLatitude,userCurrentLongitude));
         }else{
+            Log.d("Set Firebase Admin Found:", "False");
             FirebaseDatabase.getInstance().getReference("Accepted Alerts").child(FirebaseAuth.getInstance()
                     .getCurrentUser().getUid()).child("userCurrentLatitude").setValue(userCurrentLatitude);
 
@@ -275,11 +277,14 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.hasChild(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                    Log.d("Admin Found:", "True");
                     adminFound = true;
-                    adminCurrentLatitude = Double.parseDouble(String.valueOf(snapshot.child("adminCurrentLatitude").getValue()));
-                    adminCurrentLatitude = Double.parseDouble(String.valueOf(snapshot.child("adminCurrentLatitude").getValue()));
+                    adminCurrentLatitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLatitude").getValue()));
+                    adminCurrentLongitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLongitude").getValue()));
+
                 }
                 else{
+                    Log.d("Admin Found:", "False");
                     adminFound = false;
                 }
             }
@@ -393,7 +398,6 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
         return poly;
     }
 
-
     private String doubToString(double lat, double lng){
         return lat + "," + lng;
     }
@@ -416,9 +420,22 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
                     Toast.makeText(userMapsActivity.this,"Location changed",Toast.LENGTH_SHORT).show();
                     setGeocoder();
                     setFirebase();
-                    polyline.remove();
-                    mMap.clear();
-                    getDirections(doubToString(userCurrentLatitude,userCurrentLongitude) ,doubToString(adminCurrentLatitude,adminCurrentLongitude));
+                    if(adminFound && counter == 0){
+                        Log.d("counter:", "0");
+                        mMap.clear();
+                        desti = (new LatLng(adminCurrentLatitude,adminCurrentLongitude));
+                        getDirections(doubToString(userCurrentLatitude,userCurrentLongitude) ,doubToString(adminCurrentLatitude,adminCurrentLongitude));
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(adminCurrentLatitude,adminCurrentLongitude)));
+                        counter++;
+                    }else if(adminFound && counter == 1){
+                        Log.d("counter:", "1");
+                        polyline.remove();
+                        mMap.clear();
+                        desti = (new LatLng(adminCurrentLatitude,adminCurrentLongitude));
+                        getDirections(doubToString(userCurrentLatitude,userCurrentLongitude) ,doubToString(adminCurrentLatitude,adminCurrentLongitude));
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(adminCurrentLatitude,adminCurrentLongitude)));
+                    }
+
                 }else {
 //                    Toast.makeText(userMapsActivity.this,"Location unchanged, lat: "+lastLocation.getLatitude()+",lng:"+lastLocation.getLongitude(),Toast.LENGTH_SHORT).show();
                 }
