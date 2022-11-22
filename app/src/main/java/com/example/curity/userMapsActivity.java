@@ -417,7 +417,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
                 getLocation();
 
                 if(templat != userCurrentLatitude || templng != userCurrentLongitude){
-                    Toast.makeText(userMapsActivity.this,"Location changed",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(userMapsActivity.this,"Location changed",Toast.LENGTH_SHORT).show();
                     setGeocoder();
                     setFirebase();
                     if(adminFound && counter == 0){
@@ -426,6 +426,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
                         desti = (new LatLng(adminCurrentLatitude,adminCurrentLongitude));
                         getDirections(doubToString(userCurrentLatitude,userCurrentLongitude) ,doubToString(adminCurrentLatitude,adminCurrentLongitude));
                         mMap.addMarker(new MarkerOptions().position(new LatLng(adminCurrentLatitude,adminCurrentLongitude)));
+                        Toast.makeText(userMapsActivity.this, "We have tracked your location, Help is on the way! ", Toast.LENGTH_SHORT).show();
                         counter++;
                     }else if(adminFound && counter == 1){
                         Log.d("counter:", "1");

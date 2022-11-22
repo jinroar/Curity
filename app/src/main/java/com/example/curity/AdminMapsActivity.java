@@ -453,7 +453,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                 getStartLocation();
 
                 if(templat != adminCurrentLatitude || templng != adminCurrentLongitude){
-                    Toast.makeText(AdminMapsActivity.this,"Location changed",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(AdminMapsActivity.this,"Location changed",Toast.LENGTH_SHORT).show();
                     setGeocoder();
                     setFirebase();
                     polyline.remove();
@@ -462,6 +462,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                     ori = new LatLng(adminCurrentLatitude, adminCurrentLongitude);
                     desti = new LatLng(userCurrentLatitude,userCurrentLongitude);
                     mMap.addMarker(new MarkerOptions().position(new LatLng(userCurrentLatitude,userCurrentLongitude)));
+
 
                 }else {
 //                    Toast.makeText(userMapsActivity.this,"Location unchanged, lat: "+lastLocation.getLatitude()+",lng:"+lastLocation.getLongitude(),Toast.LENGTH_SHORT).show();

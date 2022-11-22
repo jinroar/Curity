@@ -134,8 +134,8 @@ public class firstFragment extends Fragment implements View.OnClickListener {
                     public void onFinish() {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
-//                            Intent intent = new Intent(firstFragment.this.requireContext(), userMapsActivity.class);
-//                            startActivity(intent);
+                            Intent intent = new Intent(firstFragment.this.requireContext(), userMapsActivity.class);
+                            startActivity(intent);
                         }
                     }
                 }.start();
