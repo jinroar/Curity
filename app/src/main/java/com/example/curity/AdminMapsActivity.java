@@ -149,17 +149,44 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
         messageET = findViewById(R.id.messageET);
         sendBtn = findViewById(R.id.sendBtn);
+
+        MessageChatModel messageChatModel = new MessageChatModel(messageET.getText().toString(),"",2);
+        String adminID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference ref =  FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userID).child("chat");
+
         sendBtn.setOnClickListener(view1 -> {
-            MessageChatModel messageChatModel = new MessageChatModel(messageET.getText().toString(),"",2);
-            String adminID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
             messageChatModel.id = adminID;
             messageChatModels.add(messageChatModel);
-            DatabaseReference ref =  FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userID).child("chat");
+
             String key = ref.push().getKey();
             ref.child(key).setValue(messageChatModel);
 
             adapter.notifyDataSetChanged();
             messageET.setText("");
+        });
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                messageChatModels.clear();
+                adapter.notifyDataSetChanged();
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    //
+                    MessageChatModel messageChatModel1 = new MessageChatModel(
+                            "",
+                            "",
+                            dataSnapshot.child("id").getValue().toString().equals(adminID) ? 2:1);
+                    messageChatModels.add(messageChatModel1);
+                }
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
     }
 
