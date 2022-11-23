@@ -1,40 +1,33 @@
 package com.example.curity;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.Point;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.curity.Chat.MessageChatAdapter;
+import com.example.curity.Chat.MessageChatModel;
 import com.example.curity.Objects.AcceptedAlerts;
 import com.example.curity.Services.ApiInterface;
 import com.example.curity.Services.Result;
@@ -45,16 +38,11 @@ import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.ButtCap;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.JointType;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -70,7 +58,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.maps.android.SphericalUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -125,6 +112,9 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
     private boolean userFound = false, requestType = false;
     private int rad;
 
+    ImageView sendBtn;
+    EditText messageET;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,6 +139,28 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
         } else {
             requestLocationPermisson();
         }
+
+        //For chat
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_chat);
+        LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
+        recyclerView.setLayoutManager(manager);
+        adapter = new MessageChatAdapter(getApplicationContext(), messageChatModels);
+        recyclerView.setAdapter(adapter);
+
+        messageET = findViewById(R.id.messageET);
+        sendBtn = findViewById(R.id.sendBtn);
+        sendBtn.setOnClickListener(view1 -> {
+            MessageChatModel messageChatModel = new MessageChatModel(messageET.getText().toString(),"",2);
+            String adminID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            messageChatModel.id = adminID;
+            messageChatModels.add(messageChatModel);
+            DatabaseReference ref =  FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userID).child("chat");
+            String key = ref.push().getKey();
+            ref.child(key).setValue(messageChatModel);
+
+            adapter.notifyDataSetChanged();
+            messageET.setText("");
+        });
     }
 
     @Override
@@ -236,11 +248,17 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
     }
 
+
+    //attributes needed for chat
+    private MessageChatAdapter adapter;
+    ArrayList<MessageChatModel> messageChatModels = new ArrayList<>();
     private void getEndLocation(){
         databaseReference = FirebaseDatabase.getInstance().getReference().child("User's Location");
         geoFire = new GeoFire(databaseReference);
         geoQuery = geoFire.queryAtLocation(new GeoLocation(adminCurrentLatitude,adminCurrentLongitude),rad);
         geoQuery .removeAllListeners();
+
+
 
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
