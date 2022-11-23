@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,7 +25,11 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.curity.Chat.MessageChatAdapter;
+import com.example.curity.Chat.MessageChatModel;
 import com.example.curity.Services.ApiInterface;
 import com.example.curity.Services.Result;
 import com.example.curity.Services.Route;
@@ -99,6 +104,12 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
     private boolean adminFound = false;
     private int counter = 0;
 
+    ImageView sendBtn;
+    EditText messageET;
+
+    //attributes needed for chat
+    private MessageChatAdapter adapter;
+    ArrayList<MessageChatModel> messageChatModels = new ArrayList<>();
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +142,55 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
 
         getLocation();
         setFirebase();
+
+        //For chat
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_chat);
+        LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
+        recyclerView.setLayoutManager(manager);
+        adapter = new MessageChatAdapter(getApplicationContext(), messageChatModels);
+        recyclerView.setAdapter(adapter);
+
+        messageET = findViewById(R.id.messageET);
+        sendBtn = findViewById(R.id.sendBtn);
+
+        MessageChatModel messageChatModel = new MessageChatModel(messageET.getText().toString(),"",2);
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference ref =  FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userId).child("chat");
+
+
+        sendBtn.setOnClickListener(view1 -> {
+            messageChatModel.id = userId;
+            messageChatModels.add(messageChatModel);
+            String key = ref.push().getKey();
+            ref.child(key).setValue(messageChatModel);
+            adapter.notifyDataSetChanged();
+            messageET.setText("");
+        });
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                messageChatModels.clear();
+                adapter.notifyDataSetChanged();
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    //
+                    MessageChatModel messageChatModel1 = new MessageChatModel(
+                            dataSnapshot.child("text").getValue().toString(),
+                            dataSnapshot.child("time").getValue().toString(),
+                            dataSnapshot.child("id").getValue().toString().equals(userId) ? 2:1);
+                    messageChatModels.add(messageChatModel1);
+                }
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
     }
 
