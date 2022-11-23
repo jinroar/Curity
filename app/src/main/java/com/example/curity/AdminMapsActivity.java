@@ -60,6 +60,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -152,12 +154,13 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
         messageET = findViewById(R.id.messageET);
         sendBtn = findViewById(R.id.sendBtn);
 
-
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+        LocalDateTime now = LocalDateTime.now();
         String adminID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ref =  FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userID).child("chat");
 
         sendBtn.setOnClickListener(view1 -> {
-            messageChatModel = new MessageChatModel(messageET.getText().toString(),"",2);
+            messageChatModel = new MessageChatModel(messageET.getText().toString(),dtf.format(now),2);
             messageChatModel.id = adminID;
 
             messageChatModels.add(messageChatModel);
@@ -177,7 +180,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                     //
                     MessageChatModel messageChatModel1 = new MessageChatModel(
                             dataSnapshot.child("text").getValue().toString(),
-                            "",
+                            dataSnapshot.child("time").getValue().toString(),
                             dataSnapshot.child("id").getValue().toString().equals(adminID) ? 2:1);
                     messageChatModels.add(messageChatModel1);
                 }

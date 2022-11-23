@@ -55,6 +55,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,13 +156,14 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
         messageET = findViewById(R.id.messageET);
         sendBtn = findViewById(R.id.sendBtn);
 
-
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+        LocalDateTime now = LocalDateTime.now();
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ref =  FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userId).child("chat");
 
 
         sendBtn.setOnClickListener(view1 -> {
-            messageChatModel = new MessageChatModel(messageET.getText().toString(),"",2);
+            messageChatModel = new MessageChatModel(messageET.getText().toString(),dtf.format(now),2);
             messageChatModel.id = userId;
             messageChatModels.add(messageChatModel);
             String key = ref.push().getKey();
