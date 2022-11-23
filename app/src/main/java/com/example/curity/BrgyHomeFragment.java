@@ -94,6 +94,7 @@ public class BrgyHomeFragment extends Fragment {
     private LatLng currentLoc;
     private String fName;
     private int rad=1;
+    private int alertCounter = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -194,8 +195,9 @@ public class BrgyHomeFragment extends Fragment {
 
         });
 
-        if (userFound){
+        if (userFound && alertCounter == 0){
             alertBox();
+            alertCounter+=1;
         }
 
 
@@ -224,6 +226,7 @@ public class BrgyHomeFragment extends Fragment {
                 public void onClick(View v) {
                     dialog.dismiss();
                     userFound = false;
+                    alertCounter = 0;
                     Intent intent = new Intent(BrgyHomeFragment.this.requireContext(), AdminMapsActivity.class);
                     startActivity(intent);
                 }

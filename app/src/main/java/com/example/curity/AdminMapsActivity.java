@@ -39,6 +39,7 @@ import com.example.curity.Objects.AcceptedAlerts;
 import com.example.curity.Services.ApiInterface;
 import com.example.curity.Services.Result;
 import com.example.curity.Services.Route;
+import com.example.curity.SignUp.User;
 import com.example.curity.databinding.ActivityMapsBinding;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -312,6 +313,68 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
                     }
                 });
+
+        FirebaseDatabase.getInstance().getReference().child("users")
+                .child(userID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (task.getResult().exists()) {
+                                DataSnapshot dataSnapshot = task.getResult();
+                                String fName = String.valueOf(dataSnapshot.child("firstName").getValue());
+                                String lName = String.valueOf(dataSnapshot.child("lastName").getValue());
+                                String address = String.valueOf(dataSnapshot.child("address").getValue());
+                                String phone = String.valueOf(dataSnapshot.child("phone").getValue());
+                                String email = String.valueOf(dataSnapshot.child("email").getValue());
+                                String isAdmin = String.valueOf(dataSnapshot.child("isAdmin").getValue());
+
+
+                                User user = new User(fName,lName, address,phone,email,isAdmin);
+                                FirebaseDatabase.getInstance().getReference().child("Accepted Alerts")
+                                        .child(userID).child("user")
+                                        .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                            }
+                        }
+                    }
+                });
+
+        FirebaseDatabase.getInstance().getReference().child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (task.getResult().exists()) {
+                                DataSnapshot dataSnapshot = task.getResult();
+                                String fName = String.valueOf(dataSnapshot.child("firstName").getValue());
+                                String lName = String.valueOf(dataSnapshot.child("lastName").getValue());
+                                String address = String.valueOf(dataSnapshot.child("address").getValue());
+                                String phone = String.valueOf(dataSnapshot.child("phone").getValue());
+                                String email = String.valueOf(dataSnapshot.child("email").getValue());
+                                String isAdmin = String.valueOf(dataSnapshot.child("isAdmin").getValue());
+
+
+                                User user = new User(fName,lName, address,phone,email,isAdmin);
+                                FirebaseDatabase.getInstance().getReference().child("Accepted Alerts")
+                                        .child(userID).child("admin")
+                                        .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                            }
+                        }
+                    }
+                });
+
+
     }
 
     private void requestLocationPermisson(){
