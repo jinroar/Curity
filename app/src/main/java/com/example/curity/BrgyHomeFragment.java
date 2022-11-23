@@ -228,6 +228,8 @@ public class BrgyHomeFragment extends Fragment {
                     userFound = false;
                     alertCounter = 0;
                     Intent intent = new Intent(BrgyHomeFragment.this.requireContext(), AdminMapsActivity.class);
+                    Log.d("USERIDFROMBRGY",userID);
+                    intent.putExtra("userID",userID);
                     startActivity(intent);
                 }
             });

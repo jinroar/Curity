@@ -107,6 +107,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
     ImageView sendBtn;
     EditText messageET;
 
+    MessageChatModel messageChatModel;
     //attributes needed for chat
     private MessageChatAdapter adapter;
     ArrayList<MessageChatModel> messageChatModels = new ArrayList<>();
@@ -153,12 +154,13 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
         messageET = findViewById(R.id.messageET);
         sendBtn = findViewById(R.id.sendBtn);
 
-        MessageChatModel messageChatModel = new MessageChatModel(messageET.getText().toString(),"",2);
+
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ref =  FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userId).child("chat");
 
 
         sendBtn.setOnClickListener(view1 -> {
+            messageChatModel = new MessageChatModel(messageET.getText().toString(),"",2);
             messageChatModel.id = userId;
             messageChatModels.add(messageChatModel);
             String key = ref.push().getKey();

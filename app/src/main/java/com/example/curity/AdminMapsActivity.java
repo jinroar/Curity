@@ -114,12 +114,14 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
     ImageView sendBtn;
     EditText messageET;
-
+    MessageChatModel messageChatModel;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        this.userID = getIntent().getExtras().getString("userID");
 
         addressTextView = findViewById(R.id.addressTextView);
         resetLocationButton = findViewById(R.id.resetLocationButton);
@@ -150,18 +152,18 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
         messageET = findViewById(R.id.messageET);
         sendBtn = findViewById(R.id.sendBtn);
 
-        MessageChatModel messageChatModel = new MessageChatModel(messageET.getText().toString(),"",2);
+
         String adminID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ref =  FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userID).child("chat");
 
         sendBtn.setOnClickListener(view1 -> {
-
+            messageChatModel = new MessageChatModel(messageET.getText().toString(),"",2);
             messageChatModel.id = adminID;
+
             messageChatModels.add(messageChatModel);
 
             String key = ref.push().getKey();
             ref.child(key).setValue(messageChatModel);
-
             adapter.notifyDataSetChanged();
             messageET.setText("");
         });
@@ -174,7 +176,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     //
                     MessageChatModel messageChatModel1 = new MessageChatModel(
-                            "",
+                            dataSnapshot.child("text").getValue().toString(),
                             "",
                             dataSnapshot.child("id").getValue().toString().equals(adminID) ? 2:1);
                     messageChatModels.add(messageChatModel1);
