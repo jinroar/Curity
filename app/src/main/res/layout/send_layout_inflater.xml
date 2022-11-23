@@ -50,18 +50,20 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="7dp"
-            android:layout_marginRight="0dp"
+            android:layout_marginRight="10dp"
             android:text="10:25 PM"
-            android:textSize="12dp"></TextView>
+            android:textSize="12dp">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:padding="5dp"
+        </TextView>
 
-            >
+<!--        <ImageView-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:padding="5dp"-->
 
-        </ImageView>
+<!--            >-->
+
+<!--        </ImageView>-->
 
     </LinearLayout>
 
