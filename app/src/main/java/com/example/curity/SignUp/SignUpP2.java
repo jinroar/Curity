@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+
 
 public class SignUpP2 extends AppCompatActivity {
 
@@ -106,6 +108,30 @@ public class SignUpP2 extends AppCompatActivity {
                                         FirebaseDatabase.getInstance().getReference("users")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                 .setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Toast.makeText(SignUpP2.this, "User has been registered successfully!", Toast.LENGTH_SHORT).show();
+
+                                                            // go to login Page
+                                                            Intent intent = new Intent(getApplicationContext(), Login.class);
+                                                            startActivity(intent);
+                                                            finish();
+                                                        } else {
+                                                            Toast.makeText(SignUpP2.this, "Failed to register! Please Try Again", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
+
+
+                                        String fullName = firstTxt + " " + lastTxt;
+                                        HashMap User1 = new HashMap();
+                                        User1.put("uid",FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                        User1.put("fullName",fullName);
+
+                                        FirebaseDatabase.getInstance().getReference("conversations")
+                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .setValue(User1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         if (task.isSuccessful()) {
