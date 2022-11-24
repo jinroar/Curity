@@ -166,12 +166,21 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
             //encrypt
             String message = encryptMessage(messageET.getText().toString());
             String time = encryptMessage(dtf.format(now));
+
+            //encrypted model
             messageChatModel = new MessageChatModel(message,time,2);
             messageChatModel.id = userId;
-            messageChatModels.add(messageChatModel);
-            String key = ref.push().getKey();
-            ref.child(key).setValue(messageChatModel);
+            messageChatModels.add(new MessageChatModel(
+                    decryptMessage( messageET.getText().toString())
+                    ,decryptMessage(time)
+                    , 2));
+
             adapter.notifyDataSetChanged();
+
+            String key = ref.push().getKey();
+
+            ref.child(key).setValue(messageChatModel);
+
             messageET.setText("");
         });
 

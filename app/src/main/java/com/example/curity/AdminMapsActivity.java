@@ -1,5 +1,7 @@
 package com.example.curity;
 
+import static androidx.fragment.app.FragmentManager.TAG;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -160,14 +162,22 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
         DatabaseReference ref =  FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userID).child("chat");
 
         sendBtn.setOnClickListener(view1 -> {
-            messageChatModel = new MessageChatModel(messageET.getText().toString(),dtf.format(now),2);
+            String message = encryptMessage(messageET.getText().toString());
+            String time = encryptMessage(dtf.format(now));
+            messageChatModel = new MessageChatModel(message,time,2);
             messageChatModel.id = adminID;
+            messageChatModels.add(new MessageChatModel(
+                    decryptMessage( messageET.getText().toString())
+                    ,decryptMessage(time)
+                    , 2));
 
-            messageChatModels.add(messageChatModel);
+            adapter.notifyDataSetChanged();
+
+            //messageChatModels.add(messageChatModel);
 
             String key = ref.push().getKey();
             ref.child(key).setValue(messageChatModel);
-            adapter.notifyDataSetChanged();
+
             messageET.setText("");
         });
 
@@ -177,10 +187,11 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                 messageChatModels.clear();
                 adapter.notifyDataSetChanged();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    //
+                    String message = decryptMessage( dataSnapshot.child("text").getValue().toString());
+                    String time = decryptMessage(dataSnapshot.child("time").getValue().toString());
                     MessageChatModel messageChatModel1 = new MessageChatModel(
-                            dataSnapshot.child("text").getValue().toString(),
-                            dataSnapshot.child("time").getValue().toString(),
+                           message,
+                           time,
                             dataSnapshot.child("id").getValue().toString().equals(adminID) ? 2:1);
                     messageChatModels.add(messageChatModel1);
                 }
@@ -590,5 +601,126 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 //
 //    }
 
+    private static final String TAG = "Chilkat123";
+    static {
+        System.loadLibrary("chilkat");
+
+        // Note: If the incorrect library name is passed to System.loadLibrary,
+        // then you will see the following error message at application startup:
+        //"The application <your-application-name> has stopped unexpectedly. Please try again."
+    }
+    private String encryptMessage(String message){
+        // This example assumes the Chilkat API to have been previously unlocked.
+        // See Global Unlock Sample for sample code.
+
+        com.chilkatsoft.CkCrypt2 crypt = new com.chilkatsoft.CkCrypt2();
+
+        // Set the encryption algorithm = "twofish"
+        crypt.put_CryptAlgorithm("twofish");
+
+        // CipherMode may be "ecb" or "cbc"
+        crypt.put_CipherMode("cbc");
+
+        // KeyLength may be 128, 192, 256
+        crypt.put_KeyLength(256);
+
+        // The padding scheme determines the contents of the bytes
+        // that are added to pad the result to a multiple of the
+        // encryption algorithm's block size.  Twofish has a block
+        // size of 16 bytes, so encrypted output is always
+        // a multiple of 16.
+        crypt.put_PaddingScheme(0);
+
+        // EncodingMode specifies the encoding of the output for
+        // encryption, and the input for decryption.
+        // It may be "hex", "url", "base64", or "quoted-printable".
+        crypt.put_EncodingMode("hex");
+
+        // An initialization vector is required if using CBC mode.
+        // ECB mode does not use an IV.
+        // The length of the IV is equal to the algorithm's block size.
+        // It is NOT equal to the length of the key.
+        String ivHex = "000102030405060708090A0B0C0D0E0F";
+        crypt.SetEncodedIV(ivHex,"hex");
+
+        // The secret key must equal the size of the key.  For
+        // 256-bit encryption, the binary secret key is 32 bytes.
+        // For 128-bit encryption, the binary secret key is 16 bytes.
+        String keyHex = "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F";
+        crypt.SetEncodedKey(keyHex,"hex");
+
+        // Encrypt a string...
+        // The input string is 44 ANSI characters (i.e. 44 bytes), so
+        // the output should be 48 bytes (a multiple of 16).
+        // Because the output is a hex string, it should
+        // be 96 characters long (2 chars per byte).
+        //String encStr = crypt.encryptStringENC("The quick brown fox jumps over the lazy dog.");
+        String encStr = crypt.encryptStringENC(message);
+        Log.i(TAG, encStr);
+
+        // Now decrypt:
+        //String decStr = crypt.decryptStringENC(message);
+        //Log.i(TAG, decStr);
+
+        // 0 = enc 1
+        return encStr;
+    }
+
+    private String decryptMessage(String message){
+        // This example assumes the Chilkat API to have been previously unlocked.
+        // See Global Unlock Sample for sample code.
+
+        com.chilkatsoft.CkCrypt2 crypt = new com.chilkatsoft.CkCrypt2();
+
+        // Set the encryption algorithm = "twofish"
+        crypt.put_CryptAlgorithm("twofish");
+
+        // CipherMode may be "ecb" or "cbc"
+        crypt.put_CipherMode("cbc");
+
+        // KeyLength may be 128, 192, 256
+        crypt.put_KeyLength(256);
+
+        // The padding scheme determines the contents of the bytes
+        // that are added to pad the result to a multiple of the
+        // encryption algorithm's block size.  Twofish has a block
+        // size of 16 bytes, so encrypted output is always
+        // a multiple of 16.
+        crypt.put_PaddingScheme(0);
+
+        // EncodingMode specifies the encoding of the output for
+        // encryption, and the input for decryption.
+        // It may be "hex", "url", "base64", or "quoted-printable".
+        crypt.put_EncodingMode("hex");
+
+        // An initialization vector is required if using CBC mode.
+        // ECB mode does not use an IV.
+        // The length of the IV is equal to the algorithm's block size.
+        // It is NOT equal to the length of the key.
+        String ivHex = "000102030405060708090A0B0C0D0E0F";
+        crypt.SetEncodedIV(ivHex,"hex");
+
+        // The secret key must equal the size of the key.  For
+        // 256-bit encryption, the binary secret key is 32 bytes.
+        // For 128-bit encryption, the binary secret key is 16 bytes.
+        String keyHex = "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F";
+        crypt.SetEncodedKey(keyHex,"hex");
+
+        // Encrypt a string...
+        // The input string is 44 ANSI characters (i.e. 44 bytes), so
+        // the output should be 48 bytes (a multiple of 16).
+        // Because the output is a hex string, it should
+        // be 96 characters long (2 chars per byte).
+        //String encStr = crypt.encryptStringENC("The quick brown fox jumps over the lazy dog.");
+//        String encStr = crypt.encryptStringENC(message);
+//        Log.i(TAG, encStr);
+
+        // Now decrypt:
+        String decStr = crypt.decryptStringENC(message);
+        Log.i(TAG, "decrypt: "+decStr);
+
+        // 0 = enc 1
+        return decStr;
+    }
 
 }
