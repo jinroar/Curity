@@ -147,6 +147,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 //                binding.bottomNavigationView.setSelectedItemId(R.id.firstFragment);
                 break;
 
+            case R.id.nav_alarm:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
+                        new secondFragment()).commit();
+                break;
+
 //            case R.id.nav_maps:
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
 //                    new secondFragment()).commit();
@@ -165,6 +170,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.nav_profile:
                 startActivity(new Intent(HomePage.this, profile.class));
                 break;
+
 
             case R.id.select_contact:
 //                startActivity(new Intent(HomePage.this, SelectContact.class));

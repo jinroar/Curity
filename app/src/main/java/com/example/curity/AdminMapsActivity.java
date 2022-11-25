@@ -1,7 +1,5 @@
 package com.example.curity;
 
-import static androidx.fragment.app.FragmentManager.TAG;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -34,7 +32,7 @@ import com.example.curity.Objects.AcceptedAlerts;
 import com.example.curity.Services.ApiInterface;
 import com.example.curity.Services.Result;
 import com.example.curity.Services.Route;
-import com.example.curity.SignUp.User;
+import com.example.curity.Objects.User;
 import com.example.curity.databinding.ActivityMapsBinding;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;

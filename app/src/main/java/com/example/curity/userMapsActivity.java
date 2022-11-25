@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -43,6 +44,7 @@ import com.google.android.gms.maps.model.ButtCap;
 import com.google.android.gms.maps.model.JointType;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -72,7 +74,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class userMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static final int LOCATION_PERMISSION_CODE = 101;
-    private static final int REQUEST_CHECK_SETTINGS = 0x1;
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
@@ -230,14 +231,14 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
 
 
         //Map Style
-//        try {
-//            boolean success = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getBaseContext(), R.raw.curity_map_style));
-//            if (!success) {
-//                Log.e("EDMT_ERROR", "Map Style Error");
-//            }
-//        } catch (Resources.NotFoundException e) {
-//            Log.e("EDMT_ERROR", e.getMessage());
-//        }
+        try {
+            boolean success = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getBaseContext(), R.raw.curity_map_style));
+            if (!success) {
+                Log.e("EDMT_ERROR", "Map Style Error");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e("EDMT_ERROR", e.getMessage());
+        }
 
         //to get lat and long
 
@@ -308,18 +309,6 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_PERMISSION_CODE);
     }
 
-//    @Override
-//    public void onLocationChanged(@NonNull Location location) {
-//        Toast.makeText(this, "Location Changed", Toast.LENGTH_SHORT).show();
-//        lastLocation = location;
-//        userCurrentLatitude = lastLocation.getLatitude();
-//        userCurrentLongitude = lastLocation.getLongitude();
-//
-//        setGeocoder();
-//        polyline.remove();
-//        mMap.clear();
-//        getDirections(doubToString(userCurrentLatitude,userCurrentLongitude) ,"14.60650190264927,121.00234099730302");
-//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -356,16 +345,14 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.hasChild(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                    Log.d("Admin Found:", "True");
                     adminFound = true;
-//                    adminCurrentLatitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLatitude").getValue()));
-//                    adminCurrentLongitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLongitude").getValue()));
-                      adminCurrentLatitude = 14.807814;
-                      adminCurrentLongitude = 121.047431;
+                    adminCurrentLatitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLatitude").getValue()));
+                    adminCurrentLongitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLongitude").getValue()));
+//                      adminCurrentLatitude = 14.807814;
+//                      adminCurrentLongitude = 121.047431;
 
                 }
                 else{
-                    Log.d("Admin Found:", "False");
                     adminFound = false;
                 }
             }

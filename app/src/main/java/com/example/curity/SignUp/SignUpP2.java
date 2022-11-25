@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.curity.Objects.User;
 import com.example.curity.R;
 import com.example.curity.login.Login;
 import com.google.android.gms.tasks.OnCompleteListener;

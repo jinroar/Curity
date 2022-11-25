@@ -1,4 +1,4 @@
-package com.example.curity.SignUp;
+package com.example.curity.Objects;
 
 public class User {
     public String firstName, lastName, address, phone, email, isAdmin;

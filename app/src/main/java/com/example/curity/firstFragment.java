@@ -112,9 +112,7 @@ public class firstFragment extends Fragment implements View.OnClickListener {
                 .setNegativeButton("no", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(firstFragment.this.requireContext(), userMapsActivity.class);
-                        startActivity(intent);
-
+                        startIntent();
                     }
                 })
                 .create();
@@ -134,13 +132,18 @@ public class firstFragment extends Fragment implements View.OnClickListener {
                     public void onFinish() {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
-                            Intent intent = new Intent(firstFragment.this.requireContext(), userMapsActivity.class);
-                            startActivity(intent);
+                            startIntent();
                         }
                     }
                 }.start();
             }
         });
         dialog.show();
+    }
+
+    private void startIntent(){
+//        Intent intent = new Intent(firstFragment.this.requireContext(), userMapsActivity.class);
+        Intent intent = new Intent(firstFragment.this.requireContext(),LoadingScreen.class);
+        startActivity(intent);
     }
 }

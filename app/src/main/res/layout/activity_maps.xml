@@ -65,10 +65,10 @@
 
             <ImageView
                 android:id="@+id/sendBtn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_gravity="center"
-                android:background="@drawable/send_icon"
+                android:background="@drawable/ic_baseline_send_24"
                 android:padding="5dp"
                 android:rotation="-30" />
 
@@ -119,11 +119,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal|bottom"
-        android:orientation="vertical">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -133,15 +129,14 @@
                 android:id="@+id/resetLocationButton"
                 android:layout_width="46dp"
                 android:layout_height="44dp"
-                android:layout_marginBottom="608dp"
+                android:layout_marginBottom="284dp"
                 map:layout_constraintBottom_toBottomOf="parent"
                 map:layout_constraintEnd_toEndOf="parent"
-                map:layout_constraintHorizontal_bias="0.959"
+                map:layout_constraintHorizontal_bias="0.953"
                 map:layout_constraintStart_toStartOf="parent"
                 map:tint="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
 
 </RelativeLayout>
