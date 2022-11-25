@@ -57,16 +57,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        binding.forgetTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Login.this, forgetPassword.class);
-                startActivity(intent);
-            }
-        });
-
-
-
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,7 +124,6 @@ public class Login extends AppCompatActivity {
             if(wifiConnected || mobileConnected){ // wifi or data connected
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                     checkUserAccessLevel(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    finish();
                 }
             }
         } else { // no internet connection
@@ -163,7 +152,7 @@ public class Login extends AppCompatActivity {
 
     @Override
     public void onStart() {
-        checkNetworkConnectionStatus();
         super.onStart();
+        checkNetworkConnectionStatus();
     }
 }
