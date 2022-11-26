@@ -1,8 +1,10 @@
 package com.example.curity;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -11,7 +13,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -27,6 +31,7 @@ import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -77,6 +82,7 @@ public class BrgyHomeFragment extends Fragment {
 //        fragment.setArguments(args);
 //        return fragment;
 //    }
+    private static final int LOCATION_PERMISSION_CODE = 101;
 
     private String userID;
     private boolean userFound;
@@ -114,8 +120,20 @@ public class BrgyHomeFragment extends Fragment {
 
         homeMessage = view.findViewById(R.id.message);
 
-        getStartLocation();
-        locationChange();
+
+        if (isLocationPermissionGranted()) {
+            getStartLocation();
+            locationChange();
+        } else {
+            requestLocationPermisson();
+            Fragment frg = null;
+            frg = getActivity().getSupportFragmentManager().findFragmentByTag("BrgyHomeFragment.java");
+            final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.detach(frg);
+            ft.attach(frg);
+            ft.commit();
+        }
+
         return view;
     }
 
@@ -274,4 +292,18 @@ public class BrgyHomeFragment extends Fragment {
             }
         }.start();
     }
+
+    private boolean isLocationPermissionGranted() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void requestLocationPermisson(){
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_PERMISSION_CODE);
+    }
+
 }

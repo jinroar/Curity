@@ -67,26 +67,6 @@ public class secondFragment extends Fragment {
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(AudioPlay.isplayingAudio){ // this will stop the SOS audio after clicking the notification
-            AudioPlay.stopAudio();
-            Toast.makeText(getActivity(), "SOS Stopped", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                Log.i("Service status", "Running");
-                return true;
-            }
-        }
-        Log.i("Service status", "Not running");
-        return false;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -111,6 +91,27 @@ public class secondFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_second, container, false);
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(AudioPlay.isplayingAudio){ // this will stop the SOS audio after clicking the notification
+            AudioPlay.stopAudio();
+            Toast.makeText(getActivity(), "SOS Stopped", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                Log.i("Service status", "Running");
+                return true;
+            }
+        }
+        Log.i("Service status", "Not running");
+        return false;
     }
 
 
