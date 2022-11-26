@@ -294,7 +294,7 @@ public class BrgyHomeFragment extends Fragment {
     }
 
     private boolean isLocationPermissionGranted() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             return true;
         } else {
