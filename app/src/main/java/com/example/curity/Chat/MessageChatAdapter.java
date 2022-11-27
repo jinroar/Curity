@@ -105,6 +105,8 @@ public class MessageChatAdapter extends RecyclerView.Adapter {
                 Picasso.get().load(messageChatModel.imgUrl)
                             .resize(400,400)
                             .into(sendImage);
+            }else if(!messageChatModel.hasImage()){
+                sendImage.setVisibility(View.GONE);
             }
         }
     }
@@ -132,6 +134,9 @@ public class MessageChatAdapter extends RecyclerView.Adapter {
                 Picasso.get().load(messageChatModel.imgUrl)
                         .resize(400,400)
                         .into(receivedImage);
+            }
+            else if(!messageChatModel.hasImage()){
+                receivedImage.setVisibility(View.GONE);
             }
         }
     }

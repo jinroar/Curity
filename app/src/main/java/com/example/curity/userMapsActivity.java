@@ -233,6 +233,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
                     messageChatModels.add(messageChatModel1);
                 }
                 adapter.notifyDataSetChanged();
+                recyclerView.scrollToPosition(messageChatModels.size()-1);
 
             }
 
