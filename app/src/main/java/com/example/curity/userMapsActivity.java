@@ -9,6 +9,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -48,12 +50,18 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -114,6 +122,11 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
     //attributes needed for chat
     private MessageChatAdapter adapter;
     ArrayList<MessageChatModel> messageChatModels = new ArrayList<>();
+
+    private Uri filepath;
+    private String downloadURL;
+
+    ImageButton img_btn_select;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +137,12 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
         //UI Elements
         addressTextView = findViewById(R.id.addressTextView);
         resetLocationButton = findViewById(R.id.resetLocationButton);
+
+        img_btn_select= findViewById(R.id.img_btn_select);
+
+        img_btn_select.setOnClickListener(view -> {
+            imageChooser();
+        });
 
 
         //Status bar color
@@ -168,21 +187,29 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
             String message = encryptMessage(messageET.getText().toString());
             String time = encryptMessage(dtf.format(now));
 
-            //encrypted model
-            messageChatModel = new MessageChatModel(message,time,2);
-            messageChatModel.id = userId;
-            messageChatModels.add(new MessageChatModel(
-                    decryptMessage( messageET.getText().toString())
-                    ,decryptMessage(time)
-                    , 2));
+            if(filepath != null){
+                uploadImage(ref,message,time,userId);
+            }else{
 
-            adapter.notifyDataSetChanged();
 
-            String key = ref.push().getKey();
+                //encrypted model
+                messageChatModel = new MessageChatModel(message,time,2);
+                messageChatModel.id = userId;
 
-            ref.child(key).setValue(messageChatModel);
+                messageChatModels.add(new MessageChatModel(
+                        decryptMessage( messageET.getText().toString())
+                        ,decryptMessage(time)
+                        , 2));
 
-            messageET.setText("");
+                adapter.notifyDataSetChanged();
+
+                String key = ref.push().getKey();
+
+                ref.child(key).setValue(messageChatModel);
+
+                messageET.setText("");
+            }
+
         });
 
         ref.addValueEventListener(new ValueEventListener() {
@@ -194,10 +221,15 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
                     //
                     String messageFromFB = decryptMessage(dataSnapshot.child("text").getValue().toString());
                     String timeFromFB =decryptMessage( dataSnapshot.child("time").getValue().toString());
+                    // check if has image
+
                     MessageChatModel messageChatModel1 = new MessageChatModel(
                             messageFromFB,
                             timeFromFB,
                             dataSnapshot.child("id").getValue().toString().equals(userId) ? 2:1);
+                    if(!dataSnapshot.child("imgUrl").getValue().toString().equals("")){
+                        messageChatModel1.imgUrl = dataSnapshot.child("imgUrl").getValue().toString();
+                    }
                     messageChatModels.add(messageChatModel1);
                 }
                 adapter.notifyDataSetChanged();
@@ -346,10 +378,10 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.hasChild(FirebaseAuth.getInstance().getCurrentUser().getUid())){
                     adminFound = true;
-                    adminCurrentLatitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLatitude").getValue()));
-                    adminCurrentLongitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLongitude").getValue()));
-//                      adminCurrentLatitude = 14.807814;
-//                      adminCurrentLongitude = 121.047431;
+//                    adminCurrentLatitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLatitude").getValue()));
+//                    adminCurrentLongitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLongitude").getValue()));
+                      adminCurrentLatitude = 14.807814;
+                      adminCurrentLongitude = 121.047431;
 
                 }
                 else{
@@ -637,4 +669,84 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
         return decStr;
     }
 
+    int PICKFILE_REQUEST_CODE = 200;
+    void imageChooser() {
+
+        // create an instance of the
+        // intent of the type image
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+
+        // pass the constant to compare it
+        // with the returned requestCode
+        startActivityForResult(Intent.createChooser(i, "Select Picture"), PICKFILE_REQUEST_CODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            Log.d("selectedImageUri", data.getData() + "");
+            if (requestCode == PICKFILE_REQUEST_CODE) {
+                Uri selectedImageUri = data.getData();
+                filepath = selectedImageUri;
+                if (selectedImageUri != null) {
+                    // update the preview image in the layout
+//                    Picasso.get().load(selectedImageUri)
+//                            .resize(200,200)
+//                            .into(img_btn_add_image);
+
+                    Log.d("selectedImageUri", selectedImageUri + "");
+                }
+            }
+
+        }
+    }
+
+    public void uploadImage(DatabaseReference ref, String message, String time,String userId){
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        Uri file = this.filepath;
+        StorageReference reportFiles = storage.getReference().child("images/"+file.getLastPathSegment());
+
+        UploadTask uploadTask = reportFiles.putFile(file);
+        Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                return reportFiles.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    Log.d("DOWNLOADURK",""+downloadUri);
+                    //encrypted model
+                    messageChatModel = new MessageChatModel(message,time,2);
+                    messageChatModel.id = userId;
+                    messageChatModel.imgUrl = downloadUri+"";
+                    messageChatModels.add(messageChatModel);
+
+                    adapter.notifyDataSetChanged();
+
+                    String key = ref.push().getKey();
+
+                    ref.child(key).setValue(messageChatModel);
+
+                    messageET.setText("");
+
+                } else {
+                    //btn_submit.setEnabled(true);
+                    // Handle failures
+                    // ...
+                }
+            }
+        });
+
+    }
 }

@@ -43,9 +43,11 @@
             android:background="#F9F9F9"
             android:orientation="horizontal">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/img_btn_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ic_baseline_image_24"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:padding="5dp" />
@@ -134,7 +136,8 @@
                 map:layout_constraintEnd_toEndOf="parent"
                 map:layout_constraintHorizontal_bias="0.953"
                 map:layout_constraintStart_toStartOf="parent"
-                map:tint="@color/white" />
+                map:tint="@color/white"
+                tools:ignore="SpeakableTextPresentCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

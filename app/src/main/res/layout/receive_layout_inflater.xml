@@ -57,6 +57,11 @@
                 android:textColor="#FFFFFF">
 
             </TextView>
+
+            <ImageView
+                android:id="@+id/receivedImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
     </LinearLayout>

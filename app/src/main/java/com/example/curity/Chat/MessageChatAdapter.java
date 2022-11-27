@@ -4,11 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.curity.R;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
@@ -82,30 +85,54 @@ public class MessageChatAdapter extends RecyclerView.Adapter {
     private class SentMessageHolder extends RecyclerView.ViewHolder{
         TextView tv_text;
         TextView tv_time;
+        ImageView sendImage;
+        LinearLayout messageLayout;
         public SentMessageHolder(@NonNull View itemView) {
             super(itemView);
             tv_text = itemView.findViewById(R.id.message);
             tv_time = itemView.findViewById(R.id.time);
+            sendImage = itemView.findViewById(R.id.sendImage);
+            messageLayout = itemView.findViewById(R.id.messageLayout);
         }
 
         void bind(MessageChatModel messageChatModel){
             tv_time.setText(messageChatModel.getTime());
             tv_text.setText(messageChatModel.getText());
+            if(messageChatModel.getText().equals("")){
+                messageLayout.setVisibility(View.GONE);
+            }
+            if(messageChatModel.hasImage()){
+                Picasso.get().load(messageChatModel.imgUrl)
+                            .resize(400,400)
+                            .into(sendImage);
+            }
         }
     }
 
     private class ReceivedMessageHolder extends RecyclerView.ViewHolder{
         TextView tv_text;
         TextView tv_time;
+        ImageView receivedImage;
+        LinearLayout messageLayout;
         public ReceivedMessageHolder(@NonNull View itemView) {
             super(itemView);
             tv_text = itemView.findViewById(R.id.message);
             tv_time = itemView.findViewById(R.id.time);
+            receivedImage = itemView.findViewById(R.id.receivedImage);
+            messageLayout = itemView.findViewById(R.id.messageLayout);
         }
 
         void bind(MessageChatModel messageChatModel){
             tv_time.setText(messageChatModel.getTime());
             tv_text.setText(messageChatModel.getText());
+            if(messageChatModel.getText().equals("")){
+                messageLayout.setVisibility(View.GONE);
+            }
+            if(messageChatModel.hasImage()){
+                Picasso.get().load(messageChatModel.imgUrl)
+                        .resize(400,400)
+                        .into(receivedImage);
+            }
         }
     }
 }

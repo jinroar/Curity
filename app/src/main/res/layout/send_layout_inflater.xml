@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:background="@drawable/receive_round_corner"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <!--        <androidx.appcompat.widget.AppCompatImageButton-->
         <!--            android:id="@+id/image"-->
@@ -35,14 +35,27 @@
             android:text="Hello Amit Anand, How are?"
             android:textColor="#FFFFFF"></TextView>
 
+
+
+
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/sendImage"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/messageLayout"
+        android:background="@drawable/ic_baseline_image_24" />
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/messageLayout"
+        android:layout_below="@+id/sendImage"
         android:layout_alignParentRight="true"
-        android:orientation="horizontal">
+
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/time"
@@ -53,8 +66,11 @@
             android:layout_marginRight="10dp"
             android:text="10:25 PM"
             android:textSize="12dp">
-
         </TextView>
+
+
+
+
 
 <!--        <ImageView-->
 <!--            android:layout_width="30dp"-->

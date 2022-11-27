@@ -6,6 +6,7 @@ public class MessageChatModel {
     private String text;
     private String time;
     private int viewType;
+    public String imgUrl = "";
 
     //Plain message
     public MessageChatModel(String text, String time, int viewType) {
@@ -29,5 +30,10 @@ public class MessageChatModel {
         return viewType;
     }
 
+    public Boolean hasImage(){
+        if(imgUrl.equals(""))
+            return false;
 
+        return true;
+    }
 }
