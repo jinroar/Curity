@@ -706,6 +706,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
     }
 
     public void uploadImage(DatabaseReference ref, String message, String time,String userId){
+        sendBtn.setEnabled(false);
         FirebaseStorage storage = FirebaseStorage.getInstance();
         Uri file = this.filepath;
         StorageReference reportFiles = storage.getReference().child("images/"+file.getLastPathSegment());
@@ -726,6 +727,8 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
+                    filepath = null;
+
                     Log.d("DOWNLOADURK",""+downloadUri);
                     //encrypted model
                     messageChatModel = new MessageChatModel(message,time,2);
@@ -740,6 +743,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
                     ref.child(key).setValue(messageChatModel);
 
                     messageET.setText("");
+                    sendBtn.setEnabled(true);
 
                 } else {
                     //btn_submit.setEnabled(true);

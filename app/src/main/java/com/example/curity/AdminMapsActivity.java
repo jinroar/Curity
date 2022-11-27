@@ -785,6 +785,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
     }
 
     public void uploadImage(DatabaseReference ref, String message, String time,String userId){
+        sendBtn.setEnabled(false);
         FirebaseStorage storage = FirebaseStorage.getInstance();
         Uri file = this.filepath;
         StorageReference reportFiles = storage.getReference().child("images/"+file.getLastPathSegment());
@@ -820,6 +821,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                     ref.child(key).setValue(messageChatModel);
 
                     messageET.setText("");
+                    sendBtn.setEnabled(true);
 
                 } else {
                     //btn_submit.setEnabled(true);
