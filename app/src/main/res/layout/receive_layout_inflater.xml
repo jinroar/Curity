@@ -58,10 +58,7 @@
 
             </TextView>
 
-            <ImageView
-                android:id="@+id/receivedImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
     </LinearLayout>
@@ -71,10 +68,17 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/messageLayout"
+        android:layout_below="@+id/receivedImage"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="10:25 PM"
         android:textSize="12dp"></TextView>
+
+    <ImageView
+        android:id="@+id/receivedImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/messageLayout"
+        android:background="@drawable/ic_baseline_image_24" />
 
 </RelativeLayout>
