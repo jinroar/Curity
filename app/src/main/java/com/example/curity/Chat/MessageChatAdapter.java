@@ -122,9 +122,9 @@ public class MessageChatAdapter extends RecyclerView.Adapter {
         void bind(MessageChatModel messageChatModel){
             tv_time.setText(messageChatModel.getTime());
             tv_text.setText(messageChatModel.getText());
-            if(messageChatModel.getText().equals("")){
-                messageLayout.setVisibility(View.GONE);
-            }
+//            if(messageChatModel.getText().equals("")){
+//                messageLayout.setVisibility(View.GONE);
+//            }
 //            if(messageChatModel.hasImage()){
 //                sendImage.setVisibility(View.VISIBLE);
 //                Picasso.get().load(messageChatModel.imgUrl)
@@ -154,9 +154,9 @@ public class MessageChatAdapter extends RecyclerView.Adapter {
         void bind(MessageChatModel messageChatModel){
             tv_time.setText(messageChatModel.getTime());
             tv_text.setText(messageChatModel.getText());
-            if(messageChatModel.getText().equals("")){
-                messageLayout.setVisibility(View.GONE);
-            }
+//            if(messageChatModel.getText().equals("")){
+//                messageLayout.setVisibility(View.GONE);
+//            }
 //            if(messageChatModel.hasImage()){
 //                receivedImage.setVisibility(View.VISIBLE);
 //                Picasso.get().load(messageChatModel.imgUrl)

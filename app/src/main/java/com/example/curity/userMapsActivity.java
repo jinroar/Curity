@@ -60,6 +60,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -188,7 +189,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
             String time = encryptMessage(dtf.format(now));
 
             if(filepath != null){
-                uploadImage(ref,message,time,userId);
+                //uploadImage(ref,message,time,userId);
             }else{
 
 
@@ -698,6 +699,15 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
 //                    Picasso.get().load(selectedImageUri)
 //                            .resize(200,200)
 //                            .into(img_btn_add_image);
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+                    LocalDateTime now = LocalDateTime.now();
+                    String message = encryptMessage(messageET.getText().toString());
+                    String time = encryptMessage(dtf.format(now));
+
+                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    DatabaseReference ref =  FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userId).child("chat");
+
+                    uploadImage(ref,message,time,userId);
 
                     Log.d("selectedImageUri", selectedImageUri + "");
                 }
@@ -708,6 +718,8 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
 
     public void uploadImage(DatabaseReference ref, String message, String time,String userId){
         sendBtn.setEnabled(false);
+        Toast.makeText(getApplicationContext(), "Uploading Image",
+                Toast.LENGTH_LONG).show();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         Uri file = this.filepath;
         StorageReference reportFiles = storage.getReference().child("images/"+file.getLastPathSegment());
@@ -745,6 +757,8 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
 
                     messageET.setText("");
                     sendBtn.setEnabled(true);
+                    Toast.makeText(getApplicationContext(), "Image upload Successfully",
+                            Toast.LENGTH_LONG).show();
 
                 } else {
                     //btn_submit.setEnabled(true);

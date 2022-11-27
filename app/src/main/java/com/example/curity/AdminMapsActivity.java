@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.curity.Chat.MessageChatAdapter;
 import com.example.curity.Chat.MessageChatModel;
@@ -182,7 +183,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
             String time = encryptMessage(dtf.format(now));
             Log.d("MESSAGEET","MESSAGE: "+message);
             if(filepath != null){
-                uploadImage(ref,message,time,adminID);
+                //uploadImage(ref,message,time,adminID);
             }else{
 
 
@@ -218,8 +219,8 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                         messageChatModel1.viewType =dataSnapshot.child("id").getValue().toString().equals(adminID) ? 3:4;
                     }
                     messageChatModels.add(messageChatModel1);
-                    adapter.notifyItemChanged(messageChatModels.size()-1);
                 }
+                adapter.notifyDataSetChanged();
                 recyclerView.scrollToPosition(messageChatModels.size()-1);
 
 
@@ -776,6 +777,15 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 //                    Picasso.get().load(selectedImageUri)
 //                            .resize(200,200)
 //                            .into(img_btn_add_image);
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+                    LocalDateTime now = LocalDateTime.now();
+                    String message = encryptMessage(messageET.getText().toString());
+                    String time = encryptMessage(dtf.format(now));
+
+                    String adminID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    DatabaseReference ref =  FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userID).child("chat");
+
+                    uploadImage(ref,message,time,adminID);
 
                     Log.d("selectedImageUri", selectedImageUri + "");
                 }
@@ -784,8 +794,10 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
         }
     }
 
-    public void uploadImage(DatabaseReference ref, String message, String time,String userId){
+    public void uploadImage(DatabaseReference ref, String message, String time,String adminID){
         sendBtn.setEnabled(false);
+        Toast.makeText(getApplicationContext(), "Uploading Image",
+                Toast.LENGTH_LONG).show();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         Uri file = this.filepath;
         StorageReference reportFiles = storage.getReference().child("images/"+file.getLastPathSegment());
@@ -810,7 +822,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                     Log.d("DOWNLOADURK",""+downloadUri);
                     //encrypted model
                     messageChatModel = new MessageChatModel(message,time,2);
-                    messageChatModel.id = userId;
+                    messageChatModel.id = adminID;
                     messageChatModel.imgUrl = downloadUri+"";
                     messageChatModels.add(messageChatModel);
 
@@ -822,6 +834,8 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
                     messageET.setText("");
                     sendBtn.setEnabled(true);
+                    Toast.makeText(getApplicationContext(), "Image upload Successfully",
+                            Toast.LENGTH_LONG).show();
 
                 } else {
                     //btn_submit.setEnabled(true);
