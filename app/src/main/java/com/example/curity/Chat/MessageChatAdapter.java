@@ -20,6 +20,8 @@ public class MessageChatAdapter extends RecyclerView.Adapter {
 
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
+    private static final int VIEW_TYPE_IMAGE_SENT = 3;
+    private static final int VIEW_TYPE_IMAGE_RECEIVED = 4;
 
     ArrayList<MessageChatModel> messageChatModels;
     Context context;
@@ -43,6 +45,16 @@ public class MessageChatAdapter extends RecyclerView.Adapter {
                     .inflate(R.layout.receive_layout_inflater, parent, false);
             return new ReceivedMessageHolder(view);
         }
+        else if(viewType == VIEW_TYPE_IMAGE_SENT){
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.send_image_layout, parent, false);
+            return new SentImageHolder(view);
+        }
+        else if(viewType == VIEW_TYPE_IMAGE_RECEIVED){
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.receive_image_layout, parent, false);
+            return new ReceiveImageHolder(view);
+        }
         return null;
     }
 
@@ -56,6 +68,12 @@ public class MessageChatAdapter extends RecyclerView.Adapter {
                 break;
             case VIEW_TYPE_MESSAGE_SENT :
                 ((ReceivedMessageHolder) holder).bind(message);
+                break;
+            case VIEW_TYPE_IMAGE_SENT:
+                ((SentImageHolder) holder).bind(message);
+                break;
+            case VIEW_TYPE_IMAGE_RECEIVED:
+                ((ReceiveImageHolder) holder).bind(message);
                 break;
         }
     }
@@ -79,6 +97,12 @@ public class MessageChatAdapter extends RecyclerView.Adapter {
         else if(messageChatModel.getViewType() == 2){
             return  VIEW_TYPE_MESSAGE_RECEIVED;
         }
+        else if(messageChatModel.getViewType() == 3){
+            return  VIEW_TYPE_IMAGE_SENT;
+        }
+        else if(messageChatModel.getViewType() == 4){
+            return  VIEW_TYPE_IMAGE_RECEIVED;
+        }
         return super.getItemViewType(position);
     }
 
@@ -101,14 +125,16 @@ public class MessageChatAdapter extends RecyclerView.Adapter {
             if(messageChatModel.getText().equals("")){
                 messageLayout.setVisibility(View.GONE);
             }
-            if(messageChatModel.hasImage()){
-                Picasso.get().load(messageChatModel.imgUrl)
-                            .resize(400,400)
-                            .into(sendImage);
-            }
-            else if(!messageChatModel.hasImage()){
-                sendImage.setVisibility(View.GONE);
-            }
+//            if(messageChatModel.hasImage()){
+//                sendImage.setVisibility(View.VISIBLE);
+//                Picasso.get().load(messageChatModel.imgUrl)
+//                            .resize(400,400)
+//                            .into(sendImage);
+//            }
+//            else if(!messageChatModel.hasImage()){
+//                sendImage.setVisibility(View.GONE);
+//            }
+
         }
     }
 
@@ -131,14 +157,43 @@ public class MessageChatAdapter extends RecyclerView.Adapter {
             if(messageChatModel.getText().equals("")){
                 messageLayout.setVisibility(View.GONE);
             }
-            if(messageChatModel.hasImage()){
-                Picasso.get().load(messageChatModel.imgUrl)
-                        .resize(400,400)
-                        .into(receivedImage);
-            }
-            else if(!messageChatModel.hasImage()){
-                receivedImage.setVisibility(View.GONE);
-            }
+//            if(messageChatModel.hasImage()){
+//                receivedImage.setVisibility(View.VISIBLE);
+//                Picasso.get().load(messageChatModel.imgUrl)
+//                        .resize(400,400)
+//                        .into(receivedImage);
+//            }
+//            else if(!messageChatModel.hasImage()){
+//                receivedImage.setVisibility(View.GONE);
+//            }
+            ;
+        }
+
+    }
+
+    public class ReceiveImageHolder extends RecyclerView.ViewHolder{
+        ImageView receivedImage;
+        public ReceiveImageHolder(@NonNull View itemView) {
+            super(itemView);
+            receivedImage = itemView.findViewById(R.id.receivedImage);
+        }
+        void bind(MessageChatModel messageChatModel){
+            Picasso.get().load(messageChatModel.imgUrl)
+                    .resize(400,400)
+                    .into(receivedImage);
+        }
+    }
+
+    public class SentImageHolder extends RecyclerView.ViewHolder{
+        ImageView sendImage;
+        public SentImageHolder(@NonNull View itemView) {
+            super(itemView);
+            sendImage = itemView.findViewById(R.id.sendImage);
+        }
+        void bind(MessageChatModel messageChatModel){
+            Picasso.get().load(messageChatModel.imgUrl)
+                    .resize(400,400)
+                    .into(sendImage);
         }
     }
 }

@@ -229,6 +229,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
                             dataSnapshot.child("id").getValue().toString().equals(userId) ? 2:1);
                     if(!dataSnapshot.child("imgUrl").getValue().toString().equals("")){
                         messageChatModel1.imgUrl = dataSnapshot.child("imgUrl").getValue().toString();
+                        messageChatModel1.viewType =dataSnapshot.child("id").getValue().toString().equals(userId) ? 3:4;
                     }
                     messageChatModels.add(messageChatModel1);
                 }

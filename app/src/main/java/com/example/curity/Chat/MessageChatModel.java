@@ -5,7 +5,7 @@ public class MessageChatModel {
     public String id;
     private String text;
     private String time;
-    private int viewType;
+    public int viewType;
     public String imgUrl = "";
 
     //Plain message

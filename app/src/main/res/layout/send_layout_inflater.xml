@@ -40,19 +40,12 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/sendImage"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/messageLayout"
-        android:background="@drawable/ic_baseline_image_24" />
 
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sendImage"
+        android:layout_below="@+id/messageLayout"
         android:layout_alignParentRight="true"
 
         android:orientation="vertical">

@@ -191,9 +191,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                 messageChatModel.id = adminID;
 
                 messageChatModels.add(messageChatModel);
-
-                adapter.notifyDataSetChanged();
-
+                adapter.notifyItemChanged(messageChatModels.size()-1);
                 String key = ref.push().getKey();
 
                 ref.child(key).setValue(messageChatModel);
@@ -217,11 +215,13 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                             dataSnapshot.child("id").getValue().toString().equals(adminID) ? 2:1);
                     if(!dataSnapshot.child("imgUrl").getValue().toString().equals("")){
                         messageChatModel1.imgUrl = dataSnapshot.child("imgUrl").getValue().toString();
+                        messageChatModel1.viewType =dataSnapshot.child("id").getValue().toString().equals(adminID) ? 3:4;
                     }
                     messageChatModels.add(messageChatModel1);
+                    adapter.notifyItemChanged(messageChatModels.size()-1);
                 }
-                adapter.notifyDataSetChanged();
                 recyclerView.scrollToPosition(messageChatModels.size()-1);
+
 
             }
 
