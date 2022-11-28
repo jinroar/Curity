@@ -381,10 +381,10 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.hasChild(FirebaseAuth.getInstance().getCurrentUser().getUid())){
                     adminFound = true;
-//                    adminCurrentLatitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLatitude").getValue()));
-//                    adminCurrentLongitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLongitude").getValue()));
-                      adminCurrentLatitude = 14.807814;
-                      adminCurrentLongitude = 121.047431;
+                    adminCurrentLatitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLatitude").getValue()));
+                    adminCurrentLongitude = Double.parseDouble(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("adminCurrentLongitude").getValue()));
+//                      adminCurrentLatitude = 14.807814;
+//                      adminCurrentLongitude = 121.047431;
 
                 }
                 else{

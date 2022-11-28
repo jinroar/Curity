@@ -142,8 +142,8 @@ public class firstFragment extends Fragment implements View.OnClickListener {
     }
 
     private void startIntent(){
-        Intent intent = new Intent(firstFragment.this.requireContext(), userMapsActivity.class);
-        //Intent intent = new Intent(firstFragment.this.requireContext(),LoadingScreen.class);
+//        Intent intent = new Intent(firstFragment.this.requireContext(), userMapsActivity.class);
+        Intent intent = new Intent(firstFragment.this.requireContext(),LoadingScreen.class);
         startActivity(intent);
     }
 }
