@@ -1,7 +1,9 @@
 package com.example.curity;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -21,8 +23,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -124,6 +128,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
     ImageView sendBtn;
     EditText messageET;
     MessageChatModel messageChatModel;
+    Button locateBtn;
 
     private Uri filepath;
     private String downloadURL;
@@ -139,6 +144,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
         addressTextView = findViewById(R.id.addressTextView);
         resetLocationButton = findViewById(R.id.resetLocationButton);
+        locateBtn = findViewById(R.id.locateBtn);
 
         img_btn_select= findViewById(R.id.img_btn_select);
 
@@ -229,6 +235,25 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        locateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog dialog = new AlertDialog.Builder(AdminMapsActivity.this)
+                        .setTitle("User Located")
+                        .setMessage("Are you sure?")
+                        .setNegativeButton("no", null)
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                onUserFound();
+                            }
+                        })
+                        .create();
+
+                dialog.show();
             }
         });
     }
@@ -847,5 +872,9 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
     }
 
+    public void onUserFound(){
+        FirebaseDatabase.getInstance().getReference().child("Finished Alerts")
+                .child(userID).child("userFound").setValue("yes");
+    }
 
 }

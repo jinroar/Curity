@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -118,6 +119,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
 
     ImageView sendBtn;
     EditText messageET;
+    Button locatedBtn;
 
     MessageChatModel messageChatModel;
     //attributes needed for chat
@@ -138,6 +140,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
         //UI Elements
         addressTextView = findViewById(R.id.addressTextView);
         resetLocationButton = findViewById(R.id.resetLocationButton);
+        locatedBtn = findViewById(R.id.locateBtn);
 
         img_btn_select= findViewById(R.id.img_btn_select);
 
@@ -151,7 +154,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(this.getResources().getColor(R.color.red));
-
+        locatedBtn.setVisibility(View.GONE);
 
         if (isLocationPermissionGranted()) {
             // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -503,6 +506,28 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
 
     private String doubToString(double lat, double lng){
         return lat + "," + lng;
+    }
+
+    private void ifUserFound(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Finished Alerts").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.hasChild("userFound")){
+                    if(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userFound").getValue()) == "yes"){
+                       finish();
+                    }
+                else{
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     //update location every 5 minutes

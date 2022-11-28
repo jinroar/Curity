@@ -122,24 +122,37 @@
     </androidx.cardview.widget.CardView>
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="655dp">
 
-            <ImageButton
-                android:id="@+id/resetLocationButton"
-                android:layout_width="46dp"
-                android:layout_height="44dp"
-                android:layout_marginBottom="284dp"
-                map:layout_constraintBottom_toBottomOf="parent"
-                map:layout_constraintEnd_toEndOf="parent"
-                map:layout_constraintHorizontal_bias="0.953"
-                map:layout_constraintStart_toStartOf="parent"
-                map:tint="@color/white"
-                tools:ignore="SpeakableTextPresentCheck" />
+        <Button
+            android:id="@+id/locateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Located"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.054"
+            map:layout_constraintStart_toStartOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/resetLocationButton"
+            android:layout_width="46dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="16dp"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.953"
+            map:layout_constraintStart_toStartOf="parent"
+            map:tint="@color/white"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </RelativeLayout>
