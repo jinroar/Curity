@@ -514,12 +514,11 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.hasChild("userFound")){
-                    if(String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userFound").getValue()) == "yes"){
-                       finish();
-                    }
-                else{
+                if (snapshot.hasChild("userFound")) {
+                    if (String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userFound").getValue()) == "yes") {
 
+
+                    }
                 }
             }
 
@@ -527,7 +526,9 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
         });
+           
     }
 
     //update location every 5 minutes
