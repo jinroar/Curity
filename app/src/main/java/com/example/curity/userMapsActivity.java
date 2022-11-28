@@ -373,12 +373,12 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
             FirebaseDatabase.getInstance().getReference("Accepted Alerts").child(FirebaseAuth.getInstance()
                     .getCurrentUser().getUid()).child("userCurrentLongitude").setValue(userCurrentLongitude);
         }
+        ifUserFound();
     }
 
     //check if paired with admin
     private void isAdminFound() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Accepted Alerts");
-
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -509,17 +509,19 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
     }
 
     private void ifUserFound(){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Finished Alerts").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Finished Alerts");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild("userFound")) {
-                    if (String.valueOf(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userFound").getValue()) == "yes") {
-
-
+                if (snapshot.hasChild(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                    boolean found = (boolean) snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userFound").getValue();
+                    Log.d("isUserFound:", ""+ found);
+                    if (found == true){
+                        finish();
                     }
                 }
+
             }
 
             @Override
@@ -528,7 +530,6 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
             }
 
         });
-           
     }
 
     //update location every 5 minutes
@@ -544,7 +545,6 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
                 double templng = userCurrentLongitude;
                 double templat = userCurrentLatitude;
                 getLocation();
-
                 if(templat != userCurrentLatitude || templng != userCurrentLongitude){
 //                    Toast.makeText(userMapsActivity.this,"Location changed",Toast.LENGTH_SHORT).show();
                     setGeocoder();
@@ -569,6 +569,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
                 }else {
 //                    Toast.makeText(userMapsActivity.this,"Location unchanged, lat: "+lastLocation.getLatitude()+",lng:"+lastLocation.getLongitude(),Toast.LENGTH_SHORT).show();
                 }
+
                 locationChange();
             }
         }.start();

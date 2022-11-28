@@ -874,7 +874,8 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
     public void onUserFound(){
         FirebaseDatabase.getInstance().getReference().child("Finished Alerts")
-                .child(userID).child("userFound").setValue("yes");
+                .child(userID).child("userFound").setValue(true);
+                finish();
     }
 
 }
