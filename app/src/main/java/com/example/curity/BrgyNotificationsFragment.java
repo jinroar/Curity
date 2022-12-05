@@ -8,6 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.curity.Objects.UserLogs;
+
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link BrgyNotificationsFragment#newInstance} factory method to
@@ -46,6 +50,8 @@ public class BrgyNotificationsFragment extends Fragment {
         return fragment;
     }
 
+    private ArrayList<UserLogs> userLogsList;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +59,11 @@ public class BrgyNotificationsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        userLogsList = new ArrayList<>();
+
+        setUserInfo();
+
     }
 
     @Override
@@ -61,4 +72,10 @@ public class BrgyNotificationsFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_brgy_notifications, container, false);
     }
+
+    private void setUserInfo() {
+
+
+    }
+
 }

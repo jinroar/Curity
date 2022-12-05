@@ -359,6 +359,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
     //sending location
     private void setFirebase(){
         isAdminFound();
+        ifUserFound();
         if(!adminFound){
             Log.d("Set Firebase Admin Found:", "True");
             databaseReference = FirebaseDatabase.getInstance().getReference("User's Location");
@@ -373,7 +374,7 @@ public class userMapsActivity extends FragmentActivity implements OnMapReadyCall
             FirebaseDatabase.getInstance().getReference("Accepted Alerts").child(FirebaseAuth.getInstance()
                     .getCurrentUser().getUid()).child("userCurrentLongitude").setValue(userCurrentLongitude);
         }
-        ifUserFound();
+
     }
 
     //check if paired with admin
