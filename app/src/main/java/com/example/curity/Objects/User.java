@@ -12,6 +12,16 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+    public User(String fname, String lname, String email, String isAdmin) {
+        this.firstName = fname;
+        this.lastName = lname;
+        this.email = email;
+        this.isAdmin = isAdmin;
+    }
+
+    public User() {
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
