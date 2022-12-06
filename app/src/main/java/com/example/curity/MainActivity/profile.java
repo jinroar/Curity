@@ -52,11 +52,28 @@ public class profile extends AppCompatActivity {
                                 String phone = String.valueOf(dataSnapshot.child("phone").getValue());
 
                                 binding.edittextFname.setText(fName);
-                                binding.edittextLname.setText(lName);
-                                binding.edittextAddress.setText(address);
                                 binding.edittextEmail.setText(email);
-                                binding.edittextPhone.setText(phone);
 
+                                // check if the last name is null
+                                if (lName.equals("null")){
+                                    binding.edittextLname.setText(" ");
+                                } else {
+                                    binding.edittextLname.setText(lName);
+                                }
+
+                                // check if the address is null
+                                if (address.equals("null")){
+                                    binding.edittextAddress.setText(" ");
+                                } else {
+                                    binding.edittextAddress.setText(address);
+                                }
+
+                                // check if the phone is null
+                                if (phone.equals("null")){
+                                    binding.edittextPhone.setText(" ");
+                                } else {
+                                    binding.edittextPhone.setText(phone);
+                                }
                             }
                         }
                     }
