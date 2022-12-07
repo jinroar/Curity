@@ -2,12 +2,18 @@ package com.example.curity;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.curity.Logs.LogsAdapter;
 import com.example.curity.Objects.UserLogs;
 
 import java.util.ArrayList;
@@ -27,6 +33,8 @@ public class BrgyNotificationsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView recyclerView;
+    private ArrayList<UserLogs> userLogsList;
 
     public BrgyNotificationsFragment() {
         // Required empty public constructor
@@ -50,7 +58,6 @@ public class BrgyNotificationsFragment extends Fragment {
         return fragment;
     }
 
-    private ArrayList<UserLogs> userLogsList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,11 +66,6 @@ public class BrgyNotificationsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        userLogsList = new ArrayList<>();
-
-        setUserInfo();
-
     }
 
     @Override
@@ -73,9 +75,27 @@ public class BrgyNotificationsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_brgy_notifications, container, false);
     }
 
-    private void setUserInfo() {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        setUserInfo();
+
+        recyclerView = view.findViewById(R.id.recycler_logs);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        LogsAdapter adapter = new LogsAdapter(getContext(),userLogsList);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        adapter.notifyDataSetChanged();
 
     }
 
+    // for the intial data
+    private void setUserInfo(){
+        userLogsList = new ArrayList<>();
+        userLogsList.add(new UserLogs("John", "09054047375", "Elyzza@gmail.com"));
+        userLogsList.add(new UserLogs("Bruh", "09054047375", "Elyzza@gmail.com"));
+        userLogsList.add(new UserLogs("bruh--1", "09054047375", "Elyzza@gmail.com"));
+    }
 }

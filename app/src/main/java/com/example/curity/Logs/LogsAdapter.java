@@ -1,5 +1,6 @@
 package com.example.curity.Logs;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,10 @@ import java.util.ArrayList;
 
 public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.MyViewHolder> {
     private ArrayList<UserLogs> userLogsList;
+    private Context context;
 
-    public LogsAdapter(ArrayList<UserLogs> userLogsList){
+    public LogsAdapter(Context context, ArrayList<UserLogs> userLogsList){
+        this.context = context;
         this.userLogsList = userLogsList;
     }
 
@@ -36,7 +39,7 @@ public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.MyViewHolder> 
     @NonNull
     @Override
     public LogsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.logs,parent,false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.list_logs,parent,false);
         return new MyViewHolder(itemView);
     }
 

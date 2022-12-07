@@ -152,12 +152,12 @@ public class HomePageBrgy extends AppCompatActivity implements NavigationView.On
 ////                binding.bottomNavigationView.setSelectedItemId(R.id.brgyMap);
 //                break;
 
-//            case R.id.nav_notification:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
-//                        new BrgyNotificationsFragment()).commit();
-//
-////                binding.bottomNavigationView.setSelectedItemId(R.id.brgyChat);
-//                break;
+            case R.id.nav_notification:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
+                        new BrgyNotificationsFragment()).commit();
+
+//                binding.bottomNavigationView.setSelectedItemId(R.id.brgyChat);
+                break;
 
             /*----------------Activities----------------*/
             case R.id.nav_profile:
