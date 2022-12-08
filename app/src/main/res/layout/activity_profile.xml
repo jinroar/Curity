@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".UserPage.Profile">
-
-
-    <!--<ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="138dp"
-        android:layout_height="144dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="-300dp"
-        android:layout_marginBottom="1145dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        app:srcCompat="@drawable/profile" />-->
 
     <ImageView
         android:id="@+id/imageView5"
@@ -51,108 +36,110 @@
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/welcomeView2">
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edittext_fnamelay"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:hint="First Name"
-            android:textSize="30dp">
+            android:textSize="30dp"
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            app:startIconTint="@color/red">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edittext_fname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_baseline_person_24"
-                android:drawablePadding="10dp"
-                android:textSize="20dp" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edittext_lnamelay"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="5dp"
             android:hint="Last Name"
-            android:textSize="30dp">
+            android:textSize="30dp"
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            app:startIconTint="@color/red">
 
             <EditText
                 android:id="@+id/edittext_lname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_baseline_person_24"
-                android:drawablePadding="10dp"
-                android:textSize="20dp" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edittext_addresslay"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="5dp"
             android:hint="Address"
-            android:textSize="30dp">
+            android:textSize="30dp"
+            app:startIconDrawable="@drawable/ic_baseline_home_24"
+            app:startIconTint="@color/red">
 
             <EditText
                 android:id="@+id/edittext_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_baseline_home_24"
-                android:drawablePadding="10dp"
-                android:textSize="20dp" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edittext_emaillay"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="5dp"
             android:hint="Email Address"
-            android:textSize="30dp">
+            android:textSize="30dp"
+            app:startIconDrawable="@drawable/ic_email"
+            app:startIconTint="@color/red">
 
             <EditText
                 android:id="@+id/edittext_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_email"
-                android:drawablePadding="10dp"
-                android:textSize="20dp"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edittext_phonelay"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="5dp"
             android:hint="Cellphone Number"
-            android:textSize="30dp">
+            android:textSize="30dp"
+            app:startIconDrawable="@drawable/ic_baseline_phone_android_24"
+            app:startIconTint="@color/red">
 
             <EditText
                 android:id="@+id/edittext_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_baseline_phone_android_24"
-                android:drawablePadding="10dp"
-                android:textSize="20dp"
-                android:inputType="number"/>
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -166,15 +153,5 @@
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold" />
-
-        <!--<Button
-            android:id="@+id/btn_logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="LOG OUT"
-            android:textSize="20dp"
-            android:textStyle="bold" />-->
-
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

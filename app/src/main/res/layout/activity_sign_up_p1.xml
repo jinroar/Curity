@@ -19,123 +19,106 @@
 
     <TextView
         android:id="@+id/WelcomeView"
-        android:layout_width="267dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="30dp"
         android:text="Welcome,\nSign up to continue"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/FnameLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toEndOf="@id/imageView3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.166" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/FnameLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="170dp"
-        app:boxStrokeColor="@color/red"
-        app:hintTextColor="@color/red"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintTop_toBottomOf="@id/imageView3">
 
-        app:layout_constraintBottom_toTopOf="@+id/LnameLayout"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/ic_baseline_person_24"
-        app:startIconTint="@color/red">
-
-        <EditText
-            android:id="@+id/f_nameEt"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/FnameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="First Name"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            app:startIconTint="@color/red">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/f_nameEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/LnameLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="15dp"
-        app:boxStrokeColor="@color/red"
-        app:hintTextColor="@color/red"
+        </com.google.android.material.textfield.TextInputLayout>
 
-        app:layout_constraintTop_toBottomOf="@+id/FnameLayout"
-        app:startIconDrawable="@drawable/ic_baseline_person_24"
-
-        app:startIconTint="@color/red">
-
-        <EditText
-            android:id="@+id/l_nameEt"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/LnameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:hint="Last Name"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            app:startIconTint="@color/red">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/AdressnameLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="15dp"
-        app:boxStrokeColor="@color/red"
-        app:hintTextColor="@color/red"
+            <EditText
+                android:id="@+id/l_nameEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
 
-        app:layout_constraintTop_toBottomOf="@+id/LnameLayout"
-        app:startIconDrawable="@drawable/ic_baseline_home_24"
+        </com.google.android.material.textfield.TextInputLayout>
 
-        app:startIconTint="@color/red">
-
-        <EditText
-            android:id="@+id/addressEt"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/AdressnameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:hint="Address"
-            android:inputType="text" />
+            android:textSize="30dp"
+            app:startIconDrawable="@drawable/ic_baseline_home_24"
+            app:startIconTint="@color/red">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/addressEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
 
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="15dp"
-        app:boxStrokeColor="@color/red"
-        app:hintTextColor="@color/red"
-        app:layout_constraintTop_toBottomOf="@+id/AdressnameLayout"
-        app:startIconDrawable="@drawable/ic_baseline_phone_android_24"
-        app:startIconTint="@color/red">
-
-        <EditText
-            android:id="@+id/phoneEt"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:hint="Cellphone Number"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:startIconDrawable="@drawable/ic_baseline_phone_android_24"
+            app:startIconTint="@color/red">
+
+            <EditText
+                android:id="@+id/phoneEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/round_btn"
         android:text="Next"
@@ -145,7 +128,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneLayout"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
