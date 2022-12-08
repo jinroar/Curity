@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:id="@+id/map"
-        tools:context=".userMapsActivity"
+        tools:context=".UserPage.userMapsActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
 
     <LinearLayout

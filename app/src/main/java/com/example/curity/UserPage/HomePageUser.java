@@ -1,4 +1,4 @@
-package com.example.curity.MainActivity;
+package com.example.curity.UserPage;
 
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -22,11 +22,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.curity.R;
 import com.example.curity.SignUp.SelectContact;
 import com.example.curity.Utility.NetworkChangeListener;
-import com.example.curity.databinding.ActivityHomePageBinding;
-import com.example.curity.firstFragment;
+import com.example.curity.databinding.ActivityHomePageUserBinding;
 import com.example.curity.login.Login;
-import com.example.curity.secondFragment;
-import com.example.curity.thirdFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -34,11 +31,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomePageUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
-    ActivityHomePageBinding binding;
+    ActivityHomePageUserBinding binding;
 
     //Variables
     DrawerLayout drawerLayout;
@@ -48,11 +45,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_home_page_user);
 
-        binding = ActivityHomePageBinding.inflate(getLayoutInflater());
+        binding = ActivityHomePageUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new firstFragment());
+        replaceFragment(new UserButtonFragment());
 
         // inserting name at the sidebar
         // Retrieve the data first using firebase realtime
@@ -75,28 +72,17 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                                 TextView setPhoneNum = headView.findViewById(R.id.userNumber);
 
                                 setName.setText(fName +" "+ lName);
-                                setPhoneNum.setText(phone);
+
+                                //check if there is phone number
+                                if (phone.equals("null")){
+                                    setPhoneNum.setText("n/a");
+                                } else {
+                                    setPhoneNum.setText(phone);
+                                }
                             }
                         }
                     }
                 });
-
-//        // bottom navigation (Home, Map, and Chats)
-//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-//            switch (item.getItemId()) {
-//                case R.id.firstFragment:
-//                    replaceFragment(new firstFragment());
-//                    break;
-//                case R.id.secondFragment:
-//                    replaceFragment(new secondFragment());
-//                    break;
-//                case R.id.thirdFragment:
-//                    replaceFragment(new thirdFragment());
-//                    break;
-//            }
-//
-//            return true;
-//        });
 
 
         /*------------------Hooks------------------*/
@@ -142,53 +128,31 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             /*----------------Fragments----------------*/
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
-                        new firstFragment()).commit();
-
-//                binding.bottomNavigationView.setSelectedItemId(R.id.firstFragment);
+                        new UserButtonFragment()).commit();
                 break;
 
             case R.id.nav_alarm:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
-                        new secondFragment()).commit();
+                        new UserShakeFragment()).commit();
                 break;
-
-//            case R.id.nav_maps:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
-//                    new secondFragment()).commit();
-//
-////                binding.bottomNavigationView.setSelectedItemId(R.id.secondFragment);
-//                break;
-
-//            case R.id.nav_chat:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
-//                        new thirdFragment()).commit();
-////
-////                binding.bottomNavigationView.setSelectedItemId(R.id.thirdFragment);
-//                break;
 
             /*----------------Activities----------------*/
             case R.id.nav_profile:
-                startActivity(new Intent(HomePage.this, profile.class));
+                startActivity(new Intent(HomePageUser.this, Profile.class));
                 break;
 
-
             case R.id.select_contact:
-//                startActivity(new Intent(HomePage.this, SelectContact.class));
-                Intent intent = new Intent(HomePage.this, SelectContact.class);
+                Intent intent = new Intent(HomePageUser.this, SelectContact.class);
                 intent.putExtra("Source", "from Homepage");
                 startActivity(intent);
                 break;
-
-//            case R.id.nav_setting:
-//                startActivity(new Intent(HomePage.this, settings.class));
-//                break;
 
             case R.id.nav_logout:
                 //logout to the firebase
                 FirebaseAuth.getInstance().signOut();
 
                 //going back to the login Page
-                startActivity(new Intent(HomePage.this, Login.class));
+                startActivity(new Intent(HomePageUser.this, Login.class));
                 finish();
                 break;
         }

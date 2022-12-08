@@ -1,4 +1,4 @@
-package com.example.curity;
+package com.example.curity.AdminPage;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.example.curity.Chat.MessageChatAdapter;
 import com.example.curity.Chat.MessageChatModel;
 import com.example.curity.Objects.AcceptedAlerts;
+import com.example.curity.R;
 import com.example.curity.Services.ApiInterface;
 import com.example.curity.Services.Result;
 import com.example.curity.Services.Route;

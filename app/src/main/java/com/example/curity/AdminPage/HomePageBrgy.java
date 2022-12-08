@@ -18,11 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.curity.BrgyHomeFragment;
-import com.example.curity.BrgyMapFragment;
-import com.example.curity.BrgyNotificationsFragment;
-import com.example.curity.MainActivity.profile;
-import com.example.curity.MainActivity.settings;
+import com.example.curity.UserPage.Profile;
 import com.example.curity.R;
 import com.example.curity.Utility.NetworkChangeListener;
 import com.example.curity.databinding.ActivityHomePageBrgyBinding;
@@ -75,28 +71,17 @@ public class HomePageBrgy extends AppCompatActivity implements NavigationView.On
                                 TextView setPhoneNum = headView.findViewById(R.id.userNumber);
 
                                 setName.setText(fName +" "+ lName);
-                                setPhoneNum.setText(phone);
+
+                                //check if there is phone number
+                                if (phone.equals("null")){
+                                    setPhoneNum.setText("n/a");
+                                } else {
+                                    setPhoneNum.setText(phone);
+                                }
                             }
                         }
                     }
                 });
-
-        // bottom navigation (Home, Dashboard, and Notification)
-//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-//            switch (item.getItemId()) {
-//                case R.id.brgyAlert:
-//                    replaceFragment(new BrgyHomeFragment());
-//                    break;
-//                case R.id.brgyMap:
-//                    replaceFragment(new BrgyMapFragment());
-//                    break;
-//                case R.id.brgyChat:
-//                    replaceFragment(new BrgyNotificationsFragment());
-//                    break;
-//            }
-//            return true;
-//        });
-
 
         /*------------------Hooks------------------*/
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -113,7 +98,6 @@ public class HomePageBrgy extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
-//        navigationView.setCheckedItem(R.id.nav_home);
     }
 
     @Override
@@ -141,32 +125,17 @@ public class HomePageBrgy extends AppCompatActivity implements NavigationView.On
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
                         new BrgyHomeFragment()).commit();
-
-//                binding.bottomNavigationView.setSelectedItemId(R.id.firstFragment);
                 break;
-
-//            case R.id.nav_map:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
-//                        new BrgyMapFragment()).commit();
-//
-////                binding.bottomNavigationView.setSelectedItemId(R.id.brgyMap);
-//                break;
 
             case R.id.nav_notification:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
                         new BrgyNotificationsFragment()).commit();
-
-//                binding.bottomNavigationView.setSelectedItemId(R.id.brgyChat);
                 break;
 
             /*----------------Activities----------------*/
             case R.id.nav_profile:
-                startActivity(new Intent(HomePageBrgy.this, profile.class));
+                startActivity(new Intent(HomePageBrgy.this, Profile.class));
                 break;
-
-//            case R.id.nav_setting:
-//                startActivity(new Intent(HomePageBrgy.this, settings.class));
-//                break;
 
             case R.id.nav_logout:
                 //logout to the firebase

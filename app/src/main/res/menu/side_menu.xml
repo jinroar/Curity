@@ -33,46 +33,5 @@
             android:checkable="false"
             android:icon="@drawable/ic_baseline_reply_24"
             android:title="Logout" />
-
-<!--        <item-->
-<!--            android:id="@+id/nav_maps"-->
-<!--            android:checkable="false"-->
-<!--            android:icon="@drawable/ic_baseline_map_24"-->
-<!--            android:title="Maps" />-->
-<!--        <item-->
-<!--            android:id="@+id/nav_chat"-->
-<!--            android:checkable="false"-->
-<!--            android:icon="@drawable/ic_baseline_chat_24"-->
-<!--            android:title="Chat" />-->
     </group>
-
-<!--    <item android:title="Profile">-->
-<!--        <menu>-->
-<!--            <group android:checkableBehavior="single">-->
-<!--                <item-->
-<!--                    android:id="@+id/nav_profile"-->
-<!--                    android:checkable="false"-->
-<!--                    android:icon="@drawable/ic_baseline_person_24"-->
-<!--                    android:title="Profile" />-->
-
-<!--                <item-->
-<!--                    android:id="@+id/select_contact"-->
-<!--                    android:checkable="false"-->
-<!--                    android:icon="@drawable/ic_baseline_contacts_24"-->
-<!--                    android:title="Contacts" />-->
-
-<!--&lt;!&ndash;                <item&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:id="@+id/nav_setting"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:checkable="false"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:icon="@drawable/ic_baseline_settings_24"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:title="Setting" />&ndash;&gt;-->
-
-<!--                <item-->
-<!--                    android:id="@+id/nav_logout"-->
-<!--                    android:checkable="false"-->
-<!--                    android:icon="@drawable/ic_baseline_reply_24"-->
-<!--                    android:title="Logout" />-->
-<!--            </group>-->
-<!--        </menu>-->
-<!--    </item>-->
 </menu>

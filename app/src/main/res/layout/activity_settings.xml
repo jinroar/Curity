@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".MainActivity.settings">
+    tools:context=".UserPage.Settings">
 
     <TextView
         android:layout_width="match_parent"

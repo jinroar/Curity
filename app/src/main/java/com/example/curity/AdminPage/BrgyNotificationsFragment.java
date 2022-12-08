@@ -1,4 +1,4 @@
-package com.example.curity;
+package com.example.curity.AdminPage;
 
 import android.os.Bundle;
 
@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.curity.Logs.LogsAdapter;
 import com.example.curity.Objects.UserLogs;
+import com.example.curity.R;
 
 import java.util.ArrayList;
 

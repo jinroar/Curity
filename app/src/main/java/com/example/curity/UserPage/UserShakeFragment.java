@@ -1,4 +1,4 @@
-package com.example.curity;
+package com.example.curity.UserPage;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -14,14 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.curity.Alarm.*;
+import com.example.curity.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link thirdFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class secondFragment extends Fragment {
+public class UserShakeFragment extends Fragment {
 
     SensorService sensorService;
 
@@ -88,7 +84,7 @@ public class secondFragment extends Fragment {
 //            Toast.makeText(this, "Record Video", Toast.LENGTH_SHORT).show();
 //        });
 
-        return inflater.inflate(R.layout.fragment_second, container, false);
+        return inflater.inflate(R.layout.fragment_user_shake, container, false);
 
 
     }

@@ -1,4 +1,4 @@
-package com.example.curity;
+package com.example.curity.UserPage;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,14 +14,15 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.curity.R;
 import com.skyfishjy.library.RippleBackground;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link firstFragment#newInstance} factory method to
+ * Use the {@link UserButtonFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class firstFragment extends Fragment implements View.OnClickListener {
+public class UserButtonFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +36,7 @@ public class firstFragment extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
 
-    public firstFragment() {
+    public UserButtonFragment() {
         // Required empty public constructor
     }
 
@@ -48,8 +49,8 @@ public class firstFragment extends Fragment implements View.OnClickListener {
      * @return A new instance of fragment firstFragmentNew.
      */
     // TODO: Rename and change types and number of parameters
-    public static firstFragment newInstance(String param1, String param2) {
-        firstFragment fragment = new firstFragment();
+    public static UserButtonFragment newInstance(String param1, String param2) {
+        UserButtonFragment fragment = new UserButtonFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,7 +70,7 @@ public class firstFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_first, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_button, container, false);
 
 //        Button button = view.findViewById(R.id.button2);
 //        button.setOnClickListener(this);
@@ -105,7 +106,7 @@ public class firstFragment extends Fragment implements View.OnClickListener {
                     rippleBackground.stopRippleAnimation(); //stopping the animation
         }
 
-        AlertDialog dialog = new AlertDialog.Builder(firstFragment.this.getContext())
+        AlertDialog dialog = new AlertDialog.Builder(UserButtonFragment.this.getContext())
                 .setTitle("Alert")
                 .setMessage("Are you OK?")
                 .setPositiveButton("yes", null)
@@ -143,7 +144,7 @@ public class firstFragment extends Fragment implements View.OnClickListener {
 
     private void startIntent(){
 //        Intent intent = new Intent(firstFragment.this.requireContext(), userMapsActivity.class);
-        Intent intent = new Intent(firstFragment.this.requireContext(),LoadingScreen.class);
+        Intent intent = new Intent(UserButtonFragment.this.requireContext(),LoadingScreen.class);
         startActivity(intent);
     }
 }

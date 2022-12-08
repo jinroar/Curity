@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity.profile">
+    tools:context=".UserPage.Profile">
 
 
     <!--<ImageView
@@ -151,7 +151,8 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_phone_android_24"
                 android:drawablePadding="10dp"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:inputType="number"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

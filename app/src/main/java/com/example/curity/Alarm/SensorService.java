@@ -19,7 +19,7 @@ import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 
 import com.example.curity.R;
-import com.example.curity.secondFragment;
+import com.example.curity.UserPage.UserShakeFragment;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -114,7 +114,7 @@ public class SensorService extends Service {
                             manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                             assert manager != null;
                             manager.createNotificationChannel(chan);
-                            Intent notificationIntent = new Intent(getApplicationContext(), secondFragment.class);
+                            Intent notificationIntent = new Intent(getApplicationContext(), UserShakeFragment.class);
                             notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 

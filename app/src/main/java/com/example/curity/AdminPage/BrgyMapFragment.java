@@ -1,4 +1,4 @@
-package com.example.curity;
+package com.example.curity.AdminPage;
 
 import android.Manifest;
 import android.content.Context;
@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.curity.Objects.AcceptedAlerts;
+import com.example.curity.R;
 import com.example.curity.Services.ApiInterface;
 import com.example.curity.Services.Result;
 import com.example.curity.Services.Route;

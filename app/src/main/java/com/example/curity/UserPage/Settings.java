@@ -1,4 +1,4 @@
-package com.example.curity.MainActivity;
+package com.example.curity.UserPage;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +16,7 @@ import com.example.curity.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class settings extends AppCompatActivity {
+public class Settings extends AppCompatActivity {
 
     SwitchCompat switch_1;
     Boolean stateSwitch1;
@@ -62,7 +62,7 @@ public class settings extends AppCompatActivity {
             public void onClick(View view) {
                 //creating list of items
                 listItems = new String[]{"Method 1", "Method 2", "Method 3"};
-                AlertDialog.Builder mbuilder = new AlertDialog.Builder(settings.this);
+                AlertDialog.Builder mbuilder = new AlertDialog.Builder(Settings.this);
                 mbuilder.setTitle("Choose a Method to disable");
                 mbuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
                     @Override
@@ -97,7 +97,7 @@ public class settings extends AppCompatActivity {
             public void onClick(View view) {
                 //creating list of items
                 listItems = new String[]{"ringtone 1", "ringtone 2", "ringtone 3"};
-                AlertDialog.Builder mbuilder = new AlertDialog.Builder(settings.this);
+                AlertDialog.Builder mbuilder = new AlertDialog.Builder(Settings.this);
                 mbuilder.setTitle("Choose an alarm sound");
                 mbuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
                     @Override

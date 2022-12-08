@@ -1,4 +1,4 @@
-package com.example.curity;
+package com.example.curity.UserPage;
 
 import android.Manifest;
 import android.content.Context;
@@ -33,6 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.curity.Chat.MessageChatAdapter;
 import com.example.curity.Chat.MessageChatModel;
+import com.example.curity.R;
 import com.example.curity.Services.ApiInterface;
 import com.example.curity.Services.Result;
 import com.example.curity.Services.Route;
@@ -61,7 +62,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 

@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.curity.AdminPage.HomePageBrgy;
-import com.example.curity.MainActivity.HomePage;
+import com.example.curity.UserPage.HomePageUser;
 import com.example.curity.Objects.User;
 import com.example.curity.R;
 import com.example.curity.SignUp.SignUpP1;
@@ -139,7 +139,7 @@ public class Login extends AppCompatActivity {
                             startActivity(new Intent(Login.this, HomePageBrgy.class));
                             finish();
                         } else if (val.equals("2")) {
-                            startActivity(new Intent(Login.this, HomePage.class));
+                            startActivity(new Intent(Login.this, HomePageUser.class));
                             finish();
                         }
                     }

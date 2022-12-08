@@ -1,19 +1,15 @@
-package com.example.curity.MainActivity;
+package com.example.curity.UserPage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.curity.R;
-import com.example.curity.databinding.ActivityHomePageBinding;
 import com.example.curity.databinding.ActivityProfileBinding;
+import com.example.curity.login.Login;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,9 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
-import java.util.Objects;
 
-public class profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
     ActivityProfileBinding binding;
     DatabaseReference databaseReference;
 
@@ -89,8 +84,12 @@ public class profile extends AppCompatActivity {
                 String address = binding.edittextAddress.getText().toString();
                 String phone = binding.edittextPhone.getText().toString();
 
-                updatedata(fName, lName, address, phone);
-
+                //check if the phone number is 11 digits
+                if (phone.length() != 11){
+                    Toast.makeText(Profile.this, "Enter the 11 digits of your cellphone number.", Toast.LENGTH_SHORT).show();
+                } else {
+                    updatedata(fName, lName, address, phone);
+                }
             }
         });
 
@@ -112,10 +111,10 @@ public class profile extends AppCompatActivity {
             public void onComplete(@NonNull Task task) {
 
                 if (task.isSuccessful()){
-                    Toast.makeText(profile.this,"Successfully Updated",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Profile.this,"Successfully Updated",Toast.LENGTH_SHORT).show();
 
                 }else {
-                    Toast.makeText(profile.this,"Failed to Update",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Profile.this,"Failed to Update",Toast.LENGTH_SHORT).show();
                 }
 
             }
