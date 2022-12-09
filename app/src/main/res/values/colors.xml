@@ -11,4 +11,5 @@
 
     //main color of the application
     <color name="red">#bb0a1e</color>
+    <color name="gray">#848884</color>
 </resources>
