@@ -1,7 +1,8 @@
 package com.example.curity.Objects;
 
 public class User {
-    public String firstName, lastName, address, phone, email, isAdmin;
+    public String firstName, lastName, address, phone, email, isAdmin, date;
+    public Boolean userFound;
 
     public User(String fname, String lname, String address, String phone, String email, String isAdmin) {
         this.firstName = fname;
@@ -12,11 +13,14 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    public User(String fname, String lname, String email, String isAdmin) {
+    public User(String fname, String lname, String email, String phone, String isAdmin, Boolean userFound, String date) {
         this.firstName = fname;
         this.lastName = lname;
         this.email = email;
+        this.phone = phone;
         this.isAdmin = isAdmin;
+        this.userFound = userFound;
+        this.date = date;
     }
 
     public User() {
@@ -46,6 +50,14 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+    public void setUserFound(Boolean userFound) {
+        this.userFound = userFound;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -68,5 +80,13 @@ public class User {
 
     public String getIsAdmin() {
         return isAdmin;
+    }
+
+    public Boolean getUserFound() {
+        return userFound;
+    }
+
+    public String getDate() {
+        return date;
     }
 }

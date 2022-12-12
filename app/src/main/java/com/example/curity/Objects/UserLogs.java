@@ -1,12 +1,13 @@
 package com.example.curity.Objects;
 
 public class UserLogs {
-    String userName, email, phoneNumber;
+    String userName, email, phoneNumber, date;
 
-    public UserLogs(String userName, String email, String phoneNumber) {
+    public UserLogs(String userName, String email, String phoneNumber, String date) {
         this.userName = userName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.date = date;
     }
 
     public String getUserName() {
@@ -31,5 +32,13 @@ public class UserLogs {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

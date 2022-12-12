@@ -212,12 +212,10 @@ public class BrgyHomeFragment extends Fragment {
             alertCounter+=1;
         }
 
-
-
     }
 
     private void alertBox(){
-        if(userFound){
+        if(userFound && getContext() != null){
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             View layout_dialog = LayoutInflater.from(getContext()).inflate(R.layout.alert_notif_design, null);
             builder.setView(layout_dialog);

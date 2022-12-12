@@ -32,6 +32,7 @@ public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.MyViewHolder> 
             textViewName = view.findViewById(R.id.name);
             textViewEmail = view.findViewById(R.id.email);
             textViewNumber = view.findViewById(R.id.number);
+            date = view.findViewById(R.id.date);
         }
     }
 
@@ -48,9 +49,11 @@ public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.MyViewHolder> 
         String name = userLogsList.get(position).getUserName();
         String email = userLogsList.get(position).getEmail();
         String number = userLogsList.get(position).getPhoneNumber();
+        String date = userLogsList.get(position).getDate();
         holder.textViewName.setText(name);
         holder.textViewEmail.setText(email);
         holder.textViewNumber.setText(number);
+        holder.date.setText(date);
     }
 
     @Override

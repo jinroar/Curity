@@ -12,10 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.curity.Logs.LogsAdapter;
 import com.example.curity.Objects.UserLogs;
 import com.example.curity.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -80,23 +89,40 @@ public class BrgyNotificationsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setUserInfo();
+        userLogsList = new ArrayList<>();
 
         recyclerView = view.findViewById(R.id.recycler_logs);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
+
         LogsAdapter adapter = new LogsAdapter(getContext(),userLogsList);
-        recyclerView.setAdapter(adapter);
+
+        FirebaseDatabase.getInstance().getReference().child("Finished Alerts")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot datasnapshot) {
+                        userLogsList.clear();
+                        for (DataSnapshot snapshot: datasnapshot.getChildren()) {
+
+                            String fName = String.valueOf(snapshot.child("firstName").getValue());
+                            String lName = String.valueOf(snapshot.child("lastName").getValue());
+                            String email = String.valueOf(snapshot.child("email").getValue());
+                            String phone = String.valueOf(snapshot.child("phone").getValue());
+                            String date = String.valueOf(snapshot.child("date").getValue());
+
+                            String fullName = fName + lName;
+                            userLogsList.add(new UserLogs(fullName, phone, email, date));
+                        }
+
+                        recyclerView.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter.notifyDataSetChanged();
-
-    }
-
-    // for the intial data
-    private void setUserInfo(){
-        userLogsList = new ArrayList<>();
-        userLogsList.add(new UserLogs("John", "09054047375", "Elyzza@gmail.com"));
-        userLogsList.add(new UserLogs("Bruh", "09054047375", "Elyzza@gmail.com"));
-        userLogsList.add(new UserLogs("bruh--1", "09054047375", "Elyzza@gmail.com"));
     }
 }

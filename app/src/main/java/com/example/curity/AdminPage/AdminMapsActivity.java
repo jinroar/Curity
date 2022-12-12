@@ -873,9 +873,40 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
     }
 
+    // logs for the finished alerts
     public void onUserFound(){
-        FirebaseDatabase.getInstance().getReference().child("Finished Alerts")
-                .child(userID).child("userFound").setValue(true);
+        FirebaseDatabase.getInstance().getReference().child("users")
+                .child(userID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (task.getResult().exists()) {
+                                DataSnapshot dataSnapshot = task.getResult();
+                                String fName = String.valueOf(dataSnapshot.child("firstName").getValue());
+                                String lName = String.valueOf(dataSnapshot.child("lastName").getValue());
+                                String email = String.valueOf(dataSnapshot.child("email").getValue());
+                                String phone = String.valueOf(dataSnapshot.child("phone").getValue());
+                                String isAdmin = String.valueOf(dataSnapshot.child("isAdmin").getValue());
+
+                                // for the date and time
+                                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+                                LocalDateTime now = LocalDateTime.now();
+
+
+                                User user = new User(fName,lName,email,phone,isAdmin, true, dtf.format(now));
+                                FirebaseDatabase.getInstance().getReference().child("Finished Alerts")
+                                        .child(userID)
+                                        .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                            }
+                        }
+                    }
+                });
                 finish();
     }
 
