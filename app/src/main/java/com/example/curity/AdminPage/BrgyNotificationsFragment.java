@@ -110,7 +110,7 @@ public class BrgyNotificationsFragment extends Fragment {
                             String phone = String.valueOf(snapshot.child("phone").getValue());
                             String date = String.valueOf(snapshot.child("date").getValue());
 
-                            String fullName = fName + lName;
+                            String fullName = fName + " " + lName;
                             userLogsList.add(new UserLogs(fullName, phone, email, date));
                         }
 

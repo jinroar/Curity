@@ -19,8 +19,8 @@
         <item
             android:id="@+id/nav_notification"
             android:checkable="false"
-            android:icon="@drawable/ic_baseline_notifications_24"
-            android:title="Notifications" />
+            android:icon="@drawable/ic_baseline_list_24"
+            android:title="Logs" />
 
         <item
             android:id="@+id/nav_logout"
