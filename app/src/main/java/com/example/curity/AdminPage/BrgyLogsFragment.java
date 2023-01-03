@@ -1,21 +1,26 @@
 package com.example.curity.AdminPage;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.curity.Logs.LogsAdapter;
 import com.example.curity.Objects.UserLogs;
 import com.example.curity.R;
+import com.example.curity.login.Login;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -107,6 +112,10 @@ public class BrgyLogsFragment extends Fragment {
 
                             String fullName = fName + " " + lName;
                             userLogsList.add(new UserLogs(fullName, phone, email, date));
+                        }
+
+                        if (userLogsList.isEmpty()){
+                            Toast.makeText(getContext(), "The User Logs is currently empty. Please try again.", Toast.LENGTH_SHORT).show();
                         }
 
                         recyclerView.setAdapter(adapter);
