@@ -907,7 +907,10 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                         }
                     }
                 });
-                finish();
+
+        //remove the user in accepted alerts
+        FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userID).removeValue();
+        finish();
     }
 
 }
