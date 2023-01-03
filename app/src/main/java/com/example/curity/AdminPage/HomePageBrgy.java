@@ -129,7 +129,7 @@ public class HomePageBrgy extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_notification:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
-                        new BrgyNotificationsFragment()).commit();
+                        new BrgyLogsFragment()).commit();
                 break;
 
             /*----------------Activities----------------*/

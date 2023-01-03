@@ -12,17 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.curity.Logs.LogsAdapter;
 import com.example.curity.Objects.UserLogs;
 import com.example.curity.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -30,10 +25,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link BrgyNotificationsFragment#newInstance} factory method to
+ * Use the {@link BrgyLogsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BrgyNotificationsFragment extends Fragment {
+public class BrgyLogsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,7 +41,7 @@ public class BrgyNotificationsFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<UserLogs> userLogsList;
 
-    public BrgyNotificationsFragment() {
+    public BrgyLogsFragment() {
         // Required empty public constructor
     }
 
@@ -59,8 +54,8 @@ public class BrgyNotificationsFragment extends Fragment {
      * @return A new instance of fragment BgryNotificationsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BrgyNotificationsFragment newInstance(String param1, String param2) {
-        BrgyNotificationsFragment fragment = new BrgyNotificationsFragment();
+    public static BrgyLogsFragment newInstance(String param1, String param2) {
+        BrgyLogsFragment fragment = new BrgyLogsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
