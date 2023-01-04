@@ -106,10 +106,10 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
     //database
     DatabaseReference databaseReference;
-    DatabaseReference userLocRef;
-    Task<DataSnapshot> userRef;
+//    DatabaseReference userLocRef;
+//    Task<DataSnapshot> userRef;
     GeoFire geoFire;
-    ValueEventListener valueEventListener;
+//    ValueEventListener valueEventListener;
 
     //UI
     private TextView addressTextView;
@@ -910,6 +910,7 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
         //remove the user in accepted alerts
         FirebaseDatabase.getInstance().getReference().child("Accepted Alerts").child(userID).removeValue();
+        FirebaseDatabase.getInstance().getReference().child("User's Location").child(userID).removeValue();
         finish();
     }
 
