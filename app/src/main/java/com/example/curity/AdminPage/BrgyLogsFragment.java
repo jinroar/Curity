@@ -110,6 +110,11 @@ public class BrgyLogsFragment extends Fragment {
                             String phone = String.valueOf(snapshot.child("phone").getValue());
                             String date = String.valueOf(snapshot.child("date").getValue());
 
+                            // check if the phone is null
+                            if (phone.equals("null")){
+                                phone = "n/a";
+                            }
+
                             String fullName = fName + " " + lName;
                             userLogsList.add(new UserLogs(fullName, phone, email, date));
                         }
