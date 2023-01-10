@@ -875,6 +875,10 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
     // logs for the finished alerts
     public void onUserFound(){
+        // for the date and time
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
         FirebaseDatabase.getInstance().getReference().child("users")
                 .child(userID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
@@ -886,16 +890,10 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
                                 String lName = String.valueOf(dataSnapshot.child("lastName").getValue());
                                 String email = String.valueOf(dataSnapshot.child("email").getValue());
                                 String phone = String.valueOf(dataSnapshot.child("phone").getValue());
-                                String isAdmin = String.valueOf(dataSnapshot.child("isAdmin").getValue());
 
-                                // for the date and time
-                                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
-                                LocalDateTime now = LocalDateTime.now();
-
-
-                                User user = new User(fName,lName,email,phone,isAdmin, true, dtf.format(now));
+                                User user = new User(fName,lName,email,phone,dtf.format(now));
                                 FirebaseDatabase.getInstance().getReference().child("Finished Alerts")
-                                        .child(userID)
+                                        .child(dtf.format(now))
                                         .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {

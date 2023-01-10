@@ -13,13 +13,11 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    public User(String fname, String lname, String email, String phone, String isAdmin, Boolean userFound, String date) {
+    public User(String fname, String lname, String email, String phone, String date) {
         this.firstName = fname;
         this.lastName = lname;
         this.email = email;
         this.phone = phone;
-        this.isAdmin = isAdmin;
-        this.userFound = userFound;
         this.date = date;
     }
 
