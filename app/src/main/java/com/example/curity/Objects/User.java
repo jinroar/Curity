@@ -3,6 +3,17 @@ package com.example.curity.Objects;
 public class User {
     public String firstName, lastName, address, phone, email, isAdmin, date;
     public Boolean userFound;
+    public String imgURL;
+
+    public User(String fname, String lname, String address, String phone, String email, String isAdmin, String imgURL) {
+        this.firstName = fname;
+        this.lastName = lname;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.isAdmin = isAdmin;
+        this.imgURL = imgURL;
+    }
 
     public User(String fname, String lname, String address, String phone, String email, String isAdmin) {
         this.firstName = fname;
@@ -86,5 +97,13 @@ public class User {
 
     public String getDate() {
         return date;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 }

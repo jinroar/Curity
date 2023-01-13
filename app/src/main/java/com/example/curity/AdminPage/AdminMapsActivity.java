@@ -792,7 +792,6 @@ public class AdminMapsActivity extends FragmentActivity implements OnMapReadyCal
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode == RESULT_OK) {
             Log.d("selectedImageUri", data.getData() + "");
             if (requestCode == PICKFILE_REQUEST_CODE) {

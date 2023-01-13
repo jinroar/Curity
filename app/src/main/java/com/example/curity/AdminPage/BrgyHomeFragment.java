@@ -254,8 +254,6 @@ public class BrgyHomeFragment extends Fragment {
         }
     }
 
-
-
     private void locationChange(){
         new CountDownTimer(5000, 1000) {
             @Override

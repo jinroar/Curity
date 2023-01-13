@@ -97,8 +97,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Retype Your Password"
+                android:layout_marginBottom="5dp"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*Please Submit Valid ID"
+            android:textSize="15dp"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:id="@+id/fileName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Filename"
+            android:textSize="20dp"
+            android:layout_margin="5dp"
+            android:textAlignment="center"
+            />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Photo"
+            android:textColor="@color/white"
+            />
+
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
