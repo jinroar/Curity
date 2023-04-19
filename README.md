@@ -4,7 +4,11 @@
 
 <table style="border:1px solid black;margin-left:auto;margin-right:auto;">
   <tr>
-    <td align="center"><h4>Front Cover</h4></td>
+    <td align="center" colspan="3"><h3>User Manual</h3></td>
+  </tr>
+  
+  <tr>
+    <td align="center"><h4>Front Cover (Page 1)</h4></td>
     <td align="center"><h4>Table of Contents (Page 2)</h4></td>
     <td align="center"><h4>About Curity (Page 3)</h4></td>
   </tr>
